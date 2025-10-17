@@ -4,6 +4,8 @@
 [![Vite](https://img.shields.io/badge/Vite-5.0.0-purple?logo=vite)](https://vitejs.dev/)
 [![CSS3](https://img.shields.io/badge/CSS3-Modern-orange?logo=css3)](https://developer.mozilla.org/en-US/docs/Web/CSS)
 
+https://tp-2-front-grupo11-rho.vercel.app/
+
 ## 📋 Descripción
 
 TechVerse es una **Single Page Application (SPA)** desarrollada en React que presenta a nuestro equipo de desarrollo. Este proyecto representa la migración y mejora del TP1, ahora implementado con tecnologías modernas, arquitectura de componentes y consumo dinámico de datos.
@@ -121,20 +123,19 @@ Presentación del equipo activo con enlaces a portales individuales.
 #### **Micaela** 🎮
 - Diseño violeta/fucsia con dorado
 - Avatar interactivo (hover effect)
-- **API de Películas**: Twister, Volver al Futuro, Mulan
-- **API de Música**: BTS, Miranda!, 5 Seconds of Summer
+- **Películas**: Twister, Volver al Futuro, Mulan
+- **Música**: BTS, Miranda!, 5 Seconds of Summer
 
 #### **Paula** 🌌
 - Tema tech futurista azul
 - Grid de íconos de intereses animados
-- **API de Películas**: Fragmentado, Harry Potter, Interstellar, Inquebrantable  
-- **API de Música**: Soda Stereo, No te va a gustar, Carlos Rivera, Airbag
+- **Películas**: Fragmentado, Harry Potter, Interstellar, Inquebrantable  
+- **Música**: Soda Stereo, No te va a gustar, Carlos Rivera, Airbag
 
 #### **María** ✨
 - Estilo retro 80s con efectos vintage
-- Carrusel automático de imágenes (3s)
-- **API de Películas**: El viaje de Chihiro, Mi vecino Totoro, El castillo ambulante
-- **API de Música**: Hoobastank, Audioslave, Keane
+- **APelículas**: El viaje de Chihiro, Mi vecino Totoro, El castillo ambulante
+- **Música**: Hoobastank, Audioslave, Keane
 
 ## 🔧 Características Técnicas
 

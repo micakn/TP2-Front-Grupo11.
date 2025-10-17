@@ -1,4 +1,4 @@
-// Musica.jsx
+/*
 import { useState, useEffect } from 'react';
 import './Peliculas.css';
 
@@ -74,14 +74,12 @@ export default function Musica() {
       </section>
     </div>
   );
-}
-
-
-
-/* 
+} 
+*/
+/*
 -------------------------------------------
 🌐 Versión para DEPLOY en Vercel (sin proxy)
--------------------------------------------
+-------------------------------------------  */
 
 import { useState, useEffect } from 'react';
 import './Peliculas.css';
@@ -156,4 +154,4 @@ export default function Musica() {
     </div>
   );
 }
-*/
+
