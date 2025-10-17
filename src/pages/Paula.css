@@ -1,0 +1,166 @@
+/* Tema tech futurista azul para Paula */
+.paula-page {
+  animation: fadeIn 0.8s ease;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+/* Tarjeta principal con gradiente tech */
+.tarjeta-paula {
+  max-width: 1100px;
+  margin: 2rem auto;
+  background: linear-gradient(135deg, #4118b1, #2d0a7a);
+  border: 3px solid rgb(58, 213, 252);
+  border-radius: 20px;
+  padding: 2rem;
+  box-shadow: 0 8px 30px rgba(65, 24, 177, 0.4);
+  display: flex;
+  gap: 2rem;
+  align-items: flex-start;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Avatar container sin bordes negros */
+.avatar-container {
+  flex-shrink: 0;
+  width: 240px;
+  height: 300px;
+  border: 4px solid rgb(58, 213, 252);
+  border-radius: 15px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.3s ease, border-color 0.3s ease;
+  background: none; /* CRÍTICO: Sin fondo negro */
+}
+
+.avatar-container:hover {
+  transform: scale(1.05);
+  border-color: #4118b1;
+}
+
+/* Imagen sin recortes */
+.avatar-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border: none;
+  background: none;
+}
+
+/* Contenido principal */
+.contenido-paula {
+  flex: 1;
+  color: #fff;
+}
+
+.contenido-paula h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: rgb(58, 213, 252);
+  margin-bottom: 1rem;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Información básica con tema azul */
+.info-basica {
+  background: rgba(58, 213, 252, 0.1);
+  padding: 1.2rem;
+  border-radius: 12px;
+  border: 2px solid rgba(58, 213, 252, 0.3);
+  margin-bottom: 1.5rem;
+}
+
+.info-basica p {
+  margin: 0.4rem 0;
+  font-size: 1rem;
+  color: #fff;
+}
+
+.info-basica strong {
+  color: rgb(58, 213, 252);
+  font-weight: 600;
+}
+
+/* Sección de loading */
+.loading-section {
+  text-align: center;
+  padding: 1rem;
+  color: #fff;
+}
+
+/* Personalización de botones para Paula */
+.paula-page .botones .btn {
+  background: transparent;
+  border: 2px solid rgb(58, 213, 252);
+  color: rgb(58, 213, 252);
+  font-weight: 600;
+}
+
+.paula-page .botones .btn:hover,
+.paula-page .botones .btn.active {
+  background: linear-gradient(135deg, rgb(58, 213, 252), #4118b1);
+  color: white;
+  box-shadow: 0 4px 15px rgba(58, 213, 252, 0.4);
+}
+
+/* Secciones con tema azul */
+.paula-page .seccion {
+  background: rgba(58, 213, 252, 0.05);
+  border: 1px solid rgba(58, 213, 252, 0.2);
+}
+
+.paula-page .seccion h2 {
+  color: rgb(58, 213, 252);
+}
+
+.paula-page .api-indicator {
+  background: rgba(58, 213, 252, 0.1);
+  color: rgb(58, 213, 252);
+  border-color: rgba(58, 213, 252, 0.3);
+}
+
+/* RESPONSIVE DESIGN */
+@media (max-width: 768px) {
+  .tarjeta-paula {
+    flex-direction: column;
+    text-align: center;
+    padding: 1.5rem;
+    margin: 1.5rem auto;
+  }
+  
+  .avatar-container {
+    width: 220px;
+    height: 280px;
+    margin-bottom: 1rem;
+  }
+  
+  .contenido-paula h1 {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .tarjeta-paula {
+    padding: 1rem;
+    margin: 1rem auto;
+  }
+  
+  .avatar-container {
+    width: 200px;
+    height: 250px;
+  }
+  
+  .contenido-paula h1 {
+    font-size: 1.8rem;
+  }
+  
+  .info-basica {
+    padding: 1rem;
+  }
+}
+

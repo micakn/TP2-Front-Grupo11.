@@ -1,0 +1,251 @@
+.bitacora {
+  animation: fadeIn 0.8s ease;
+}
+
+/* Hero Bitácora */
+.hero-bitacora {
+  text-align: center;
+  padding: 3rem 0;
+  background: linear-gradient(135deg, rgba(0, 212, 255, 0.1), rgba(255, 107, 107, 0.1));
+  border-radius: 20px;
+  margin-bottom: 3rem;
+}
+
+.hero-bitacora h1 {
+  font-size: 3.5rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 1rem;
+}
+
+.hero-bitacora p {
+  font-size: 1.3rem;
+  color: #ccc;
+}
+
+/* Timeline */
+.timeline-section {
+  margin: 4rem 0;
+}
+
+.timeline-section h2 {
+  text-align: center;
+  font-size: 2.5rem;
+  color: var(--primary-color);
+  margin-bottom: 3rem;
+}
+
+.timeline-container {
+  position: relative;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.timeline-container::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 4px;
+  height: 100%;
+  background: linear-gradient(180deg, var(--primary-color), var(--secondary-color));
+  border-radius: 2px;
+}
+
+.timeline-item {
+  position: relative;
+  margin-bottom: 3rem;
+}
+
+.timeline-item:nth-child(odd) .timeline-content {
+  margin-left: 0;
+  margin-right: 50%;
+  text-align: right;
+}
+
+.timeline-item:nth-child(even) .timeline-content {
+  margin-left: 50%;
+  margin-right: 0;
+  text-align: left;
+}
+
+.timeline-content {
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px solid var(--tipo-color, var(--primary-color));
+  border-radius: 15px;
+  padding: 1.5rem;
+  position: relative;
+  margin: 0 2rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.timeline-content::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 0;
+  height: 0;
+  border: 12px solid transparent;
+}
+
+.timeline-item:nth-child(odd) .timeline-content::before {
+  right: -24px;
+  border-left-color: var(--tipo-color, var(--primary-color));
+}
+
+.timeline-item:nth-child(even) .timeline-content::before {
+  left: -24px;
+  border-right-color: var(--tipo-color, var(--primary-color));
+}
+
+.timeline-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.timeline-icon {
+  font-size: 1.5rem;
+  width: 40px;
+  height: 40px;
+  background: var(--tipo-color, var(--primary-color));
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.timeline-header h3 {
+  flex: 1;
+  color: var(--tipo-color, var(--primary-color));
+  font-size: 1.3rem;
+  margin: 0;
+}
+
+.timeline-date {
+  background: var(--tipo-color, var(--primary-color));
+  color: white;
+  padding: 0.3rem 0.8rem;
+  border-radius: 15px;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.timeline-content p {
+  color: #ddd;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Decisiones Section */
+.decisiones-section {
+  margin: 4rem 0;
+}
+
+.decisiones-section h2 {
+  text-align: center;
+  font-size: 2.5rem;
+  color: var(--secondary-color);
+  margin-bottom: 2rem;
+}
+
+.decision-card {
+  background: rgba(255, 107, 107, 0.1);
+  border: 2px solid var(--secondary-color);
+  border-radius: 15px;
+  padding: 2rem;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.decision-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(255, 107, 107, 0.2);
+}
+
+.decision-card h3 {
+  color: var(--secondary-color);
+  margin-bottom: 1rem;
+  font-size: 1.3rem;
+}
+
+.decision-card p {
+  color: #ddd;
+  line-height: 1.6;
+}
+
+/* Cambios Section */
+.cambios-section {
+  margin: 4rem 0;
+}
+
+.cambios-section h2 {
+  text-align: center;
+  font-size: 2.5rem;
+  color: var(--accent-color);
+  margin-bottom: 2rem;
+}
+
+.cambios-list {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.cambio-item {
+  background: rgba(255, 217, 61, 0.1);
+  border-left: 4px solid var(--accent-color);
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  border-radius: 0 12px 12px 0;
+}
+
+.cambio-item h4 {
+  color: var(--accent-color);
+  margin-bottom: 0.5rem;
+  font-size: 1.2rem;
+}
+
+.cambio-item p {
+  color: #ddd;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .hero-bitacora h1 {
+    font-size: 2.5rem;
+  }
+  
+  .timeline-container::before {
+    left: 20px;
+  }
+  
+  .timeline-item:nth-child(odd) .timeline-content,
+  .timeline-item:nth-child(even) .timeline-content {
+    margin-left: 60px;
+    margin-right: 0;
+    text-align: left;
+  }
+  
+  .timeline-item:nth-child(odd) .timeline-content::before,
+  .timeline-item:nth-child(even) .timeline-content::before {
+    left: -24px;
+    right: auto;
+    border-right-color: var(--tipo-color, var(--primary-color));
+    border-left-color: transparent;
+  }
+  
+  .timeline-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+}
+
+
+

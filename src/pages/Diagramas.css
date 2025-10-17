@@ -1,0 +1,593 @@
+/* Página de diagramas con estilo técnico */
+.diagramas {
+  animation: fadeIn 0.8s ease;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+/* Hero Diagramas */
+.hero-diagramas {
+  text-align: center;
+  padding: 3rem 2rem;
+  background: linear-gradient(135deg, rgba(255, 217, 61, 0.1), rgba(168, 85, 247, 0.1));
+  border-radius: 20px;
+  margin-bottom: 3rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.hero-diagramas h1 {
+  font-size: 3.5rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--accent-color), #a855f7);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 1rem;
+}
+
+.hero-diagramas p {
+  font-size: 1.3rem;
+  color: #ccc;
+}
+
+/* Arquitectura Section */
+.arquitectura-section {
+  margin: 4rem 0;
+  width: 100%;
+}
+
+.arquitectura-section h2 {
+  text-align: center;
+  font-size: 2.5rem;
+  color: var(--primary-color);
+  margin-bottom: 3rem;
+}
+
+.diagram-container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.arquitectura-diagram {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  max-width: 600px;
+  width: 100%;
+}
+
+/* Capas de la arquitectura */
+.layer {
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px solid var(--primary-color);
+  border-radius: 15px;
+  padding: 2rem;
+  width: 100%;
+  text-align: center;
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+}
+
+.layer:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 25px rgba(0, 212, 255, 0.2);
+}
+
+.layer h3 {
+  color: var(--primary-color);
+  margin-bottom: 0.5rem;
+  font-size: 1.5rem;
+}
+
+.layer p {
+  color: #ccc;
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+}
+
+/* Grid de componentes y fuentes de datos */
+.components-grid,
+.data-sources {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+}
+
+.components-grid span,
+.data-sources span {
+  background: var(--primary-color);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+/* Flecha entre capas */
+.arrow {
+  font-size: 2rem;
+  color: var(--primary-color);
+  font-weight: bold;
+}
+
+/* Componentes Section */
+.componentes-section {
+  margin: 4rem 0;
+  width: 100%;
+}
+
+.componentes-section h2 {
+  text-align: center;
+  font-size: 2.5rem;
+  color: var(--secondary-color);
+  margin-bottom: 3rem;
+}
+
+.componentes-tree {
+  display: flex;
+  justify-content: center;
+  overflow-x: auto;
+  padding: 2rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Nodos del árbol de componentes */
+.component-node {
+  position: relative;
+  background: rgba(255, 107, 107, 0.1);
+  border: 2px solid var(--secondary-color);
+  border-radius: 10px;
+  padding: 1rem;
+  margin: 0.5rem;
+  text-align: center;
+  min-width: 120px;
+}
+
+.component-node.root {
+  background: rgba(255, 107, 107, 0.2);
+  border-color: var(--secondary-color);
+  font-weight: 700;
+}
+
+.component-name {
+  color: var(--secondary-color);
+  font-weight: 600;
+}
+
+.children {
+  display: flex;
+  flex-direction: column;
+  margin-top: 1rem;
+}
+
+/* Flujo Section */
+.flujo-section {
+  margin: 4rem 0;
+  width: 100%;
+}
+
+.flujo-section h2 {
+  text-align: center;
+  font-size: 2.5rem;
+  color: var(--accent-color);
+  margin-bottom: 3rem;
+}
+
+.flujo-diagram {
+  text-align: center;
+  width: 100%;
+}
+
+/* Nodos de páginas */
+.page-node {
+  background: rgba(255, 217, 61, 0.1);
+  border: 2px solid var(--accent-color);
+  border-radius: 15px;
+  padding: 1.5rem;
+  margin: 1rem;
+  display: inline-block;
+  min-width: 180px;
+  transition: all 0.3s ease;
+  vertical-align: top;
+}
+
+.page-node:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(255, 217, 61, 0.2);
+}
+
+.page-node.home {
+  background: rgba(255, 217, 61, 0.2);
+  border-width: 3px;
+  margin-bottom: 2rem;
+}
+
+.page-node h4 {
+  color: var(--accent-color);
+  margin-bottom: 0.5rem;
+  font-size: 1.2rem;
+}
+
+.page-node p {
+  color: #ccc;
+  font-size: 0.9rem;
+}
+
+/* Flechas de navegación */
+.navigation-arrows {
+  margin: 2rem 0;
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.nav-arrow {
+  color: var(--accent-color);
+  font-weight: 600;
+  background: rgba(255, 217, 61, 0.1);
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 217, 61, 0.3);
+}
+
+/* Grid de páginas responsive */
+.pages-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-top: 2rem;
+  max-width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Enlaces de portales */
+.portal-links {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  margin-top: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.portal-links span {
+  background: var(--accent-color);
+  color: white;
+  padding: 0.3rem 0.6rem;
+  border-radius: 12px;
+  font-size: 0.8rem;
+}
+
+/* Tecnologías Section */
+.tecnologias-section {
+  margin: 4rem 0;
+  width: 100%;
+}
+
+.tecnologias-section h2 {
+  text-align: center;
+  font-size: 2.5rem;
+  color: #a855f7;
+  margin-bottom: 3rem;
+}
+
+/* Stack tecnológico en grid */
+.tech-stack {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* Categorías tecnológicas */
+.tech-category {
+  background: rgba(168, 85, 247, 0.1);
+  border: 2px solid #a855f7;
+  border-radius: 15px;
+  padding: 2rem;
+}
+
+.tech-category h3 {
+  color: #a855f7;
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-size: 1.4rem;
+}
+
+.tech-items {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Items tecnológicos */
+.tech-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: rgba(168, 85, 247, 0.05);
+  padding: 1rem;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+}
+
+.tech-item:hover {
+  background: rgba(168, 85, 247, 0.1);
+  transform: translateX(5px);
+}
+
+.tech-icon {
+  font-size: 1.5rem;
+  width: 30px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.tech-item strong {
+  color: #a855f7;
+  display: block;
+  margin-bottom: 0.2rem;
+}
+
+.tech-item p {
+  color: #ccc;
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+/* Mejoras Section */
+.mejoras-section {
+  margin: 4rem 0;
+  width: 100%;
+}
+
+.mejoras-section h2 {
+  text-align: center;
+  font-size: 2.5rem;
+  color: var(--primary-color);
+  margin-bottom: 3rem;
+}
+
+.mejoras-comparison {
+  max-width: 1000px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* Comparación antes/después */
+.before-after {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  width: 100%;
+}
+
+.before,
+.after {
+  padding: 2rem;
+  border-radius: 15px;
+  position: relative;
+}
+
+.before {
+  background: rgba(255, 107, 107, 0.1);
+  border: 2px solid var(--secondary-color);
+}
+
+.after {
+  background: rgba(0, 212, 255, 0.1);
+  border: 2px solid var(--primary-color);
+}
+
+.before h3,
+.after h3 {
+  margin-bottom: 1.5rem;
+  font-size: 1.3rem;
+}
+
+.before h3 {
+  color: var(--secondary-color);
+}
+
+.after h3 {
+  color: var(--primary-color);
+}
+
+/* Listas de características */
+.before ul,
+.after ul {
+  list-style: none;
+}
+
+.before li,
+.after li {
+  padding: 0.5rem 0;
+  position: relative;
+  padding-left: 2rem;
+  color: #ddd;
+}
+
+.before li::before {
+  content: '❌';
+  position: absolute;
+  left: 0;
+}
+
+.after li::before {
+  content: '✅';
+  position: absolute;
+  left: 0;
+}
+
+/* RESPONSIVE DESIGN CRITICAL */
+@media (max-width: 900px) {
+  .tech-stack {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  }
+  
+  .before-after {
+    gap: 1.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-diagramas {
+    padding: 2rem 1rem;
+  }
+  
+  .hero-diagramas h1 {
+    font-size: 2.5rem;
+  }
+  
+  .arquitectura-diagram {
+    padding: 0 1rem;
+  }
+  
+  .layer {
+    padding: 1.5rem;
+  }
+  
+  .componentes-tree {
+    overflow-x: scroll;
+    justify-content: flex-start;
+  }
+  
+  .pages-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .tech-stack {
+    grid-template-columns: 1fr;
+  }
+  
+  .before-after {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .navigation-arrows {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-diagramas h1 {
+    font-size: 2rem;
+  }
+  
+  .layer {
+    padding: 1rem;
+  }
+  
+  .tech-category {
+    padding: 1.5rem;
+  }
+  
+  .before,
+  .after {
+    padding: 1.5rem;
+  }
+  
+  .page-node {
+    min-width: 150px;
+    padding: 1rem;
+  }
+}
+
+
+.before {
+  background: rgba(255, 107, 107, 0.1);
+  border: 2px solid var(--secondary-color);
+}
+
+.after {
+  background: rgba(0, 212, 255, 0.1);
+  border: 2px solid var(--primary-color);
+}
+
+.before h3,
+.after h3 {
+  margin-bottom: 1.5rem;
+  font-size: 1.3rem;
+}
+
+.before h3 {
+  color: var(--secondary-color);
+}
+
+.after h3 {
+  color: var(--primary-color);
+}
+
+.before ul,
+.after ul {
+  list-style: none;
+}
+
+.before li,
+.after li {
+  padding: 0.5rem 0;
+  position: relative;
+  padding-left: 2rem;
+  color: #ddd;
+}
+
+.before li::before {
+  content: '❌';
+  position: absolute;
+  left: 0;
+}
+
+.after li::before {
+  content: '✅';
+  position: absolute;
+  left: 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .hero-diagramas h1 {
+    font-size: 2.5rem;
+  }
+  
+  .arquitectura-diagram {
+    padding: 0 1rem;
+  }
+  
+  .layer {
+    padding: 1.5rem;
+  }
+  
+  .componentes-tree {
+    overflow-x: scroll;
+  }
+  
+  .pages-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .tech-stack {
+    grid-template-columns: 1fr;
+  }
+  
+  .before-after {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .navigation-arrows {
+    flex-direction: column;
+    align-items: center;
+  }
+}

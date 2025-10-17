@@ -1,0 +1,242 @@
+.integrantes {
+  animation: fadeIn 0.8s ease;
+}
+
+/* Hero Integrantes */
+.hero-integrantes {
+  text-align: center;
+  padding: 3rem 0;
+  background: linear-gradient(135deg, rgba(255, 217, 61, 0.1), rgba(0, 212, 255, 0.1));
+  border-radius: 20px;
+  margin-bottom: 3rem;
+}
+
+.hero-integrantes h1 {
+  font-size: 3.5rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--accent-color), var(--primary-color));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 1rem;
+}
+
+.hero-integrantes p {
+  font-size: 1.3rem;
+  color: #ccc;
+}
+
+/* Equipo Actual */
+.equipo-actual {
+  margin: 4rem 0;
+}
+
+.equipo-actual h2 {
+  text-align: center;
+  font-size: 2.5rem;
+  color: var(--primary-color);
+  margin-bottom: 3rem;
+}
+
+.integrantes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Integrante Card */
+.integrante-card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  padding: 2rem;
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.integrante-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--color-principal);
+  transform: translateX(-100%);
+  transition: transform 0.3s ease;
+}
+
+.integrante-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+  border-color: var(--color-principal);
+}
+
+.integrante-card:hover::before {
+  transform: translateX(0);
+}
+
+/* Avatar */
+.integrante-avatar {
+  position: relative;
+  width: 120px;
+  height: 120px;
+  margin: 0 auto 1.5rem;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 3px solid var(--color-principal);
+}
+
+.integrante-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.avatar-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.avatar-overlay span {
+  color: white;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.integrante-card:hover .integrante-avatar img {
+  transform: scale(1.1);
+}
+
+.integrante-card:hover .avatar-overlay {
+  opacity: 1;
+}
+
+/* Info */
+.integrante-info {
+  text-align: center;
+}
+
+.integrante-info h3 {
+  font-size: 2rem;
+  color: var(--color-principal);
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+}
+
+.rol {
+  font-size: 1.1rem;
+  color: var(--color-principal);
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.ubicacion {
+  font-size: 1rem;
+  color: #aaa;
+  margin-bottom: 1rem;
+}
+
+.descripcion {
+  font-size: 1rem;
+  color: #ddd;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+
+/* Especialidades */
+.especialidades h4 {
+  font-size: 1rem;
+  color: #ccc;
+  margin-bottom: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.especialidades-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
+}
+
+.especialidad-tag {
+  background: var(--color-principal);
+  color: white;
+  padding: 0.3rem 0.8rem;
+  border-radius: 15px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+/* Nota Cambios */
+.nota-cambios {
+  margin: 4rem 0;
+}
+
+.nota-box {
+  background: rgba(255, 217, 61, 0.1);
+  border: 2px solid var(--accent-color);
+  border-radius: 15px;
+  padding: 2rem;
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.nota-box h3 {
+  color: var(--accent-color);
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.nota-box p {
+  color: #ddd;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+.nota-box p:last-child {
+  margin-bottom: 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .hero-integrantes h1 {
+    font-size: 2.5rem;
+  }
+  
+  .integrantes-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .integrante-card {
+    padding: 1.5rem;
+  }
+  
+  .integrante-avatar {
+    width: 100px;
+    height: 100px;
+  }
+  
+  .integrante-info h3 {
+    font-size: 1.8rem;
+  }
+}

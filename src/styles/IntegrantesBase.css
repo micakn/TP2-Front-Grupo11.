@@ -1,0 +1,123 @@
+/* === Estilos base para las páginas individuales === */
+.integrante-page {
+  animation: fadeIn 0.8s ease;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+.tarjeta-integrante {
+  max-width: 1100px;
+  margin: 2rem auto;
+  border-radius: 20px;
+  padding: 2rem;
+  display: flex;
+  gap: 2rem;
+  align-items: flex-start;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Avatar */
+.avatar-container {
+  flex-shrink: 0;
+  width: 260px;
+  height: 320px;
+  border-radius: 15px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease;
+}
+
+.avatar-container:hover {
+  transform: scale(1.05);
+}
+
+.avatar-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Contenido */
+.contenido-integrante {
+  flex: 1;
+  color: #fff;
+}
+
+.contenido-integrante h1,
+.contenido-integrante h2 {
+  font-size: 2.6rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.rol {
+  font-size: 1.2rem;
+  color: var(--primary-color);
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.info-basica {
+  background: rgba(255, 255, 255, 0.08);
+  padding: 1.2rem;
+  border-radius: 12px;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  margin-bottom: 1.5rem;
+}
+
+.info-basica p {
+  margin: 0.4rem 0;
+  font-size: 1rem;
+  color: #eee;
+}
+
+.info-basica strong {
+  color: var(--primary-color);
+  font-weight: 600;
+}
+
+.loading-section {
+  text-align: center;
+  padding: 1rem;
+  color: var(--primary-color);
+}
+
+/* Secciones comunes */
+.seccion h2 {
+  font-size: 1.6rem;
+  margin-bottom: 1rem;
+}
+
+.habilidades-lista li {
+  font-size: 1rem;
+}
+
+.peliculas-grid img,
+.musica-grid img {
+  width: 100%;
+  border-radius: 8px;
+  object-fit: cover;
+  height: 320px;
+}
+
+/* === Responsive === */
+@media (max-width: 768px) {
+  .tarjeta-integrante {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .avatar-container {
+    width: 220px;
+    height: 270px;
+    margin: 0 auto;
+  }
+
+  .contenido-integrante h1 {
+    font-size: 2rem;
+  }
+}

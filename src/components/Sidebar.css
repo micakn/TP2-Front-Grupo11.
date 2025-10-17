@@ -1,0 +1,145 @@
+/* Sidebar fijo para navegación */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 260px;
+  height: 100vh;
+  background: linear-gradient(180deg, #1a1a1a 0%, #0d1421 100%);
+  border-right: 2px solid #333;
+  padding: 2rem 1rem;
+  overflow-y: auto;
+  z-index: 1000;
+}
+
+/* Header del sidebar con logo */
+.sidebar-header {
+  text-align: center;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #333;
+}
+
+.sidebar-header .logo {
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
+  margin-bottom: 0.5rem;
+}
+
+.sidebar-header h2 {
+  color: var(--primary-color);
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+/* Lista de menú sin puntos */
+.sidebar-menu {
+  list-style: none;
+}
+
+.sidebar-menu li {
+  margin-bottom: 0.5rem;
+}
+
+/* Secciones del menú */
+.menu-section {
+  color: #888;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin: 1.5rem 0 0.5rem 0;
+  padding-left: 1rem;
+}
+
+/* Enlaces del menú con efectos */
+.menu-link {
+  display: block;
+  padding: 12px 1rem;
+  color: #ccc;
+  text-decoration: none;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  font-weight: 500;
+}
+
+.menu-link:hover {
+  background: rgba(0, 212, 255, 0.1);
+  color: var(--primary-color);
+  transform: translateX(4px);
+}
+
+/* Enlace activo con gradiente */
+.menu-link.active {
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  color: white;
+  font-weight: 600;
+}
+
+/* Footer del sidebar */
+.sidebar-footer {
+  position: absolute;
+  bottom: 1rem;
+  left: 1rem;
+  right: 1rem;
+  text-align: center;
+  color: #666;
+  font-size: 0.8rem;
+}
+
+/* RESPONSIVE - Mobile: Sidebar horizontal */
+@media (max-width: 768px) {
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 80px;
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    overflow-x: auto;
+  }
+  
+  .sidebar-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 0;
+    border-bottom: none;
+    padding-bottom: 0;
+    flex-shrink: 0;
+  }
+  
+  .sidebar-header .logo {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .sidebar-header h2 {
+    font-size: 1rem;
+  }
+  
+  .sidebar-menu {
+    display: flex;
+    gap: 1rem;
+    overflow-x: auto;
+    flex: 1;
+  }
+  
+  .menu-section {
+    display: none; /* Ocultar secciones en móvil */
+  }
+  
+  .menu-link {
+    white-space: nowrap;
+    padding: 8px 16px;
+    font-size: 0.9rem;
+  }
+  
+  .sidebar-footer {
+    display: none; /* Ocultar footer en móvil */
+  }
+}
+
