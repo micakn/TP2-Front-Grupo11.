@@ -20,7 +20,7 @@ export default function Integrantes() {
       ubicacion: "Buenos Aires, Argentina", 
       rol: "Frontend Developer & Design Enthusiast",
       avatar: "/img/card-Micaela.webp",
-      descripcion: "Creativa y detallista, combina diseño y programación. Experta en impresión 3D y café perfecto.",
+      descripcion: "Creativa y detallista, combina diseño y programación. Aficionada a la impresión 3D y el café.",
       especialidades: ["Impresión 3D", "Diseño Creativo", "Programación", "Café"],
       ruta: "/micaela",
       color: "#F8B55F"
@@ -31,7 +31,7 @@ export default function Integrantes() {
       ubicacion: "Córdoba, Argentina",
       rol: "Creative Designer & Project Manager",
       avatar: "/img/card-Maria.webp",
-      descripcion: "Organizada y comunicativa, aporta experiencia en gestión de proyectos con estilo retro único.",
+      descripcion: "Organizada y comunicativa, Combina su experiencia en gestión de proyectos con una visión artística que da identidad y equilibrio al equipo.",
       especialidades: ["Organización", "Trabajo en equipo", "Resolución de problemas", "Comunicación"],
       ruta: "/maria",
       color: "#F8B55F"
