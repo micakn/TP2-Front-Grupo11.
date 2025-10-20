@@ -81,89 +81,72 @@ export default function Musica() {
 🌐 Versión para DEPLOY en Vercel (sin proxy)
 -------------------------------------------  */
 
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import "./Musica.css";
 
 export default function Musica() {
-  const [canciones, setCanciones] = useState([]);
+  const [tracks, setTracks] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState(false);
 
   useEffect(() => {
-    const fetchMusica = async () => {
+    async function obtenerMusica() {
       try {
-        // Fetch desde el endpoint interno (compatible con Vercel)
-        const response = await fetch("/api/deezer");
-        if (!response.ok) throw new Error("Error al obtener los datos de Deezer");
+        // Llamada al backend (api/deezer.js)
+        const res = await fetch("/api/deezer");
+        const data = await res.json();
 
-        const data = await response.json();
-        setCanciones(data.data || []); // Deezer devuelve un array dentro de 'data'
+        // Ruta correcta del JSON de Deezer
+        setTracks(data.tracks?.data || []);
       } catch (err) {
-        console.error("Error al cargar música:", err);
-        setError("No se pudieron cargar las canciones en este momento.");
+        console.error("Error al obtener datos de Deezer:", err);
+        setError(true);
       } finally {
         setLoading(false);
       }
-    };
+    }
 
-    fetchMusica();
+    obtenerMusica();
   }, []);
 
-  if (loading)
-    return (
-      <div className="loading">
-        <p>🎧 Cargando canciones populares desde Deezer...</p>
-      </div>
-    );
-
-  if (error)
-    return (
-      <div className="error">
-        <p>{error}</p>
-      </div>
-    );
+  if (loading) return <p className="loading">🎧 Cargando canciones...</p>;
+  if (error) return <p className="error">❌ Error al cargar música.</p>;
 
   return (
     <div className="musica-page">
       <section className="hero-musica">
-        <h1>🎵 Tendencias Globales en Deezer</h1>
-        <p>Explorá las canciones más populares según el ranking oficial de Deezer</p>
+        <h1>🎶 Descubrí el Top Global de Deezer</h1>
+        <p className="api-indicator">
+          Datos obtenidos desde la API pública de Deezer
+        </p>
       </section>
 
-      <section className="musica-listado">
-        <h2>Top {canciones.length} Canciones</h2>
-        <p className="api-indicator">📡 Datos obtenidos desde la API pública de Deezer</p>
-
-        <div className="musica-grid">
-          {canciones.map((track) => (
-            <div key={track.id} className="musica-card">
-              <img
-                loading="lazy"
-                src={track.album?.cover_medium || "/img/placeholder-artist.webp"}
-                alt={track.title}
-                onError={(e) => (e.currentTarget.src = "/img/placeholder-artist.webp")}
-              />
-              <div className="musica-info">
-                <h3>{track.title}</h3>
-                <p>
-                  <strong>Artista:</strong> {track.artist?.name}
-                </p>
-                <p>
-                  <strong>Álbum:</strong> {track.album?.title}
-                </p>
-                <a
-                  href={track.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="ver-deezer"
-                >
-                  Escuchar en Deezer
-                </a>
-              </div>
+      <div className="musica-grid">
+        {tracks.map((track) => (
+          <div key={track.id} className="musica-card">
+            <img
+              src={track.album.cover_medium}
+              alt={track.title}
+              onError={(e) => (e.target.style.display = "none")}
+            />
+            <div className="musica-info">
+              <h3>{track.title}</h3>
+              <p>{track.artist.name}</p>
+              <a
+                href={track.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="ver-deezer"
+              >
+                Ver en Deezer 🎧
+              </a>
+              <audio controls src={track.preview}></audio>
             </div>
-          ))}
-        </div>
-      </section>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
+
+
