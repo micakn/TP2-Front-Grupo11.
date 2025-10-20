@@ -1,4 +1,4 @@
-/* codigo para pruebas locales
+/*
 import { useState, useEffect } from 'react';
 import './Peliculas.css';
 
@@ -81,72 +81,77 @@ export default function Musica() {
 🌐 Versión para DEPLOY en Vercel (sin proxy)
 -------------------------------------------  */
 
-import { useEffect, useState } from "react";
-import "./Musica.css";
+import { useState, useEffect } from 'react';
+import './Peliculas.css';
 
 export default function Musica() {
-  const [tracks, setTracks] = useState([]);
+  const [canciones, setCanciones] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(false);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    async function obtenerMusica() {
+    const fetchDeezer = async () => {
       try {
-        // Llamada al backend (api/deezer.js)
-        const res = await fetch("/api/deezer");
-        const data = await res.json();
-
-        // Ruta correcta del JSON de Deezer
-        setTracks(data.tracks?.data || []);
+        // ✅ Versión PRODUCCIÓN: llama al proxy /api/deezer de Vercel
+        const response = await fetch('/api/deezer');
+        const data = await response.json();
+        if (data.data) {
+          setCanciones(data.data);
+        } else {
+          setError('No se encontraron canciones');
+        }
       } catch (err) {
-        console.error("Error al obtener datos de Deezer:", err);
-        setError(true);
+        setError('Error al cargar datos de Deezer');
+        console.error('Error al cargar datos de Deezer:', err);
       } finally {
         setLoading(false);
       }
-    }
-
-    obtenerMusica();
+    };
+    fetchDeezer();
   }, []);
 
-  if (loading) return <p className="loading">🎧 Cargando canciones...</p>;
-  if (error) return <p className="error">❌ Error al cargar música.</p>;
+  if (loading) return (
+    <div className="loading">
+      <p>Cargando canciones de Deezer...</p>
+    </div>
+  );
+
+  if (error) return (
+    <div className="error">
+      <p>{error}</p>
+    </div>
+  );
 
   return (
-    <div className="musica-page">
-      <section className="hero-musica">
-        <h1>🎶 Descubrí el Top Global de Deezer</h1>
-        <p className="api-indicator">
-          Datos obtenidos desde la API pública de Deezer
-        </p>
+    <div className="peliculas-page">
+      <section className="hero-peliculas">
+        <h1>Top Global - Deezer</h1>
+        <p>Las canciones más escuchadas del momento 🎵</p>
       </section>
 
-      <div className="musica-grid">
-        {tracks.map((track) => (
-          <div key={track.id} className="musica-card">
-            <img
-              src={track.album.cover_medium}
-              alt={track.title}
-              onError={(e) => (e.target.style.display = "none")}
-            />
-            <div className="musica-info">
-              <h3>{track.title}</h3>
-              <p>{track.artist.name}</p>
-              <a
-                href={track.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="ver-deezer"
-              >
-                Ver en Deezer 🎧
-              </a>
-              <audio controls src={track.preview}></audio>
+      <section className="musica-api">
+        <h2>Ranking mundial</h2>
+        <p className="api-indicator">Canciones más escuchadas del ranking global</p>
+        <div className="musica-grid">
+          {canciones.map(song => (
+            <div key={song.id} className="musica-card">
+              <img 
+                src={song.album.cover_medium || '/img/placeholder-artist.webp'}
+                alt={song.title}
+              />
+              <div className="musica-info">
+                <h3>{song.title}</h3>
+                <p>Artista: {song.artist.name}</p>
+                <p>Álbum: {song.album.title}</p>
+                <a href={song.link} target="_blank" rel="noopener noreferrer" className="ver-spotify">
+                  Escuchar en Deezer
+                </a>
+              </div>
             </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      </section>
     </div>
   );
 }
-
 
