@@ -1,5 +1,6 @@
-import { Link } from 'react-router-dom'
-import './Integrantes.css'
+import { Link } from "react-router-dom";
+import HeroSection from "../components/ui/HeroSection";
+import "./Integrantes.css";
 
 export default function Integrantes() {
   const integrantes = [
@@ -9,21 +10,28 @@ export default function Integrantes() {
       ubicacion: "Berazategui, Buenos Aires",
       rol: "Full Stack Developer",
       avatar: "/img/card-Paula.webp",
-      descripcion: "Apasionada por la tecnología y el desarrollo web. Especializada en HTML, CSS, PHP y JavaScript.",
+      descripcion:
+        "Apasionada por la tecnología y el desarrollo web. Especializada en HTML, CSS, PHP y JavaScript.",
       especialidades: ["HTML", "CSS", "PHP", "JavaScript"],
       ruta: "/paula",
-      color: "rgb(58, 213, 252)"
+      color: "rgb(58, 213, 252)",
     },
     {
       nombre: "Micaela",
       edad: 31,
-      ubicacion: "Buenos Aires, Argentina", 
+      ubicacion: "Buenos Aires, Argentina",
       rol: "Frontend Developer & Design Enthusiast",
       avatar: "/img/card-Micaela.webp",
-      descripcion: "Creativa y detallista, combina diseño y programación. Aficionada a la impresión 3D y el café.",
-      especialidades: ["Impresión 3D", "Diseño Creativo", "Programación", "Café"],
+      descripcion:
+        "Creativa y detallista, combina diseño y programación. Aficionada a la impresión 3D y el café.",
+      especialidades: [
+        "Impresión 3D",
+        "Diseño Creativo",
+        "Programación",
+        "Café ☕",
+      ],
       ruta: "/micaela",
-      color: "#F8B55F"
+      color: "#F8B55F",
     },
     {
       nombre: "María",
@@ -31,50 +39,57 @@ export default function Integrantes() {
       ubicacion: "Córdoba, Argentina",
       rol: "Creative Designer & Project Manager",
       avatar: "/img/card-Maria.webp",
-      descripcion: "Organizada y comunicativa, Combina su experiencia en gestión de proyectos con una visión artística que da identidad y equilibrio al equipo.",
-      especialidades: ["Organización", "Trabajo en equipo", "Resolución de problemas", "Comunicación"],
+      descripcion:
+        "Organizada y comunicativa, combina su experiencia en gestión de proyectos con una visión artística que da identidad y equilibrio al equipo.",
+      especialidades: [
+        "Organización",
+        "Trabajo en equipo",
+        "Resolución de problemas",
+        "Comunicación",
+      ],
       ruta: "/maria",
-      color: "#F8B55F"
-    }
-  ]
+      color: "#F8B55F",
+    },
+  ];
 
   return (
     <div className="integrantes">
-      <section className="hero-integrantes">
-        <div className="hero-content">
-          <h1>Nuestro Equipo</h1>
-          <p>Conocé a las integrantes del Grupo 11</p>
-        </div>
-      </section>
+      <HeroSection
+        title="Nuestro Equipo"
+        subtitle="Conocé a las integrantes del Grupo 11"
+        gradient="linear-gradient(135deg, rgba(255,217,61,0.1), rgba(0,212,255,0.1))"
+      />
 
       <section className="equipo-actual">
         <h2>Integrantes Activos</h2>
         <div className="integrantes-grid">
-          {integrantes.map((integrante, index) => (
+          {integrantes.map((i, index) => (
             <Link
               key={index}
-              to={integrante.ruta}
+              to={i.ruta}
               className="integrante-card"
-              style={{'--color-principal': integrante.color}}
+              style={{ "--color-principal": i.color }}
             >
               <div className="integrante-avatar">
-                <img src={integrante.avatar} alt={`${integrante.nombre} Avatar`} />
+                <img src={i.avatar} alt={`${i.nombre} Avatar`} />
                 <div className="avatar-overlay">
                   <span>Ver Portal</span>
                 </div>
               </div>
-              
+
               <div className="integrante-info">
-                <h3>{integrante.nombre}</h3>
-                <p className="rol">{integrante.rol}</p>
-                <p className="ubicacion">📍 {integrante.ubicacion}</p>
-                <p className="descripcion">{integrante.descripcion}</p>
-                
+                <h3>{i.nombre}</h3>
+                <p className="rol">{i.rol}</p>
+                <p className="ubicacion">📍 {i.ubicacion}</p>
+                <p className="descripcion">{i.descripcion}</p>
+
                 <div className="especialidades">
                   <h4>Especialidades:</h4>
                   <div className="especialidades-tags">
-                    {integrante.especialidades.map((esp, i) => (
-                      <span key={i} className="especialidad-tag">{esp}</span>
+                    {i.especialidades.map((esp, j) => (
+                      <span key={j} className="especialidad-tag">
+                        {esp}
+                      </span>
                     ))}
                   </div>
                 </div>

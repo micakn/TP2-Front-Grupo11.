@@ -1,0 +1,100 @@
+/* ================================
+   💜 Tema María - Retro 80s violeta y dorado
+   ================================ */
+
+.maria-theme .tarjeta-integrante {
+  background: linear-gradient(135deg, #955ea0, #4a0b78);
+  border: 3px solid #F8B55F;
+  box-shadow: 0 8px 25px rgba(26, 24, 26, 0.5);
+  position: relative;
+}
+
+.maria-theme .avatar-container {
+  border: 3px solid #F8B55F;
+  box-shadow: 0 8px 25px rgba(248, 181, 95, 0.2);
+}
+.maria-theme .avatar-container:hover {
+  transform: scale(1.05);
+  border-color: #955ea0;
+  box-shadow: 0 8px 25px rgba(248, 181, 95, 0.4);
+}
+
+.maria-theme .contenido-integrante h1 {
+  color: #F8B55F;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+.maria-theme .rol {
+  color: #F8B55F;
+}
+
+/* Caja info personalizada */
+.maria-theme .info-basica {
+  background: rgba(17, 24, 39, 0.3);
+  border: 2px solid #4a0b78;
+  box-shadow: 0 0 10px rgba(223, 210, 225, 0.2);
+}
+.maria-theme .info-basica strong {
+  color: #F8B55F;
+}
+
+/* Botones personalizados */
+.maria-theme .btn-outline {
+  border-color: #F8B55F;
+  color: #F8B55F;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+.maria-theme .btn-outline:hover,
+.maria-theme .btn-outline.active {
+  background: linear-gradient(135deg, #F8B55F, #955ea0);
+  color: white;
+  box-shadow: 0 4px 15px rgba(248, 181, 95, 0.4);
+}
+
+/* Secciones */
+.maria-theme .seccion {
+  background: rgba(17, 24, 39, 0.3);
+  border: 1px solid rgba(248, 181, 95, 0.3);
+}
+.maria-theme .seccion h2 {
+  color: #F8B55F;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Efecto retro escaneado */
+.maria-theme .tarjeta-integrante::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: repeating-linear-gradient(
+    90deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 255, 255, 0.03) 2px,
+    rgba(0, 255, 255, 0.03) 4px
+  );
+  pointer-events: none;
+  border-radius: var(--radius);
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+  .maria-theme .tarjeta-integrante {
+    flex-direction: column;
+    text-align: center;
+  }
+  .maria-theme .avatar-container {
+    width: 230px;
+    height: 290px;
+    margin: 0 auto;
+  }
+  .maria-theme .contenido-integrante h1 {
+    font-size: 2.3rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .maria-theme .contenido-integrante h1 {
+    font-size: 1.9rem;
+  }
+}

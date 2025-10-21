@@ -1,0 +1,78 @@
+/* ================================
+   💙 Tema Paula - Tech futurista azul
+   ================================ */
+
+.paula-theme .tarjeta-integrante {
+  background: linear-gradient(135deg, #4118b1, #2d0a7a);
+  border: 3px solid rgb(58, 213, 252);
+  box-shadow: 0 8px 30px rgba(65, 24, 177, 0.4);
+}
+
+.paula-theme .avatar-container {
+  border: 3px solid rgb(58, 213, 252);
+}
+.paula-theme .avatar-container:hover {
+  border-color: #4118b1;
+  transform: scale(1.05);
+}
+
+.paula-theme .contenido-integrante h1 {
+  color: rgb(58, 213, 252);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.paula-theme .rol {
+  color: rgb(58, 213, 252);
+}
+
+/* Caja info personalizada */
+.paula-theme .info-basica {
+  background: rgba(58, 213, 252, 0.1);
+  border: 2px solid rgba(58, 213, 252, 0.3);
+}
+.paula-theme .info-basica strong {
+  color: rgb(58, 213, 252);
+}
+
+/* Botones personalizados */
+.paula-theme .btn-outline {
+  border-color: rgb(58, 213, 252);
+  color: rgb(58, 213, 252);
+}
+.paula-theme .btn-outline:hover,
+.paula-theme .btn-outline.active {
+  background: linear-gradient(135deg, rgb(58, 213, 252), #4118b1);
+  color: white;
+  box-shadow: 0 4px 15px rgba(58, 213, 252, 0.4);
+}
+
+/* Secciones dinámicas */
+.paula-theme .seccion {
+  background: rgba(58, 213, 252, 0.05);
+  border: 1px solid rgba(58, 213, 252, 0.2);
+}
+.paula-theme .seccion h2 {
+  color: rgb(58, 213, 252);
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+  .paula-theme .tarjeta-integrante {
+    flex-direction: column;
+    text-align: center;
+  }
+  .paula-theme .avatar-container {
+    width: 220px;
+    height: 280px;
+    margin: 0 auto;
+  }
+  .paula-theme .contenido-integrante h1 {
+    font-size: 2.2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .paula-theme .contenido-integrante h1 {
+    font-size: 1.8rem;
+  }
+}

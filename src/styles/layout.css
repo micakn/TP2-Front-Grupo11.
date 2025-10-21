@@ -1,0 +1,78 @@
+/* ================================
+   📐 LAYOUT GENERAL MEJORADO
+   ================================ */
+
+/* Estructura base */
+.app {
+  display: flex;
+  min-height: 100vh;
+  background: var(--bg-color);
+  color: var(--text-color);
+  overflow-x: hidden;
+}
+
+.sidebar {
+  width: 260px;
+  min-width: 240px;
+  background: linear-gradient(180deg, #1a1a1a 0%, #0d1421 100%);
+  border-right: 2px solid #333;
+  transition: width 0.3s ease;
+}
+
+.main-content {
+  flex: 1;
+  padding: 2rem;
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+}
+
+/* 💻 Escritorio grande */
+@media (min-width: 1200px) {
+  .main-content {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 3rem;
+  }
+}
+
+/* 💻 Pantallas medianas (laptops) */
+@media (max-width: 1024px) {
+  .sidebar {
+    width: 220px;
+  }
+  .main-content {
+    padding: 1.5rem;
+  }
+}
+
+/* 📱 Tablets y móviles */
+@media (max-width: 768px) {
+  .sidebar {
+    position: fixed;
+    width: 60px; /* ✅ En lugar de desaparecer, se contrae */
+    overflow: hidden;
+  }
+
+  .sidebar:hover {
+    width: 200px; /* se expande al pasar el mouse */
+  }
+
+  .main-content {
+    margin-left: 60px;
+    padding: 1rem;
+  }
+}
+
+/* 📱 Móviles pequeños */
+@media (max-width: 480px) {
+  .sidebar {
+    width: 50px;
+  }
+
+  .main-content {
+    margin-left: 0;
+    padding: 0.8rem;
+  }
+}
+
+

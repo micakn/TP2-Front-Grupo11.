@@ -1,108 +1,82 @@
-// Componente reutilizable para mostrar habilidades, películas y música
-import { useState } from 'react'
-import './SeccionIntegrante.css'
+//  SeccionIntegrante.jsx
+// Muestra las secciones interactivas: Habilidades, Películas y Música.
+// Usa los subcomponentes PeliculaCard y MusicaCard para mayor limpieza.
 
-export default function SeccionIntegrante({ habilidades, peliculas, musica }) {
-  const [seccionActiva, setSeccionActiva] = useState(null)
+import { useState } from 'react';
+import './SeccionIntegrante.css';
+import PeliculaCard from './cards/PeliculaCard';
+import MusicaCard from './cards/MusicaCard';
+
+export default function SeccionIntegrante({ habilidades = [], peliculas = [], musica = [] }) {
+  const [seccionActiva, setSeccionActiva] = useState('habilidades'); // inicia abierta
+
+  const toggleSeccion = (nombre) =>
+    setSeccionActiva(seccionActiva === nombre ? null : nombre);
 
   return (
-    <div className="secciones-integrante">
-      {/* Botones de navegación entre secciones */}
-      <div className="botones">
-        <button
-          className={`btn ${seccionActiva === 'habilidades' ? 'active' : ''}`}
-          onClick={() =>
-            setSeccionActiva(
-              seccionActiva === 'habilidades' ? null : 'habilidades'
-            )
-          }
-        >
-          Habilidades
-        </button>
-        <button
-          className={`btn ${seccionActiva === 'peliculas' ? 'active' : ''}`}
-          onClick={() =>
-            setSeccionActiva(
-              seccionActiva === 'peliculas' ? null : 'peliculas'
-            )
-          }
-        >
-          Películas
-        </button>
-        <button
-          className={`btn ${seccionActiva === 'musica' ? 'active' : ''}`}
-          onClick={() =>
-            setSeccionActiva(seccionActiva === 'musica' ? null : 'musica')
-          }
-        >
-          Música
-        </button>
+    <div className="secciones-integrante fade-in">
+
+      {/* 🔘 Botones de navegación */}
+      <div className="botones center">
+        {['habilidades', 'peliculas', 'musica'].map((tipo) => (
+          <button
+            key={tipo}
+            className={`btn-outline ${seccionActiva === tipo ? 'active' : ''}`}
+            onClick={() => toggleSeccion(tipo)}
+          >
+            {tipo.charAt(0).toUpperCase() + tipo.slice(1)}
+          </button>
+        ))}
       </div>
 
-      {/* Sección de Habilidades */}
+      {/* 💡 Habilidades */}
       {seccionActiva === 'habilidades' && (
-        <div className="seccion fadeIn">
+        <div className="seccion card fade-in">
           <h2>💡 Habilidades</h2>
           <ul className="habilidades-lista">
-            {habilidades.map((habilidad, index) => (
-              <li key={index}>{habilidad}</li>
+            {habilidades.map((habilidad, i) => (
+              <li key={i}>{habilidad}</li>
             ))}
           </ul>
         </div>
       )}
 
-      {/* Sección de Películas */}
+      {/* 🎬 Películas */}
       {seccionActiva === 'peliculas' && (
-        <div className="seccion fadeIn">
+        <div className="seccion fade-in">
           <h2>🎬 Películas Favoritas</h2>
-          <div className="peliculas-grid">
+          <div className="grid-auto">
             {peliculas.map((peli) => (
-              <div key={peli.id || peli.titulo} className="pelicula-card">
-                <img
-                  loading="lazy"
-                  src={peli.poster || '/img/placeholder-movie.webp'}
-                  alt={peli.titulo}
-                  onError={(e) =>
-                    (e.currentTarget.src = '/img/placeholder-movie.webp')
-                  }
-                />
-                <div className="pelicula-info">
-                  <h3>{peli.titulo}</h3>
-                  {/* Admite 'año' o 'year' */}
-                  <p>
-                    <strong>Año:</strong> {peli.year ?? peli.año ?? 'Desconocido'}
-                  </p>
-                </div>
-              </div>
+              <PeliculaCard
+                key={peli.id || peli.titulo}
+                poster={peli.poster}
+                titulo={peli.titulo}
+                year={peli.year ?? peli.año}
+                director={peli.director}
+                url={peli.url}
+              />
             ))}
           </div>
         </div>
       )}
 
-      {/* Sección de Música */}
+      {/* 🎵 Música */}
       {seccionActiva === 'musica' && (
-        <div className="seccion fadeIn">
+        <div className="seccion fade-in">
           <h2>🎵 Música Favorita</h2>
-          <div className="musica-grid">
+          <div className="grid-auto grid-1-md">
             {musica.map((track) => (
-              <div key={track.id || track.artista} className="musica-card">
-                <img
-                  loading="lazy"
-                  src={track.imagen || '/img/placeholder-artist.webp'}
-                  alt={track.artista}
-                  onError={(e) =>
-                    (e.currentTarget.src = '/img/placeholder-artist.webp')
-                  }
-                />
-                <div className="musica-info">
-                  <h3>{track.artista}</h3>
-                </div>
-              </div>
+              <MusicaCard
+                key={track.id || track.artista}
+                artista={track.artista}
+                imagen={track.imagen}
+                url={track.url}
+              />
             ))}
           </div>
         </div>
       )}
     </div>
-  )
+  );
 }
 

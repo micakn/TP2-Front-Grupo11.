@@ -1,76 +1,38 @@
-/* Componente reutilizable para datos dinámicos */
+/*  SeccionIntegrante.css */
+/* Solo estilos específicos del componente.
+   Todo lo genérico (cards, grid, fade-in, botones, etc.) viene de util.css. */
+
+/* Contenedor principal */
 .secciones-integrante {
   margin-top: 2rem;
   width: 100%;
 }
 
-/* Botones de navegación entre secciones */
+/* Botones */
 .botones {
   display: flex;
   gap: 1rem;
-  margin-bottom: 1.5rem;
-  flex-wrap: wrap;
   justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 1.5rem;
 }
 
-.botones .btn {
-  background: transparent;
-  border: 2px solid var(--primary-color);
-  color: var(--primary-color);
-  padding: 10px 20px;
-  font-size: 0.9rem;
-  transition: all 0.3s ease;
-  cursor: pointer;
-  border-radius: 25px;
-  font-weight: 500;
-}
-
-.botones .btn:hover,
-.botones .btn.active {
-  background: var(--primary-color);
-  color: white;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 15px rgba(0, 212, 255, 0.3);
-}
-
-/* Contenedor de sección con animación */
+/* Sección activa */
 .seccion {
-  background: rgba(255, 255, 255, 0.05);
   padding: 1.5rem;
-  border-radius: 12px;
-  border: 1px solid rgba(0, 212, 255, 0.2);
-  animation: fadeIn 0.3s ease;
   width: 100%;
   box-sizing: border-box;
 }
 
+/* Título de cada sección */
 .seccion h2 {
   color: var(--primary-color);
-  margin-bottom: 1rem;
+  text-align: center;
+  margin-bottom: 1.5rem;
   font-size: 1.4rem;
 }
 
-/* Indicador de datos desde API */
-.api-indicator {
-  background: rgba(0, 212, 255, 0.1);
-  color: var(--primary-color);
-  padding: 0.5rem 1rem;
-  border-radius: 20px;
-  font-size: 0.8rem;
-  margin-bottom: 1rem;
-  display: inline-block;
-  border: 1px solid rgba(0, 212, 255, 0.3);
-  font-weight: 600;
-}
-
-/* Loading section */
-.loading-section {
-  text-align: center;
-  padding: 2rem;
-  color: var(--primary-color);
-}
-
-/* Habilidades en grid */
+/* Habilidades */
 .habilidades-lista {
   list-style: none;
   display: grid;
@@ -84,180 +46,24 @@
   border-radius: 8px;
   border-left: 4px solid var(--primary-color);
   transition: all 0.3s ease;
+  text-align: center;
 }
 
 .habilidades-lista li:hover {
-  transform: translateX(5px);
+  transform: translateY(-3px);
   background: rgba(0, 212, 255, 0.15);
 }
 
-/* Grid de películas responsive */
-.peliculas-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 1rem;
-  width: 100%;
-}
-
-.pelicula-card {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 10px;
-  overflow: hidden;
-  transition: all 0.3s ease;
-}
-
-.pelicula-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-}
-
-/* CRÍTICO: Imágenes sin bordes negros */
-.pelicula-card img {
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
-  background: none; /* Sin fondo negro */
-  border: none; /* Sin borde */
-}
-
-.pelicula-info {
-  padding: 1rem;
-}
-
-.pelicula-info h3 {
-  color: var(--accent-color);
-  margin-bottom: 0.5rem;
-  font-size: 1rem;
-}
-
-.pelicula-info p {
-  color: #ccc;
-  font-size: 0.9rem;
-  margin-bottom: 0.5rem;
-}
-
-/* Botón IMDb con colores oficiales */
-.ver-imdb {
-  background: #f5c518;
-  color: black;
-  padding: 0.3rem 0.8rem;
-  border-radius: 15px;
-  text-decoration: none;
-  font-size: 0.8rem;
-  font-weight: 600;
-  transition: all 0.3s ease;
-}
-
-.ver-imdb:hover {
-  background: #e6b800;
-  transform: translateY(-1px);
-}
-
-/* Grid de música horizontal */
-.musica-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 1rem;
-  width: 100%;
-}
-
-.musica-card {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 10px;
-  overflow: hidden;
-  transition: all 0.3s ease;
-  display: flex;
-  align-items: center;
-  padding: 1rem;
-}
-
-.musica-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-}
-
-/* CRÍTICO: Imágenes de música sin bordes negros */
-.musica-card img {
-  width: 70px;
-  height: 70px;
-  border-radius: 50%;
-  object-fit: cover;
-  margin-right: 1rem;
-  background: none; /* Sin fondo negro */
-  border: none; /* Sin borde */
-  flex-shrink: 0;
-}
-
-.musica-info {
-  flex: 1;
-}
-
-.musica-info h3 {
-  color: var(--accent-color);
-  margin-bottom: 0.5rem;
-  font-size: 1rem;
-}
-
-/* Botón Spotify con colores oficiales */
-.ver-spotify {
-  background: #1db954;
-  color: white;
-  padding: 0.3rem 0.8rem;
-  border-radius: 15px;
-  text-decoration: none;
-  font-size: 0.8rem;
-  font-weight: 600;
-  transition: all 0.3s ease;
-}
-
-.ver-spotify:hover {
-  background: #1ed760;
-  transform: translateY(-1px);
-}
-
-/* Animación de entrada */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* RESPONSIVE DESIGN CRITICAL */
-@media (max-width: 768px) {
+/* =======================
+   📱 Responsive específico
+   ======================= */
+@media (max-width: 1024px) {
   .botones {
-    justify-content: center;
-    gap: 0.5rem;
+    gap: 0.75rem;
   }
-  
-  .botones .btn {
-    flex: 1;
-    min-width: 100px;
-    font-size: 0.8rem;
-    padding: 8px 16px;
-  }
-  
-  .peliculas-grid,
-  .musica-grid {
-    grid-template-columns: 1fr; /* Una columna en móvil */
-  }
-  
-  .musica-card {
-    flex-direction: column;
-    text-align: center;
-  }
-  
-  .musica-card img {
-    margin-right: 0;
-    margin-bottom: 0.5rem;
-  }
-  
+}
+
+@media (max-width: 768px) {
   .habilidades-lista {
     grid-template-columns: 1fr;
   }
@@ -267,21 +73,8 @@
   .seccion {
     padding: 1rem;
   }
-  
-  .botones .btn {
-    font-size: 0.75rem;
-    padding: 6px 12px;
-  }
-  
-  .pelicula-card img {
-    height: 180px;
-  }
-  
-  .musica-card img {
-    width: 60px;
-    height: 60px;
+
+  .seccion h2 {
+    font-size: 1.2rem;
   }
 }
-
-
-

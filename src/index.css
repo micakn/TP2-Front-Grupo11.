@@ -1,44 +1,34 @@
-/* Reset y configuración global de la aplicación */
+/* ================================
+    RESET Y CONFIGURACIÓN GLOBAL
+   ================================ */
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* Configuración del body principal */
+/* Evita scroll horizontal global */
 body {
-  font-family: 'Nunito', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  background: #0a0a0a;
-  color: #fff;
-  line-height: 1.6;
-  overflow-x: hidden; /* CRÍTICO: Elimina scroll horizontal */
+  overflow-x: hidden;
 }
 
-/* Variables CSS para consistencia de colores */
-:root {
-  --primary-color: #00d4ff;
-  --secondary-color: #ff6b6b;
-  --accent-color: #ffd93d;
-  --dark-bg: #0a0a0a;
-  --card-bg: #1a1a1a;
-  --border-color: #333;
-}
-
-/* Contenedor principal responsivo */
+/* Contenedor responsivo estándar */
 .container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 1rem;
   width: 100%;
-  box-sizing: border-box;
 }
 
-/* Botones globales con gradiente */
+/* ================================
+    BOTONES DE ESTILO SECUNDARIO
+   ================================ */
 .btn {
   display: inline-block;
   padding: 12px 24px;
-  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-  color: white;
+  background: var(--gradient-primary);
+  color: #fff;
   text-decoration: none;
   border-radius: 25px;
   border: none;
@@ -52,7 +42,9 @@ body {
   box-shadow: 0 8px 25px rgba(0, 212, 255, 0.3);
 }
 
-/* Scrollbar personalizado para mejor UX */
+/* ================================
+    SCROLLBAR PERSONALIZADO
+   ================================ */
 ::-webkit-scrollbar {
   width: 8px;
 }
@@ -67,10 +59,12 @@ body {
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--secondary-color);
+  background: #48a6a7;
 }
 
-/* Animación global de entrada */
+/* ================================
+   ANIMACIÓN GLOBAL DE ENTRADA
+   ================================ */
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -85,4 +79,3 @@ body {
 .fade-in {
   animation: fadeIn 0.6s ease;
 }
-

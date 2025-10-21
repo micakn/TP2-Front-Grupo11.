@@ -1,55 +1,52 @@
-//Peliculas.jsx
-import "./Peliculas.css";
+// 🎬 Peliculas.jsx — listado desde JSON local con PeliculaCard unificada
+import "../styles/util.css";               // grid-media, card-media, botones, etc.
+import "../styles/MediaPages.css";         // nuevo archivo unificado
+import PeliculaCard from "../components/cards/PeliculaCard";
 import data from "../data/peliculas.json";
 
 export default function Peliculas() {
- 
+  // Normaliza los datos del JSON
   const peliculas = (data.peliculas || []).map((p) => ({
     ...p,
-    year: p.year ?? p.año, // usa 'año' si 'year' no existe
+    year: p.year ?? p.año, // Usa 'año' si no existe 'year'
   }));
 
   return (
-    <div className="peliculas-page">
-      <section className="hero-peliculas">
+    <div
+      className="media-page fade-in"
+      style={{ "--accent-color": "#00d4ff" }} // 🎨 color de acento (azul celeste)
+    >
+      <section className="hero-media">
         <h1>🎬 Catálogo de Películas</h1>
         <p>Datos obtenidos desde un archivo local JSON</p>
       </section>
 
-      <section className="peliculas-listado">
+      <section className="media-listado card">
         <h2>Listado dinámico</h2>
-        <p className="api-indicator">Mostrando {peliculas.length} películas</p>
+        <p className="api-indicator">
+          Mostrando {peliculas.length} películas
+        </p>
 
-        <div className="peliculas-grid">
+        <div className="grid-media">
           {peliculas.map((peli) => (
-            <div key={peli.id} className="pelicula-card">
-              <img
-                loading="lazy"
-                src={peli.poster || "/img/placeholder-movie.webp"}
-                alt={peli.titulo}
-                onError={(e) => (e.currentTarget.src = "/img/placeholder-movie.webp")}
-              />
-              <div className="pelicula-info">
-                <h3>{peli.titulo}</h3>
-                <p><strong>Año:</strong> {peli.year}</p>
-                <p><strong>Género:</strong> {peli.genero}</p>
-                <p><strong>Director:</strong> {peli.director}</p>
-                <p><strong>Duración:</strong> {peli.duracion}</p>
-                <p><strong>Rating IMDb:</strong> {peli.rating}</p>
-                <a
-                  href={peli.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="ver-imdb"
-                >
-                  Ver en IMDb
-                </a>
-              </div>
-            </div>
+            <PeliculaCard
+              key={peli.id || peli.titulo}
+              poster={peli.poster}
+              titulo={peli.titulo}
+              year={peli.year}
+              genero={peli.genero}
+              director={peli.director}
+              duracion={peli.duracion}
+              rating={peli.rating}
+              url={peli.url}
+            />
           ))}
         </div>
       </section>
     </div>
   );
 }
+
+
+
 

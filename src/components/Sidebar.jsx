@@ -1,76 +1,77 @@
-// Sidebar.jsx - versión mejorada y accesible
+// Sidebar.jsx - versión final con menú hamburguesa y overlay
 import { NavLink } from "react-router-dom";
 import "./Sidebar.css";
 
-export default function Sidebar() {
+export default function Sidebar({ sidebarOpen, toggleSidebar }) {
+  const linksPrincipales = [
+    { to: "/", label: "🏠 Inicio" },
+    { to: "/bitacora", label: "📋 Bitácora" },
+    { to: "/integrantes", label: "👥 Integrantes" },
+    { to: "/diagramas", label: "📊 Diagramas" },
+    { to: "/peliculas", label: "🎬 Películas" },
+    { to: "/musica", label: "🎶 Música" },
+  ];
+
+  const linksPortales = [
+    { to: "/micaela", label: "🎮 Micaela" },
+    { to: "/paula", label: "🌌 Paula" },
+    { to: "/maria", label: "✨ María" },
+  ];
+
   return (
-    <nav className="sidebar">
-      <div className="sidebar-header">
-        <img
-          src="/img/logo-inicio.webp"
-          alt="Logo del Grupo 11"
-          className="logo"
-        />
-        <h2>Grupo 11</h2>
-      </div>
+    <>
+      {/* 🔹 Botón hamburguesa visible solo en móvil */}
+      <button
+        className={`hamburger-btn ${sidebarOpen ? "open" : ""}`}
+        onClick={toggleSidebar}
+        aria-label="Alternar menú"
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
 
-      <ul className="sidebar-menu">
-        <li className="menu-section">Navegación</li>
-        <li>
-          <NavLink to="/" className="menu-link">
-            🏠 Inicio
-          </NavLink>
-        </li>
-        <li>
-          <NavLink to="/bitacora" className="menu-link">
-            📋 Bitácora
-          </NavLink>
-        </li>
-        <li>
-          <NavLink to="/integrantes" className="menu-link">
-            👥 Integrantes
-          </NavLink>
-        </li>
-        <li>
-          <NavLink to="/diagramas" className="menu-link">
-            📊 Diagramas
-          </NavLink>
-        </li>
-        <li>
-          <NavLink to="/peliculas" className="menu-link">
-            🎬 Películas
-          </NavLink>
-        </li>
-        <li>
-          <NavLink to="/musica" className="menu-link">
-            🎶 Música
-          </NavLink>
-        </li>
+      {/* 🔹 Sidebar principal */}
+      <nav className={`sidebar ${sidebarOpen ? "open" : ""}`} aria-label="Menú principal">
+        <div className="sidebar-header">
+          <img src="/img/logo-inicio.webp" alt="Logo del Grupo 11" className="logo" />
+          <h2>Grupo 11</h2>
+        </div>
 
-        <li className="menu-section">Portales Individuales</li>
-        <li>
-          <NavLink to="/micaela" className="menu-link">
-            🎮 Micaela
-          </NavLink>
-        </li>
-        <li>
-          <NavLink to="/paula" className="menu-link">
-            🌌 Paula
-          </NavLink>
-        </li>
-        <li>
-          <NavLink to="/maria" className="menu-link">
-            ✨ María
-          </NavLink>
-        </li>
-      </ul>
+        <ul className="sidebar-menu">
+          <li className="menu-section">Navegación</li>
+          {linksPrincipales.map((item) => (
+            <li key={item.to}>
+              <NavLink
+                to={item.to}
+                className={({ isActive }) => `menu-link ${isActive ? "active" : ""}`}
+                onClick={toggleSidebar}
+              >
+                {item.label}
+              </NavLink>
+            </li>
+          ))}
 
-      <div className="sidebar-footer">TP2 React · 2025</div>
-    </nav>
+          <li className="menu-section">Portales Individuales</li>
+          {linksPortales.map((item) => (
+            <li key={item.to}>
+              <NavLink
+                to={item.to}
+                className={({ isActive }) => `menu-link ${isActive ? "active" : ""}`}
+                onClick={toggleSidebar}
+              >
+                {item.label}
+              </NavLink>
+            </li>
+          ))}
+        </ul>
+
+        <div className="sidebar-footer">TP2 React · 2025</div>
+      </nav>
+
+      {/* 🔹 Overlay para cerrar al hacer click afuera */}
+      {sidebarOpen && <div className="sidebar-overlay" onClick={toggleSidebar}></div>}
+    </>
   );
 }
-
-
-
-
 

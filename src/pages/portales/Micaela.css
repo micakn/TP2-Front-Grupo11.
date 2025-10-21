@@ -1,0 +1,80 @@
+/* ================================
+   🎨 Tema Micaela (violeta y dorado)
+   ================================ */
+
+.micaela-theme .tarjeta-integrante {
+  background: linear-gradient(135deg, #7C4585, #3D365C);
+  border: 3px solid #F8B55F;
+  box-shadow: 0 8px 25px rgba(124, 69, 133, 0.4);
+}
+
+.micaela-theme .avatar-container {
+  border: 3px solid #C95792;
+  box-shadow: 0 8px 25px rgba(201, 87, 146, 0.2);
+}
+
+.micaela-theme .avatar-container:hover {
+  border-color: #F8B55F;
+  box-shadow: 0 8px 25px rgba(201, 87, 146, 0.6);
+}
+
+.micaela-theme .contenido-integrante h1 {
+  color: #F8B55F;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.micaela-theme .rol {
+  color: #C95792;
+}
+
+.micaela-theme .info-basica {
+  background: rgba(201, 87, 146, 0.15);
+  border: 2px solid #C95792;
+}
+
+.micaela-theme .info-basica strong {
+  color: #F8B55F;
+}
+
+.micaela-theme .btn-outline {
+  border-color: #F8B55F;
+  color: #F8B55F;
+}
+
+.micaela-theme .btn-outline:hover,
+.micaela-theme .btn-outline.active {
+  background: linear-gradient(135deg, #F8B55F, #C95792);
+  color: white;
+  box-shadow: 0 4px 15px rgba(248, 181, 95, 0.4);
+}
+
+.micaela-theme .seccion {
+  background: rgba(248, 181, 95, 0.08);
+  border: 1px solid rgba(248, 181, 95, 0.3);
+}
+
+.micaela-theme .seccion h2 {
+  color: #F8B55F;
+}
+
+/* Responsividad (hereda estructura de IntegrantesBase.css) */
+@media (max-width: 768px) {
+  .micaela-theme .tarjeta-integrante {
+    flex-direction: column;
+    text-align: center;
+  }
+  .micaela-theme .avatar-container {
+    width: 220px;
+    height: 280px;
+    margin: 0 auto;
+  }
+  .micaela-theme .contenido-integrante h1 {
+    font-size: 2.2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .micaela-theme .contenido-integrante h1 {
+    font-size: 1.8rem;
+  }
+}
