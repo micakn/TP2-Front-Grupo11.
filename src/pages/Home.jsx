@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import HeroSection from "../components/ui/HeroSection";
 import CardGrid from "../components/ui/CardGrid";
 import "./Home.css";
