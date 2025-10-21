@@ -8,7 +8,7 @@
 ## 🌐 Links del Proyecto
 
 - **🚀 Deploy en Vercel:** [https://tp-2-front-grupo11-rho.vercel.app/](https://tp-2-front-grupo11-rho.vercel.app/)
-- **📂 Repositorio GitHub:** [URL del repositorio aquí]
+- **📂 Repositorio GitHub:** [[URL de GitHub](https://github.com/micakn/TP2-Front-Grupo11.)]
 
 ---
 
