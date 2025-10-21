@@ -8,7 +8,7 @@ export default function Paula() {
       rol="Full Stack Developer"
       ubicacion="Berazategui, Buenos Aires"
       edad={32}
-      avatar="/img/card-Paula.webp"
+      avatar="/img/card-Paula2.webp"
       habilidades={["HTML", "CSS", "PHP", "JavaScript"]}
       peliculasTitulos={[
         "Fragmentado",
