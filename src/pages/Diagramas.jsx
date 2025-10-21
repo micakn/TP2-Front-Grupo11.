@@ -7,7 +7,7 @@ export default function Diagramas() {
   return (
     <div className="diagramas">
       <HeroSection
-  title="📊 Diagramas Técnicos del Proyecto"
+  title="📊 Diagramas del Proyecto"
   subtitle="Visualización de la arquitectura y organización del TP2 React SPA"
   accentColor="#4ade80"
 />
