@@ -1,6 +1,5 @@
 // Maria.jsx - Portal individual simplificado
 import PortalBase from "../../components/PortalBase";
-import "./Maria.css";
 
 export default function Maria() {
   return (

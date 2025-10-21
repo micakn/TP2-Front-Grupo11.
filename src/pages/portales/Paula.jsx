@@ -1,6 +1,5 @@
 // Paula.jsx - Portal individual simplificado
 import PortalBase from "../../components/PortalBase";
-import "./Paula.css";
 
 export default function Paula() {
   return (

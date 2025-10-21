@@ -1,0 +1,4559 @@
+
+=====================================================
+
+# Archivo: C:\Users\micae\Desktop\4to Cuatri\Front\TP2-Front-Grupo11\src\App.css
+
+/* ================================
+   app.css - ESTILOS BASE DE App
+   ================================ */
+
+/* CONTENEDOR PRINCIPAL */
+.app {
+  display: flex;
+  min-height: 100vh;
+  background: var(--bg-color);
+  overflow-x: hidden;
+}
+
+/* SIDEBAR FIJA */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 260px;
+  background: linear-gradient(180deg, #1a1a1a 0%, #0d1421 100%);
+  border-right: 2px solid #333;
+  z-index: 1000;
+  transition: left 0.3s ease;
+}
+
+/* CONTENIDO PRINCIPAL */
+.main-content {
+  flex: 1;
+  padding: 2rem;
+  margin-left: 260px;
+  color: var(--text-color);
+  box-sizing: border-box;
+  transition: margin-left 0.3s ease;
+  width: 100%;
+}
+
+/* ===== DESKTOP MEDIO ===== */
+@media (max-width: 1024px) {
+  .sidebar { 
+    width: 220px; 
+  }
+  .main-content { 
+    margin-left: 220px; 
+    padding: 1.5rem; 
+  }
+}
+
+/* ===== TABLETS & MÓVILES: OVERLAY MODE ===== */
+@media (max-width: 768px) {
+  /* Sidebar oculta por defecto */
+  .sidebar { 
+    left: -260px; 
+    width: 260px; 
+  }
+
+  /* Sidebar visible cuando tiene clase 'open' */
+  .sidebar.open { 
+    left: 0; 
+  }
+
+  /* Main content NUNCA se mueve en móvil */
+  .main-content { 
+    margin-left: 0; 
+    padding: 1rem; 
+    padding-top: 4rem; /* Espacio para hamburguesa */
+  }
+}
+
+/* ===== MÓVILES PEQUEÑOS ===== */
+@media (max-width: 480px) {
+  .main-content { 
+    padding: 0.8rem; 
+    padding-top: 3.5rem;
+  }
+}
+
+/* =======================
+   SPINNER GLOBAL
+   ======================= */
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+  color: var(--primary-color);
+}
+
+.loading::after {
+  content: "";
+  width: 40px;
+  height: 40px;
+  border: 4px solid rgba(0, 212, 255, 0.2);
+  border-left-color: var(--primary-color);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+=====================================================
+
+# Archivo: C:\Users\micae\Desktop\4to Cuatri\Front\TP2-Front-Grupo11\src\App.jsx
+
+// App.jsx
+import { useState, useEffect } from "react";
+import { Routes, Route } from "react-router-dom";
+import Sidebar from "./components/Sidebar";
+import Home from "./pages/Home";
+import Bitacora from "./pages/Bitacora";
+import Integrantes from "./pages/Integrantes";
+import Micaela from "./pages/portales/Micaela";
+import Paula from "./pages/portales/Paula";
+import Maria from "./pages/portales/Maria";
+import Diagramas from "./pages/Diagramas";
+import Musica from "./pages/Musica";
+import Peliculas from "./pages/Peliculas";
+import "./App.css";
+
+export default function App() {
+  const [sidebarOpen, setSidebarOpen] = useState(window.innerWidth > 768);
+
+  // ✅ Cierra automáticamente la sidebar si se agranda la pantalla
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth > 768) {
+        setSidebarOpen(true);
+      } else {
+        setSidebarOpen(false);
+      }
+    };
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  const toggleSidebar = () => setSidebarOpen((prev) => !prev);
+
+  return (
+    <div className={`app ${sidebarOpen ? "sidebar-open" : ""}`}>
+      <Sidebar sidebarOpen={sidebarOpen} toggleSidebar={toggleSidebar} />
+
+      <main
+        className="main-content"
+        onClick={() => {
+          // 🔹 Cierra el menú al hacer clic fuera en móvil
+          if (sidebarOpen && window.innerWidth <= 768) toggleSidebar();
+        }}
+      >
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/bitacora" element={<Bitacora />} />
+          <Route path="/integrantes" element={<Integrantes />} />
+          <Route path="/micaela" element={<Micaela />} />
+          <Route path="/paula" element={<Paula />} />
+          <Route path="/maria" element={<Maria />} />
+          <Route path="/diagramas" element={<Diagramas />} />
+          <Route path="/musica" element={<Musica />} />
+          <Route path="/peliculas" element={<Peliculas />} />
+        </Routes>
+      </main>
+    </div>
+  );
+}
+
+=====================================================
+
+# Archivo: C:\Users\micae\Desktop\4to Cuatri\Front\TP2-Front-Grupo11\src\index.css
+
+/* ================================
+    index.css - RESET Y CONFIGURACIÓN GLOBAL
+   ================================ */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Evita scroll horizontal global */
+body {
+  overflow-x: hidden;
+}
+
+/* Contenedor responsivo estándar */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  width: 100%;
+}
+
+/* ================================
+    BOTONES DE ESTILO SECUNDARIO
+   ================================ */
+.btn {
+  display: inline-block;
+  padding: 12px 24px;
+  background: var(--gradient-primary);
+  color: #fff;
+  text-decoration: none;
+  border-radius: 25px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 600;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 212, 255, 0.3);
+}
+
+/* ================================
+    SCROLLBAR PERSONALIZADO
+   ================================ */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #1a1a1a;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--primary-color);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #48a6a7;
+}
+
+/* ================================
+   ANIMACIÓN GLOBAL DE ENTRADA
+   ================================ */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.6s ease;
+}
+
+=====================================================
+
+# Archivo: C:\Users\micae\Desktop\4to Cuatri\Front\TP2-Front-Grupo11\src\main.jsx
+
+//main.jsx - Punto de entrada principal de la aplicación React
+import { StrictMode } from 'react'
+import { createRoot } from 'react-dom/client'
+import { BrowserRouter } from 'react-router-dom'
+import App from './App.jsx'
+import './index.css'
+import './styles/variables.css';       //  colores y fuente
+import './styles/layout.css';          //  estructura general
+import './styles/IntegrantesBase.css'; //  base común entre integrantes
+import './styles/util.css';            // utilidades globales (cards, grids, etc.)
+import './styles/themes.css';
+
+
+// Renderizar la aplicación con React Router para SPA
+createRoot(document.getElementById('root')).render(
+  <StrictMode>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </StrictMode>,
+)
+
+
+
+=====================================================
+
+# Archivo: C:\Users\micae\Desktop\4to Cuatri\Front\TP2-Front-Grupo11\src\components\PortalBase.jsx
+
+// PortalBase.jsx - Componente base reutilizable para todos los portales
+import { useState, useEffect } from "react";
+import SeccionIntegrante from "../components/SeccionIntegrante"; 
+import { getDeezerArtists } from "../utils/getDeezerArtists";    
+import data from "../data/peliculas.json";                     
+import "../styles/IntegrantesBase.css";                         
+
+
+export default function PortalBase({
+  nombre,
+  rol,
+  ubicacion,
+  edad,
+  avatar,
+  avatarHover, // opcional para efecto hover (Micaela)
+  habilidades,
+  peliculasTitulos,
+  artistasDeezer,
+  themeClass, // 'micaela-theme', 'paula-theme', 'maria-theme'
+  themeColors, // { primary, secondary }
+}) {
+  const [currentAvatar, setCurrentAvatar] = useState(avatar);
+  const [peliculas, setPeliculas] = useState([]);
+  const [musica, setMusica] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        // 🎬 Películas favoritas desde JSON global
+        const peliculasFavoritas = data.peliculas.filter((p) =>
+          peliculasTitulos.some(
+            (titulo) => p.titulo.toLowerCase() === titulo.toLowerCase()
+          )
+        );
+
+        // 🎧 Artistas desde Deezer
+        const musicaFavorita = await getDeezerArtists(artistasDeezer);
+
+        setPeliculas(peliculasFavoritas);
+        setMusica(musicaFavorita);
+      } catch (error) {
+        console.error("Error cargando datos:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, [peliculasTitulos, artistasDeezer]);
+
+  return (
+    <div
+      className={`integrante-page ${themeClass} fade-in`}
+      style={{
+        "--theme-primary": themeColors.primary,
+        "--theme-secondary": themeColors.secondary,
+      }}
+    >
+      <section className="tarjeta-integrante">
+        {/* Avatar con efecto hover opcional */}
+        <div
+          className="avatar-container"
+          onMouseEnter={() => avatarHover && setCurrentAvatar(avatarHover)}
+          onMouseLeave={() => avatarHover && setCurrentAvatar(avatar)}
+        >
+          <img
+            src={currentAvatar}
+            alt={`Avatar de ${nombre}`}
+            className="avatar-img"
+            onError={(e) => (e.currentTarget.src = avatar)}
+          />
+        </div>
+
+        <div className="contenido-integrante">
+          <h1>{nombre}</h1>
+          <p className="rol">{rol}</p>
+
+          <div className="info-basica">
+            <p>
+              <strong>Ubicación:</strong> {ubicacion}
+            </p>
+            <p>
+              <strong>Edad:</strong> {edad} años
+            </p>
+          </div>
+
+          {loading ? (
+            <div className="loading-section">⏳ Cargando información...</div>
+          ) : (
+            <SeccionIntegrante
+              habilidades={habilidades}
+              peliculas={peliculas}
+              musica={musica}
+            />
+          )}
+        </div>
+      </section>
+    </div>
+  );
+}
+
+=====================================================
+
+# Archivo: C:\Users\micae\Desktop\4to Cuatri\Front\TP2-Front-Grupo11\src\components\SeccionIntegrante.css
+
+/*  SeccionIntegrante.css */
+/* Solo estilos específicos del componente.
+   Todo lo genérico (cards, grid, fade-in, botones, etc.) viene de util.css. */
+
+/* Contenedor principal */
+.secciones-integrante {
+  margin-top: 2rem;
+  width: 100%;
+}
+
+/* Botones */
+.botones {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 1.5rem;
+}
+
+/* Sección activa */
+.seccion {
+  padding: 1.5rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Título de cada sección */
+.seccion h2 {
+  color: var(--primary-color);
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-size: 1.4rem;
+}
+
+/* Habilidades */
+.habilidades-lista {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.habilidades-lista li {
+  background: rgba(0, 212, 255, 0.1);
+  padding: 1rem;
+  border-radius: 8px;
+  border-left: 4px solid var(--primary-color);
+  transition: all 0.3s ease;
+  text-align: center;
+}
+
+.habilidades-lista li:hover {
+  transform: translateY(-3px);
+  background: rgba(0, 212, 255, 0.15);
+}
+
+/* =======================
+   📱 Responsive específico
+   ======================= */
+@media (max-width: 1024px) {
+  .botones {
+    gap: 0.75rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .habilidades-lista {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .seccion {
+    padding: 1rem;
+  }
+
+  .seccion h2 {
+    font-size: 1.2rem;
+  }
+}
+
+=====================================================
+
+# Archivo: C:\Users\micae\Desktop\4to Cuatri\Front\TP2-Front-Grupo11\src\components\SeccionIntegrante.jsx
+
+//  SeccionIntegrante.jsx
+// Muestra las secciones interactivas: Habilidades, Películas y Música.
+// Usa los subcomponentes PeliculaCard y MusicaCard para mayor limpieza.
+
+import { useState } from 'react';
+import './SeccionIntegrante.css';
+import PeliculaCard from './cards/PeliculaCard';
+import MusicaCard from './cards/MusicaCard';
+
+export default function SeccionIntegrante({ habilidades = [], peliculas = [], musica = [] }) {
+  const [seccionActiva, setSeccionActiva] = useState('habilidades'); // inicia abierta
+
+  const toggleSeccion = (nombre) =>
+    setSeccionActiva(seccionActiva === nombre ? null : nombre);
+
+  return (
+    <div className="secciones-integrante fade-in">
+
+      {/* 🔘 Botones de navegación */}
+      <div className="botones center">
+        {['habilidades', 'peliculas', 'musica'].map((tipo) => (
+          <button
+            key={tipo}
+            className={`btn-outline ${seccionActiva === tipo ? 'active' : ''}`}
+            onClick={() => toggleSeccion(tipo)}
+          >
+            {tipo.charAt(0).toUpperCase() + tipo.slice(1)}
+          </button>
+        ))}
+      </div>
+
+      {/* 💡 Habilidades */}
+      {seccionActiva === 'habilidades' && (
+        <div className="seccion card fade-in">
+          <h2>💡 Habilidades</h2>
+          <ul className="habilidades-lista">
+            {habilidades.map((habilidad, i) => (
+              <li key={i}>{habilidad}</li>
+            ))}
+          </ul>
+        </div>
+      )}
+
+      {/* 🎬 Películas */}
+      {seccionActiva === 'peliculas' && (
+        <div className="seccion fade-in">
+          <h2>🎬 Películas Favoritas</h2>
+          <div className="grid-auto">
+            {peliculas.map((peli) => (
+              <PeliculaCard
+                key={peli.id || peli.titulo}
+                poster={peli.poster}
+                titulo={peli.titulo}
+                year={peli.year ?? peli.año}
+                director={peli.director}
+                url={peli.url}
+              />
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* 🎵 Música */}
+      {seccionActiva === 'musica' && (
+        <div className="seccion fade-in">
+          <h2>🎵 Música Favorita</h2>
+          <div className="grid-auto grid-1-md">
+            {musica.map((track) => (
+              <MusicaCard
+                key={track.id || track.artista}
+                artista={track.artista}
+                imagen={track.imagen}
+                url={track.url}
+              />
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+
+=====================================================
+
+# Archivo: C:\Users\micae\Desktop\4to Cuatri\Front\TP2-Front-Grupo11\src\components\Sidebar.css
+
+/* Sidebar.css - versión responsive con menú hamburguesa */
+
+/* === Estructura base === */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 260px;
+  height: 100vh;
+  background: linear-gradient(180deg, var(--card-bg, #1a1a1a) 0%, var(--dark-bg, #0d1421) 100%);
+  border-right: 2px solid var(--border-color, #333);
+  padding: 2rem 1rem;
+  overflow-y: auto;
+  transition: left 0.3s ease;
+  z-index: 1000;
+}
+
+/* === Header === */
+.sidebar-header {
+  text-align: center;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--border-color, #333);
+}
+
+.sidebar-header .logo {
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
+  margin-bottom: 0.5rem;
+}
+
+.sidebar-header h2 {
+  color: var(--primary-color, #00d4ff);
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+/* === Menú === */
+.sidebar-menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.menu-section {
+  color: #888;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin: 1.5rem 0 0.5rem 0;
+  padding-left: 1rem;
+}
+
+.menu-link {
+  display: block;
+  padding: 12px 1rem;
+  color: #ccc;
+  text-decoration: none;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.menu-link:hover {
+  background: rgba(0, 212, 255, 0.1);
+  color: var(--primary-color, #00d4ff);
+  transform: translateX(4px);
+}
+
+.menu-link.active {
+  background: linear-gradient(135deg, var(--primary-color, #00d4ff), var(--secondary-color, #ff6b6b));
+  color: #fff;
+  font-weight: 600;
+}
+
+/* === Footer === */
+.sidebar-footer {
+  position: absolute;
+  bottom: 1rem;
+  left: 1rem;
+  right: 1rem;
+  text-align: center;
+  color: #666;
+  font-size: 0.8rem;
+}
+
+/* ============================
+   🍔 Botón hamburguesa
+   ============================ */
+.hamburger-btn {
+  display: none;
+  position: fixed;
+  top: 1rem;
+  left: 1rem;
+  width: 40px;
+  height: 40px;
+  flex-direction: column;
+  justify-content: center;
+  gap: 6px;
+  z-index: 1100;
+  background: rgba(0, 212, 255, 0.1);
+  border: 2px solid var(--primary-color, #00d4ff);
+  border-radius: 8px;
+  cursor: pointer;
+  padding: 8px;
+}
+
+.hamburger-btn span {
+  display: block;
+  width: 100%;
+  height: 3px;
+  background: var(--primary-color, #00d4ff);
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+/* Animación a X */
+.hamburger-btn.open span:nth-child(1) {
+  transform: rotate(45deg) translate(6px, 6px);
+}
+.hamburger-btn.open span:nth-child(2) {
+  opacity: 0;
+}
+.hamburger-btn.open span:nth-child(3) {
+  transform: rotate(-45deg) translate(6px, -6px);
+}
+
+/* ============================
+   📱 Responsive - móvil
+   ============================ */
+@media (max-width: 768px) {
+  .hamburger-btn {
+    display: flex;
+  }
+
+  .sidebar {
+    left: -100%;
+    width: 260px;
+  }
+
+  .sidebar.open {
+    left: 0;
+  }
+
+  /* Overlay oscuro */
+  .sidebar-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 900;
+  }
+
+  /* Mostrar overlay cuando sidebar abierta */
+  .app:has(.sidebar.open) .sidebar-overlay {
+    display: block;
+  }
+
+  /* Simplificar sidebar en móvil */
+  .sidebar-footer {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .sidebar {
+    width: 240px;
+  }
+  
+  .hamburger-btn {
+    width: 36px;
+    height: 36px;
+  }
+}
+
+=====================================================
+
+# Archivo: C:\Users\micae\Desktop\4to Cuatri\Front\TP2-Front-Grupo11\src\components\Sidebar.jsx
+
+// Sidebar.jsx - versión final con menú hamburguesa y overlay accesible
+import { NavLink } from "react-router-dom";
+import "./Sidebar.css";
+
+export default function Sidebar({ sidebarOpen, toggleSidebar }) {
+  const linksPrincipales = [
+    { to: "/", label: "🏠 Inicio" },
+    { to: "/bitacora", label: "📋 Bitácora" },
+    { to: "/integrantes", label: "👥 Integrantes" },
+    { to: "/diagramas", label: "📊 Diagramas" },
+    { to: "/peliculas", label: "🎬 Películas" },
+    { to: "/musica", label: "🎶 Música" },
+  ];
+
+  const linksPortales = [
+    { to: "/micaela", label: "🎮 Micaela" },
+    { to: "/paula", label: "🌌 Paula" },
+    { to: "/maria", label: "✨ María" },
+  ];
+
+  // 🔹 Cierra el menú solo si el ancho de pantalla es móvil
+  const handleLinkClick = () => {
+    if (window.innerWidth <= 768) toggleSidebar();
+  };
+
+  return (
+    <>
+      {/* 🍔 Botón hamburguesa visible solo en móvil */}
+      <button
+        className={`hamburger-btn ${sidebarOpen ? "open" : ""}`}
+        onClick={toggleSidebar}
+        aria-label="Alternar menú"
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      {/* 🧭 Sidebar principal */}
+      <nav
+        className={`sidebar ${sidebarOpen ? "open" : ""}`}
+        aria-label="Menú principal de navegación"
+      >
+        <div className="sidebar-header">
+          <img
+            src="/img/logo-inicio.webp"
+            alt="Logo del Grupo 11"
+            className="logo"
+          />
+          <h2>Grupo 11</h2>
+        </div>
+
+        <ul className="sidebar-menu">
+          <li className="menu-section">Navegación</li>
+          {linksPrincipales.map((item) => (
+            <li key={item.to}>
+              <NavLink
+                to={item.to}
+                className={({ isActive }) =>
+                  `menu-link ${isActive ? "active" : ""}`
+                }
+                onClick={handleLinkClick}
+              >
+                {item.label}
+              </NavLink>
+            </li>
+          ))}
+
+          <li className="menu-section">Portales Individuales</li>
+          {linksPortales.map((item) => (
+            <li key={item.to}>
+              <NavLink
+                to={item.to}
+                className={({ isActive }) =>
+                  `menu-link ${isActive ? "active" : ""}`
+                }
+                onClick={handleLinkClick}
+              >
+                {item.label}
+              </NavLink>
+            </li>
+          ))}
+        </ul>
+
+        <div className="sidebar-footer">TP2 React · 2025</div>
+      </nav>
+
+      {/* 🌙 Overlay accesible (cierra al click o Enter) */}
+      {sidebarOpen && (
+        <div
+          className="sidebar-overlay"
+          role="button"
+          tabIndex={0}
+          aria-label="Cerrar menú"
+          onClick={toggleSidebar}
+          onKeyDown={(e) => e.key === "Enter" && toggleSidebar()}
+        ></div>
+      )}
+    </>
+  );
+}
+
+=====================================================
+
+# Archivo: C:\Users\micae\Desktop\4to Cuatri\Front\TP2-Front-Grupo11\src\components\TimelineItem.jsx
+
+// TimelineItem.jsx
+// Elemento individual de la bitácora (con fecha, título y descripción)
+
+export default function TimelineItem({ fecha, titulo, descripcion }) {
+  return (
+    <div className="timeline-item fade-in">
+      <div className="timeline-dot"></div>
+      <div className="timeline-content card">
+        <h3>{titulo}</h3>
+        <span className="timeline-date">{fecha}</span>
+        <p>{descripcion}</p>
+      </div>
+    </div>
+  );
+}
+
+
+=====================================================
+
+# Archivo: C:\Users\micae\Desktop\4to Cuatri\Front\TP2-Front-Grupo11\src\components\cards\MusicaCard.jsx
+
+// MusicaCard.jsx - Tarjeta simple para artistas Deezer (usada en portales individuales)
+export default function MusicaCard({ artista, url, imagen }) {
+  return (
+    <article className="card-media fade-in">
+      <img
+        src={imagen || "/img/placeholder-artist.webp"}
+        alt={artista}
+        loading="lazy"
+        onError={(e) => (e.currentTarget.src = "/img/placeholder-artist.webp")}
+      />
+
+      <div className="media-info">
+        <h3>{artista}</h3>
+        <a
+          href={url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="btn-deezer"
+        >
+          Escuchar en Deezer
+        </a>
+      </div>
+    </article>
+  );
+}
+
+
+=====================================================
+
+# Archivo: C:\Users\micae\Desktop\4to Cuatri\Front\TP2-Front-Grupo11\src\components\cards\PeliculaCard.jsx
+
+// PeliculaCard.jsx
+// Props esperadas: { poster, titulo, year, director }
+export default function PeliculaCard({
+  poster,
+  titulo,
+  year,
+  genero,
+  director,
+  duracion,
+  rating,
+  url
+}) {
+  return (
+    <div className="card-media fade-in">
+      <img
+        loading="lazy"
+        src={poster || '/img/placeholder-movie.webp'}
+        alt={titulo}
+        onError={(e) => (e.currentTarget.src = '/img/placeholder-movie.webp')}
+      />
+
+      <div className="media-info">
+        <h3>{titulo}</h3>
+
+        {year && <p><strong>Año:</strong> {year}</p>}
+        {genero && <p><strong>Género:</strong> {genero}</p>}
+        {director && <p><strong>Director:</strong> {director}</p>}
+        {duracion && <p><strong>Duración:</strong> {duracion}</p>}
+        {rating && <p><strong>Rating IMDb:</strong> {rating}</p>}
+
+        {url && (
+          <a
+            href={url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn-imdb"
+          >
+            Ver en IMDb
+          </a>
+        )}
+      </div>
+    </div>
+  );
+}
+
+
+=====================================================
+
+# Archivo: C:\Users\micae\Desktop\4to Cuatri\Front\TP2-Front-Grupo11\src\components\ui\CardGrid.jsx
+
+// CardGrid.jsx - Componente de cuadrícula de tarjetas para miembros o proyectos
+import { Link } from "react-router-dom";
+import "./ui.css";
+
+export default function CardGrid({ items, type = "member" }) {
+  return (
+    <div className="card-grid">
+      {items.map((item, i) => (
+        <Link key={i} to={item.link} className={`card-item ${type}`}>
+          <div className="card-image">
+            <img src={item.image} alt={item.name} />
+          </div>
+          <span>{item.name}</span>
+        </Link>
+      ))}
+    </div>
+  );
+}
+
+
+=====================================================
+
+# Archivo: C:\Users\micae\Desktop\4to Cuatri\Front\TP2-Front-Grupo11\src\components\ui\HeroSection.jsx
+
+// HeroSection.jsx - Componente de sección hero con fondo degradado
+import "./ui.css";
+
+export default function HeroSection({ title, subtitle, gradient }) {
+  return (
+    <section
+      className="hero-section"
+      style={{
+        background:
+          gradient ||
+          "linear-gradient(135deg, rgba(0, 212, 255, 0.1), rgba(255, 107, 107, 0.1))",
+      }}
+    >
+      <div className="hero-content">
+        <h1>{title}</h1>
+        {subtitle && <p>{subtitle}</p>}
+      </div>
+    </section>
+  );
+}
+
+=====================================================
+
+# Archivo: C:\Users\micae\Desktop\4to Cuatri\Front\TP2-Front-Grupo11\src\components\ui\ui.css
+
+/* ===============================
+   ui.css - base compartida
+   =============================== */
+
+/* Hero Section */
+.hero-section {
+  text-align: center;
+  padding: 4rem 2rem;
+  border-radius: 20px;
+  margin-bottom: 3rem;
+}
+
+.hero-section h1 {
+  font-size: clamp(2.2rem, 6vw, 4rem);
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: salmon;
+  margin-bottom: 1rem;
+}
+
+.hero-section p {
+  font-size: 1.2rem;
+  color: #ccc;
+}
+
+/* ===============================
+   🧩 Card Grid
+   =============================== */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 2rem;
+  justify-content: center;
+  padding: 0 1rem;
+  margin: 2rem auto;
+  max-width: 1000px;
+}
+
+.card-item {
+  text-decoration: none;
+  color: inherit;
+  text-align: center;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 1rem;
+  transition: 0.3s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.card-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 212, 255, 0.2);
+  border-color: var(--primary-color);
+}
+
+.card-image {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 1rem;
+}
+
+.card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s;
+}
+
+.card-item:hover .card-image img {
+  transform: scale(1.05);
+}
+
+.card-item span {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--accent-color);
+}
+
+/* ===============================
+   📱 Responsive
+   =============================== */
+@media (max-width: 768px) {
+  .hero-section {
+    padding: 2rem 1rem;
+  }
+
+  .hero-section h1 {
+    font-size: 2.2rem;
+  }
+
+  .hero-section p {
+    font-size: 1rem;
+  }
+
+  .card-grid {
+    grid-template-columns: 1fr;
+    gap: 1.2rem;
+  }
+
+  .card-item span {
+    font-size: 1.1rem;
+  }
+}
+
+=====================================================
+
+# Archivo: C:\Users\micae\Desktop\4to Cuatri\Front\TP2-Front-Grupo11\src\data\peliculas.json
+
+
+{
+  "peliculas": [
+    {
+      "id": 1,
+      "titulo": "Fragmentado",
+      "año": 2016,
+      "genero": "Thriller",
+      "director": "M. Night Shyamalan",
+      "rating": 7.3,
+      "duracion": "117 min",
+      "poster": "/img/peli-fragmentado.webp",
+      "url": "https://www.imdb.com/title/tt4972582"
+    },
+    {
+      "id": 2,
+      "titulo": "Harry Potter y la Piedra Filosofal",
+      "año": 2001,
+      "genero": "Fantasía",
+      "director": "Chris Columbus",
+      "rating": 7.6,
+      "duracion": "152 min",
+      "poster": "/img/peli-harrypotter.webp",
+      "url": "https://www.imdb.com/title/tt0241527"
+    },
+    {
+      "id": 3,
+      "titulo": "Interstellar",
+      "año": 2014,
+      "genero": "Ciencia Ficción",
+      "director": "Christopher Nolan",
+      "rating": 8.6,
+      "duracion": "169 min",
+      "poster": "/img/peli-interestelar.webp",
+      "url": "https://www.imdb.com/title/tt0816692"
+    },
+    {
+      "id": 4,
+      "titulo": "Inquebrantable",
+      "año": 2014,
+      "genero": "Biografía",
+      "director": "Angelina Jolie",
+      "rating": 7.2,
+      "duracion": "137 min",
+      "poster": "/img/peli-inquebrantable_1.webp",
+      "url": "https://www.imdb.com/title/tt2758890"
+    },
+    {
+      "id": 5,
+      "titulo": "El Viaje de Chihiro",
+      "año": 2001,
+      "genero": "Animación",
+      "director": "Hayao Miyazaki",
+      "rating": 8.6,
+      "duracion": "125 min",
+      "url": "https://www.imdb.com/title/tt0245429"
+    },
+    {
+      "id": 6,
+      "titulo": "Mi Vecino Totoro",
+      "año": 1988,
+      "genero": "Animación",
+      "director": "Hayao Miyazaki",
+      "rating": 8.1,
+      "duracion": "86 min",
+      "url": "https://www.imdb.com/title/tt0096283"
+    },
+    {
+      "id": 7,
+      "titulo": "El Castillo Ambulante",
+      "año": 2004,
+      "genero": "Animación",
+      "director": "Hayao Miyazaki",
+      "rating": 8.2,
+      "duracion": "119 min",
+      "url": "https://www.imdb.com/title/tt0347149"
+    },
+    {
+      "id": 8,
+      "titulo": "Twister",
+      "año": 1996,
+      "genero": "Acción",
+      "director": "Jan de Bont",
+      "rating": 6.4,
+      "duracion": "113 min",
+      "url": "https://www.imdb.com/title/tt0117998"
+    },
+    {
+      "id": 9,
+      "titulo": "Volver al Futuro",
+      "año": 1985,
+      "genero": "Ciencia Ficción",
+      "director": "Robert Zemeckis",
+      "rating": 8.5,
+      "duracion": "116 min",
+      "url": "https://www.imdb.com/title/tt0088763"
+    },
+    {
+      "id": 10,
+      "titulo": "Mulan",
+      "año": 1998,
+      "genero": "Animación",
+      "director": "Tony Bancroft",
+      "rating": 7.6,
+      "duracion": "88 min",
+      "url": "https://www.imdb.com/title/tt0120762"
+    },
+    {
+      "id": 11,
+      "titulo": "Matrix",
+      "año": 1999,
+      "genero": "Ciencia Ficción",
+      "director": "Lana y Lilly Wachowski",
+      "rating": 8.7,
+      "duracion": "136 min",
+      "url": "https://www.imdb.com/title/tt0133093"
+    },
+    {
+      "id": 12,
+      "titulo": "El Señor de los Anillos: La Comunidad del Anillo",
+      "año": 2001,
+      "genero": "Fantasía",
+      "director": "Peter Jackson",
+      "rating": 8.8,
+      "duracion": "178 min",
+      "url": "https://www.imdb.com/title/tt0120737"
+    },
+    {
+      "id": 13,
+      "titulo": "Inception",
+      "año": 2010,
+      "genero": "Ciencia Ficción",
+      "director": "Christopher Nolan",
+      "rating": 8.8,
+      "duracion": "148 min",
+      "url": "https://www.imdb.com/title/tt1375666"
+    },
+    {
+      "id": 14,
+      "titulo": "El Laberinto del Fauno",
+      "año": 2006,
+      "genero": "Fantasía",
+      "director": "Guillermo del Toro",
+      "rating": 8.2,
+      "duracion": "118 min",
+      "url": "https://www.imdb.com/title/tt0457430"
+    },
+    {
+      "id": 15,
+      "titulo": "Coco",
+      "año": 2017,
+      "genero": "Animación",
+      "director": "Lee Unkrich",
+      "rating": 8.4,
+      "duracion": "105 min",
+      "url": "https://www.imdb.com/title/tt2380307"
+    },
+    {
+      "id": 16,
+      "titulo": "El Caballero de la Noche",
+      "año": 2008,
+      "genero": "Acción",
+      "director": "Christopher Nolan",
+      "rating": 9.0,
+      "duracion": "152 min",
+      "url": "https://www.imdb.com/title/tt0468569"
+    },
+    {
+      "id": 17,
+      "titulo": "La La Land",
+      "año": 2016,
+      "genero": "Musical",
+      "director": "Damien Chazelle",
+      "rating": 8.0,
+      "duracion": "128 min",
+      "url": "https://www.imdb.com/title/tt3783958"
+    },
+    {
+      "id": 18,
+      "titulo": "El Gran Hotel Budapest",
+      "año": 2014,
+      "genero": "Comedia",
+      "director": "Wes Anderson",
+      "rating": 8.1,
+      "duracion": "99 min",
+      "url": "https://www.imdb.com/title/tt2278388"
+    },
+    {
+      "id": 19,
+      "titulo": "Mad Max: Fury Road",
+      "año": 2015,
+      "genero": "Acción",
+      "director": "George Miller",
+      "rating": 8.1,
+      "duracion": "120 min",
+      "url": "https://www.imdb.com/title/tt1392190"
+    },
+    {
+      "id": 20,
+      "titulo": "Your Name",
+      "año": 2016,
+      "genero": "Animación",
+      "director": "Makoto Shinkai",
+      "rating": 8.4,
+      "duracion": "106 min",
+      "url": "https://www.imdb.com/title/tt5311514"
+    }
+  ]
+}
+
+=====================================================
+
+# Archivo: C:\Users\micae\Desktop\4to Cuatri\Front\TP2-Front-Grupo11\src\pages\Bitacora.css
+
+/* bitacora.css - Página que muestra la bitácora de desarrollo del proyecto */
+
+.bitacora {
+  animation: fadeIn 0.8s ease;
+}
+
+/* Hero Bitácora */
+.hero-bitacora {
+  text-align: center;
+  padding: 3rem 0;
+  background: linear-gradient(135deg, rgba(0, 212, 255, 0.1), rgba(255, 107, 107, 0.1));
+  border-radius: 20px;
+  margin-bottom: 3rem;
+}
+
+.hero-bitacora h1 {
+  font-size: 3.5rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 1rem;
+}
+
+.hero-bitacora p {
+  font-size: 1.3rem;
+  color: #ccc;
+}
+
+/* Timeline */
+.timeline-section {
+  margin: 4rem 0;
+}
+
+.timeline-section h2 {
+  text-align: center;
+  font-size: 2.5rem;
+  color: var(--primary-color);
+  margin-bottom: 3rem;
+}
+
+.timeline-container {
+  position: relative;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.timeline-container::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 4px;
+  height: 100%;
+  background: linear-gradient(180deg, var(--primary-color), var(--secondary-color));
+  border-radius: 2px;
+}
+
+.timeline-item {
+  position: relative;
+  margin-bottom: 3rem;
+}
+
+.timeline-item:nth-child(odd) .timeline-content {
+  margin-left: 0;
+  margin-right: 50%;
+  text-align: right;
+}
+
+.timeline-item:nth-child(even) .timeline-content {
+  margin-left: 50%;
+  margin-right: 0;
+  text-align: left;
+}
+
+.timeline-content {
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px solid var(--tipo-color, var(--primary-color));
+  border-radius: 15px;
+  padding: 1.5rem;
+  position: relative;
+  margin: 0 2rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.timeline-content::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 0;
+  height: 0;
+  border: 12px solid transparent;
+}
+
+.timeline-item:nth-child(odd) .timeline-content::before {
+  right: -24px;
+  border-left-color: var(--tipo-color, var(--primary-color));
+}
+
+.timeline-item:nth-child(even) .timeline-content::before {
+  left: -24px;
+  border-right-color: var(--tipo-color, var(--primary-color));
+}
+
+.timeline-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.timeline-icon {
+  font-size: 1.5rem;
+  width: 40px;
+  height: 40px;
+  background: var(--tipo-color, var(--primary-color));
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.timeline-header h3 {
+  flex: 1;
+  color: var(--tipo-color, var(--primary-color));
+  font-size: 1.3rem;
+  margin: 0;
+}
+
+.timeline-date {
+  background: var(--tipo-color, var(--primary-color));
+  color: white;
+  padding: 0.3rem 0.8rem;
+  border-radius: 15px;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.timeline-content p {
+  color: #ddd;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Decisiones Section */
+.decisiones-section {
+  margin: 4rem 0;
+}
+
+.decisiones-section h2 {
+  text-align: center;
+  font-size: 2.5rem;
+  color: var(--secondary-color);
+  margin-bottom: 2rem;
+}
+
+.decision-card {
+  background: rgba(255, 107, 107, 0.1);
+  border: 2px solid var(--secondary-color);
+  border-radius: 15px;
+  padding: 2rem;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.decision-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(255, 107, 107, 0.2);
+}
+
+.decision-card h3 {
+  color: var(--secondary-color);
+  margin-bottom: 1rem;
+  font-size: 1.3rem;
+}
+
+.decision-card p {
+  color: #ddd;
+  line-height: 1.6;
+}
+
+/* Cambios Section */
+.cambios-section {
+  margin: 4rem 0;
+}
+
+.cambios-section h2 {
+  text-align: center;
+  font-size: 2.5rem;
+  color: var(--accent-color);
+  margin-bottom: 2rem;
+}
+
+.cambios-list {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.cambio-item {
+  background: rgba(255, 217, 61, 0.1);
+  border-left: 4px solid var(--accent-color);
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  border-radius: 0 12px 12px 0;
+}
+
+.cambio-item h4 {
+  color: var(--accent-color);
+  margin-bottom: 0.5rem;
+  font-size: 1.2rem;
+}
+
+.cambio-item p {
+  color: #ddd;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .hero-bitacora h1 {
+    font-size: 2.5rem;
+  }
+  
+  .timeline-container::before {
+    left: 20px;
+  }
+  
+  .timeline-item:nth-child(odd) .timeline-content,
+  .timeline-item:nth-child(even) .timeline-content {
+    margin-left: 60px;
+    margin-right: 0;
+    text-align: left;
+  }
+  
+  .timeline-item:nth-child(odd) .timeline-content::before,
+  .timeline-item:nth-child(even) .timeline-content::before {
+    left: -24px;
+    right: auto;
+    border-right-color: var(--tipo-color, var(--primary-color));
+    border-left-color: transparent;
+  }
+  
+  .timeline-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+}
+
+
+
+
+=====================================================
+
+# Archivo: C:\Users\micae\Desktop\4to Cuatri\Front\TP2-Front-Grupo11\src\pages\Bitacora.jsx
+
+
+// src/pages/Bitacora.jsx - Página que muestra la bitácora de desarrollo del proyecto
+import './Bitacora.css'
+
+export default function Bitacora() {
+  const eventos = [
+    {
+      fecha: "01/09/25",
+      titulo: "Inicio del Proyecto",
+      descripcion: "Primera reunión del equipo. Definición de roles y objetivos del TP1.",
+      tipo: "inicio"
+    },
+    {
+      fecha: "05/09/25",
+      titulo: "Diseño y Estructura",
+      descripcion: "Creación de wireframes y definición de la estructura del sitio web.",
+      tipo: "diseño"
+    },
+    {
+      fecha: "12/09/25",
+      titulo: "Desarrollo HTML/CSS",
+      descripcion: "Implementación de páginas principales y estilos personalizados por integrante.",
+      tipo: "desarrollo"
+    },
+    {
+      fecha: "18/09/25",
+      titulo: "Funcionalidad JavaScript",
+      descripcion: "Agregado de interactividad, carruseles de imágenes y efectos dinámicos.",
+      tipo: "desarrollo"
+    },
+    {
+      fecha: "20/09/25",
+      titulo: "Entrega TP1",
+      descripcion: "Finalización y entrega del primer trabajo práctico.",
+      tipo: "entrega"
+    },
+    {
+      fecha: "22/09/25",
+      titulo: "Inicio TP2",
+      descripcion: "Lanzamiento del segundo trabajo práctico: migración a React.",
+      tipo: "inicio"
+    },
+    {
+      fecha: "25/09/25",
+      titulo: "Configuración React",
+      descripción: "Setup del proyecto React con Vite, instalación de dependencias y estructura inicial.",
+      tipo: "desarrollo"
+    },
+    {
+      fecha: "02/10/25",
+      titulo: "Componentes Básicos",
+      descripcion: "Creación de componentes reutilizables y configuración del routing.",
+      tipo: "desarrollo"
+    },
+    {
+      fecha: "08/10/25",
+      titulo: "Migración de Contenido",
+      descripcion: "Traslado del contenido del TP1 a los nuevos componentes React.",
+      tipo: "desarrollo"
+    },
+    {
+      fecha: "12/10/25",
+      titulo: "API y JSON",
+      descripcion: "Implementación de la sección de películas (JSON) y consumo de API pública.",
+      tipo: "desarrollo"
+    },
+    {
+      fecha: "15/10/25",
+      titulo: "Estilos y Responsive",
+      descripcion: "Refinamiento de estilos CSS y adaptación responsive para móviles.",
+      tipo: "diseño"
+    },
+    {
+      fecha: "18/10/25",
+      titulo: "Testing y Documentación",
+      descripcion: "Pruebas finales, documentación del README y preparación para entrega.",
+      tipo: "testing"
+    },
+    {
+      fecha: "20/10/25",
+      titulo: "Entrega TP2",
+      descripcion: "Entrega final del trabajo práctico en React SPA.",
+      tipo: "entrega"
+    }
+  ]
+
+  const getTipoIcon = (tipo) => {
+    const icons = {
+      inicio: "🚀",
+      diseño: "🎨", 
+      desarrollo: "💻",
+      entrega: "📋",
+      testing: "🔍"
+    }
+    return icons[tipo] || "📌"
+  }
+
+  const getTipoColor = (tipo) => {
+    const colors = {
+      inicio: "var(--primary-color)",
+      diseño: "var(--secondary-color)",
+      desarrollo: "var(--accent-color)",
+      entrega: "#4ade80",
+      testing: "#a78bfa"
+    }
+    return colors[tipo] || "var(--primary-color)"
+  }
+
+  return (
+    <div className="bitacora">
+      <section className="hero-bitacora">
+        <div className="hero-content">
+          <h1>Bitácora de Desarrollo</h1>
+          <p>Registro del proceso de creación del TechVerse</p>
+        </div>
+      </section>
+
+      <section className="timeline-section">
+        <h2>Línea de Tiempo del Proyecto</h2>
+        <div className="timeline-container">
+          {eventos.map((evento, index) => (
+            <div key={index} className="timeline-item" data-date={evento.fecha}>
+              <div className="timeline-content" style={{'--tipo-color': getTipoColor(evento.tipo)}}>
+                <div className="timeline-header">
+                  <span className="timeline-icon">{getTipoIcon(evento.tipo)}</span>
+                  <h3>{evento.titulo}</h3>
+                  <span className="timeline-date">{evento.fecha}</span>
+                </div>
+                <p>{evento.descripcion}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section className="decisiones-section">
+        <h2>Decisiones del Proyecto</h2>
+        <div className="cards-grid">
+          <div className="decision-card">
+            <h3>🎯 Tecnologías Elegidas</h3>
+            <p>Decidimos usar React con Vite para mejor rendimiento y experiencia de desarrollo moderna.</p>
+          </div>
+          <div className="decision-card">
+            <h3>🎨 Diseño Individual</h3>
+            <p>Cada integrante mantiene su estilo único en sus páginas personales, creando diversidad visual.</p>
+          </div>
+          <div className="decision-card">
+            <h3>📱 Responsive Design</h3>
+            <p>Implementamos diseño adaptable con mobile-first approach para mejor accesibilidad.</p>
+          </div>
+          <div className="decision-card">
+            <h3>🔄 SPA Navigation</h3>
+            <p>Single Page Application con React Router para navegación fluida sin recargas de página.</p>
+          </div>
+        </div>
+      </section>
+
+      <section className="cambios-section">
+        <h2>Cambios y Mejoras</h2>
+        <div className="cambios-list">
+          <div className="cambio-item">
+            <h4>🔧 Migración a React</h4>
+            <p>Transformación de sitio estático HTML/CSS/JS a SPA React con componentes reutilizables.</p>
+          </div>
+          <div className="cambio-item">
+            <h4>📊 Datos Dinámicos</h4>
+            <p>Implementación de sección de películas con datos JSON y consumo de API externa.</p>
+          </div>
+          <div className="cambio-item">
+            <h4>🚀 Performance</h4>
+            <p>Optimización de carga con lazy loading y componentes eficientes.</p>
+          </div>
+          <div className="cambio-item">
+            <h4>🎯 UX Mejorada</h4>
+            <p>Navegación más intuitiva con sidebar fijo y transiciones suaves.</p>
+          </div>
+        </div>
+      </section>
+    </div>
+  )
+}
+
+
+=====================================================
+
+# Archivo: C:\Users\micae\Desktop\4to Cuatri\Front\TP2-Front-Grupo11\src\pages\Diagramas.css
+
+/* diagramas.css - Página que muestra diagramas y arquitectura de la aplicación */
+
+.diagramas {
+  animation: fadeIn 0.8s ease;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+/* Hero Diagramas */
+.hero-diagramas {
+  text-align: center;
+  padding: 3rem 2rem;
+  background: linear-gradient(135deg, rgba(255, 217, 61, 0.1), rgba(168, 85, 247, 0.1));
+  border-radius: 20px;
+  margin-bottom: 3rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.hero-diagramas h1 {
+  font-size: 3.5rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--accent-color), #a855f7);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 1rem;
+}
+
+.hero-diagramas p {
+  font-size: 1.3rem;
+  color: #ccc;
+}
+
+/* Arquitectura Section */
+.arquitectura-section {
+  margin: 4rem 0;
+  width: 100%;
+}
+
+.arquitectura-section h2 {
+  text-align: center;
+  font-size: 2.5rem;
+  color: var(--primary-color);
+  margin-bottom: 3rem;
+}
+
+.diagram-container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.arquitectura-diagram {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  max-width: 600px;
+  width: 100%;
+}
+
+/* Capas de la arquitectura */
+.layer {
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px solid var(--primary-color);
+  border-radius: 15px;
+  padding: 2rem;
+  width: 100%;
+  text-align: center;
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+}
+
+.layer:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 25px rgba(0, 212, 255, 0.2);
+}
+
+.layer h3 {
+  color: var(--primary-color);
+  margin-bottom: 0.5rem;
+  font-size: 1.5rem;
+}
+
+.layer p {
+  color: #ccc;
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+}
+
+/* Grid de componentes y fuentes de datos */
+.components-grid,
+.data-sources {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+}
+
+.components-grid span,
+.data-sources span {
+  background: var(--primary-color);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+/* Flecha entre capas */
+.arrow {
+  font-size: 2rem;
+  color: var(--primary-color);
+  font-weight: bold;
+}
+
+/* Componentes Section */
+.componentes-section {
+  margin: 4rem 0;
+  width: 100%;
+}
+
+.componentes-section h2 {
+  text-align: center;
+  font-size: 2.5rem;
+  color: var(--secondary-color);
+  margin-bottom: 3rem;
+}
+
+.componentes-tree {
+  display: flex;
+  justify-content: center;
+  overflow-x: auto;
+  padding: 2rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Nodos del árbol de componentes */
+.component-node {
+  position: relative;
+  background: rgba(255, 107, 107, 0.1);
+  border: 2px solid var(--secondary-color);
+  border-radius: 10px;
+  padding: 1rem;
+  margin: 0.5rem;
+  text-align: center;
+  min-width: 120px;
+}
+
+.component-node.root {
+  background: rgba(255, 107, 107, 0.2);
+  border-color: var(--secondary-color);
+  font-weight: 700;
+}
+
+.component-name {
+  color: var(--secondary-color);
+  font-weight: 600;
+}
+
+.children {
+  display: flex;
+  flex-direction: column;
+  margin-top: 1rem;
+}
+
+/* Flujo Section */
+.flujo-section {
+  margin: 4rem 0;
+  width: 100%;
+}
+
+.flujo-section h2 {
+  text-align: center;
+  font-size: 2.5rem;
+  color: var(--accent-color);
+  margin-bottom: 3rem;
+}
+
+.flujo-diagram {
+  text-align: center;
+  width: 100%;
+}
+
+/* Nodos de páginas */
+.page-node {
+  background: rgba(255, 217, 61, 0.1);
+  border: 2px solid var(--accent-color);
+  border-radius: 15px;
+  padding: 1.5rem;
+  margin: 1rem;
+  display: inline-block;
+  min-width: 180px;
+  transition: all 0.3s ease;
+  vertical-align: top;
+}
+
+.page-node:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(255, 217, 61, 0.2);
+}
+
+.page-node.home {
+  background: rgba(255, 217, 61, 0.2);
+  border-width: 3px;
+  margin-bottom: 2rem;
+}
+
+.page-node h4 {
+  color: var(--accent-color);
+  margin-bottom: 0.5rem;
+  font-size: 1.2rem;
+}
+
+.page-node p {
+  color: #ccc;
+  font-size: 0.9rem;
+}
+
+/* Flechas de navegación */
+.navigation-arrows {
+  margin: 2rem 0;
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.nav-arrow {
+  color: var(--accent-color);
+  font-weight: 600;
+  background: rgba(255, 217, 61, 0.1);
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 217, 61, 0.3);
+}
+
+/* Grid de páginas responsive */
+.pages-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-top: 2rem;
+  max-width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Enlaces de portales */
+.portal-links {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  margin-top: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.portal-links span {
+  background: var(--accent-color);
+  color: white;
+  padding: 0.3rem 0.6rem;
+  border-radius: 12px;
+  font-size: 0.8rem;
+}
+
+/* Tecnologías Section */
+.tecnologias-section {
+  margin: 4rem 0;
+  width: 100%;
+}
+
+.tecnologias-section h2 {
+  text-align: center;
+  font-size: 2.5rem;
+  color: #a855f7;
+  margin-bottom: 3rem;
+}
+
+/* Stack tecnológico en grid */
+.tech-stack {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* Categorías tecnológicas */
+.tech-category {
+  background: rgba(168, 85, 247, 0.1);
+  border: 2px solid #a855f7;
+  border-radius: 15px;
+  padding: 2rem;
+}
+
+.tech-category h3 {
+  color: #a855f7;
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-size: 1.4rem;
+}
+
+.tech-items {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Items tecnológicos */
+.tech-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: rgba(168, 85, 247, 0.05);
+  padding: 1rem;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+}
+
+.tech-item:hover {
+  background: rgba(168, 85, 247, 0.1);
+  transform: translateX(5px);
+}
+
+.tech-icon {
+  font-size: 1.5rem;
+  width: 30px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.tech-item strong {
+  color: #a855f7;
+  display: block;
+  margin-bottom: 0.2rem;
+}
+
+.tech-item p {
+  color: #ccc;
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+/* Mejoras Section */
+.mejoras-section {
+  margin: 4rem 0;
+  width: 100%;
+}
+
+.mejoras-section h2 {
+  text-align: center;
+  font-size: 2.5rem;
+  color: var(--primary-color);
+  margin-bottom: 3rem;
+}
+
+.mejoras-comparison {
+  max-width: 1000px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* Comparación antes/después */
+.before-after {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  width: 100%;
+}
+
+.before,
+.after {
+  padding: 2rem;
+  border-radius: 15px;
+  position: relative;
+}
+
+.before {
+  background: rgba(255, 107, 107, 0.1);
+  border: 2px solid var(--secondary-color);
+}
+
+.after {
+  background: rgba(0, 212, 255, 0.1);
+  border: 2px solid var(--primary-color);
+}
+
+.before h3,
+.after h3 {
+  margin-bottom: 1.5rem;
+  font-size: 1.3rem;
+}
+
+.before h3 {
+  color: var(--secondary-color);
+}
+
+.after h3 {
+  color: var(--primary-color);
+}
+
+/* Listas de características */
+.before ul,
+.after ul {
+  list-style: none;
+}
+
+.before li,
+.after li {
+  padding: 0.5rem 0;
+  position: relative;
+  padding-left: 2rem;
+  color: #ddd;
+}
+
+.before li::before {
+  content: '❌';
+  position: absolute;
+  left: 0;
+}
+
+.after li::before {
+  content: '✅';
+  position: absolute;
+  left: 0;
+}
+
+/* RESPONSIVE DESIGN CRITICAL */
+@media (max-width: 900px) {
+  .tech-stack {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  }
+  
+  .before-after {
+    gap: 1.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-diagramas {
+    padding: 2rem 1rem;
+  }
+  
+  .hero-diagramas h1 {
+    font-size: 2.5rem;
+  }
+  
+  .arquitectura-diagram {
+    padding: 0 1rem;
+  }
+  
+  .layer {
+    padding: 1.5rem;
+  }
+  
+  .componentes-tree {
+    overflow-x: scroll;
+    justify-content: flex-start;
+  }
+  
+  .pages-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .tech-stack {
+    grid-template-columns: 1fr;
+  }
+  
+  .before-after {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .navigation-arrows {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-diagramas h1 {
+    font-size: 2rem;
+  }
+  
+  .layer {
+    padding: 1rem;
+  }
+  
+  .tech-category {
+    padding: 1.5rem;
+  }
+  
+  .before,
+  .after {
+    padding: 1.5rem;
+  }
+  
+  .page-node {
+    min-width: 150px;
+    padding: 1rem;
+  }
+}
+
+
+.before {
+  background: rgba(255, 107, 107, 0.1);
+  border: 2px solid var(--secondary-color);
+}
+
+.after {
+  background: rgba(0, 212, 255, 0.1);
+  border: 2px solid var(--primary-color);
+}
+
+.before h3,
+.after h3 {
+  margin-bottom: 1.5rem;
+  font-size: 1.3rem;
+}
+
+.before h3 {
+  color: var(--secondary-color);
+}
+
+.after h3 {
+  color: var(--primary-color);
+}
+
+.before ul,
+.after ul {
+  list-style: none;
+}
+
+.before li,
+.after li {
+  padding: 0.5rem 0;
+  position: relative;
+  padding-left: 2rem;
+  color: #ddd;
+}
+
+.before li::before {
+  content: '❌';
+  position: absolute;
+  left: 0;
+}
+
+.after li::before {
+  content: '✅';
+  position: absolute;
+  left: 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .hero-diagramas h1 {
+    font-size: 2.5rem;
+  }
+  
+  .arquitectura-diagram {
+    padding: 0 1rem;
+  }
+  
+  .layer {
+    padding: 1.5rem;
+  }
+  
+  .componentes-tree {
+    overflow-x: scroll;
+  }
+  
+  .pages-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .tech-stack {
+    grid-template-columns: 1fr;
+  }
+  
+  .before-after {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .navigation-arrows {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+=====================================================
+
+# Archivo: C:\Users\micae\Desktop\4to Cuatri\Front\TP2-Front-Grupo11\src\pages\Diagramas.jsx
+
+// src/pages/Diagramas.jsx - Página que muestra diagramas y arquitectura de la aplicación
+import './Diagramas.css'
+
+export default function Diagramas() {
+  return (
+    <div className="diagramas">
+      {/* Hero principal */}
+      <section className="hero-diagramas">
+        <h1>Diagramas y Arquitectura</h1>
+        <p>Arquitectura y flujo de la aplicación React SPA</p>
+      </section>
+
+      {/* Arquitectura de la aplicación */}
+      <section className="arquitectura-section">
+        <h2>Arquitectura React SPA</h2>
+        <div className="diagram-container">
+          <div className="arquitectura-diagram">
+            {/* Capa de presentación */}
+            <div className="layer">
+              <h3>Capa de Presentación</h3>
+              <p>Componentes React que renderizan la interfaz</p>
+              <div className="components-grid">
+                <span>Pages</span>
+                <span>Components</span>
+                <span>Sidebar</span>
+                <span>Router</span>
+              </div>
+            </div>
+            
+            <div className="arrow">↓</div>
+            
+            {/* Capa de lógica */}
+            <div className="layer">
+              <h3>Capa de Lógica</h3>
+              <p>Estados, hooks y manejo de datos</p>
+              <div className="components-grid">
+                <span>useState</span>
+                <span>useEffect</span>
+                <span>Props</span>
+                <span>State Management</span>
+              </div>
+            </div>
+            
+            <div className="arrow">↓</div>
+            
+            {/* Capa de datos */}
+            <div className="layer">
+              <h3>Capa de Datos</h3>
+              <p>Fuentes de información y APIs</p>
+              <div className="data-sources">
+                <span>JSON Local</span>
+                <span>APIs Simuladas</span>
+                <span>Static Assets</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Estructura de componentes */}
+      <section className="componentes-section">
+        <h2>Estructura de Componentes</h2>
+        <div className="componentes-tree">
+          <div className="component-node root">
+            <div className="component-name">App.jsx</div>
+            <div className="children">
+              <div className="component-node">
+                <div className="component-name">Sidebar</div>
+              </div>
+              <div className="component-node">
+                <div className="component-name">Router</div>
+                <div className="children">
+                  <div className="component-node">Home</div>
+                  <div className="component-node">Bitacora</div>
+                  <div className="component-node">Integrantes</div>
+                  <div className="component-node">Micaela</div>
+                  <div className="component-node">Paula</div>
+                  <div className="component-node">María</div>
+                  <div className="component-node">Diagramas</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Flujo de navegación */}
+      <section className="flujo-section">
+        <h2>Flujo de Navegación</h2>
+        <div className="flujo-diagram">
+          {/* Página principal */}
+          <div className="page-node home">
+            <h4>Home</h4>
+            <p>Página principal con introducción al proyecto</p>
+          </div>
+          
+          {/* Navegación */}
+          <div className="navigation-arrows">
+            <span className="nav-arrow">Sidebar Navigation</span>
+            <span className="nav-arrow">React Router</span>
+            <span className="nav-arrow">SPA Experience</span>
+          </div>
+          
+          {/* Páginas secundarias */}
+          <div className="pages-grid">
+            <div className="page-node">
+              <h4>Bitácora</h4>
+              <p>Timeline del proyecto</p>
+            </div>
+            <div className="page-node">
+              <h4>Integrantes</h4>
+              <p>Equipo activo</p>
+            </div>
+            <div className="page-node">
+              <h4>Portales</h4>
+              <p>Páginas individuales</p>
+              <div className="portal-links">
+                <span>Micaela</span>
+                <span>Paula</span>
+                <span>María</span>
+              </div>
+            </div>
+            <div className="page-node">
+              <h4>Diagramas</h4>
+              <p>Arquitectura técnica</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Stack tecnológico */}
+      <section className="tecnologias-section">
+        <h2>Stack Tecnológico</h2>
+        <div className="tech-stack">
+          {/* Frontend */}
+          <div className="tech-category">
+            <h3>Frontend</h3>
+            <div className="tech-items">
+              <div className="tech-item">
+                <span className="tech-icon">⚛️</span>
+                <div>
+                  <strong>React 18</strong>
+                  <p>Librería para interfaces de usuario</p>
+                </div>
+              </div>
+              <div className="tech-item">
+                <span className="tech-icon">🚀</span>
+                <div>
+                  <strong>Vite</strong>
+                  <p>Build tool rápido y moderno</p>
+                </div>
+              </div>
+              <div className="tech-item">
+                <span className="tech-icon">🛣️</span>
+                <div>
+                  <strong>React Router</strong>
+                  <p>Navegación SPA sin recargas</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Estilos */}
+          <div className="tech-category">
+            <h3>Estilos</h3>
+            <div className="tech-items">
+              <div className="tech-item">
+                <span className="tech-icon">🎨</span>
+                <div>
+                  <strong>CSS3 Puro</strong>
+                  <p>Sin frameworks, máximo control</p>
+                </div>
+              </div>
+              <div className="tech-item">
+                <span className="tech-icon">📱</span>
+                <div>
+                  <strong>Responsive Design</strong>
+                  <p>Mobile-first approach</p>
+                </div>
+              </div>
+              <div className="tech-item">
+                <span className="tech-icon">✨</span>
+                <div>
+                  <strong>CSS Variables</strong>
+                  <p>Temas personalizados por página</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Datos */}
+          <div className="tech-category">
+            <h3>Datos</h3>
+            <div className="tech-items">
+              <div className="tech-item">
+                <span className="tech-icon">📄</span>
+                <div>
+                  <strong>Datos JSON (22+ items)</strong>
+                  <p>Películas y música local</p>
+                </div>
+              </div>
+              <div className="tech-item">
+                <span className="tech-icon">🌐</span>
+                <div>
+                  <strong>APIs Simuladas</strong>
+                  <p>Fetch asíncrono con delays reales</p>
+                </div>
+              </div>
+              <div className="tech-item">
+                <span className="tech-icon">⚡</span>
+                <div>
+                  <strong>React Hooks</strong>
+                  <p>useState, useEffect para manejo de estado</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Comparación TP1 vs TP2 */}
+      <section className="mejoras-section">
+        <h2>Migración TP1 → TP2</h2>
+        <div className="mejoras-comparison">
+          <div className="before-after">
+            {/* Antes (TP1) */}
+            <div className="before">
+              <h3>TP1 - Sitio Estático</h3>
+              <ul>
+                <li>HTML puro con múltiples archivos</li>
+                <li>CSS separado por página</li>
+                <li>JavaScript básico para interacciones</li>
+                <li>Navegación con recarga de página</li>
+                <li>Datos estáticos hardcodeados</li>
+                <li>Sin componentes reutilizables</li>
+                <li>Menor escalabilidad</li>
+              </ul>
+            </div>
+            
+            {/* Después (TP2) */}
+            <div className="after">
+              <h3>TP2 - React SPA</h3>
+              <ul>
+                <li>Componentes React reutilizables</li>
+                <li>CSS modular por componente</li>
+                <li>Hooks para estado y efectos</li>
+                <li>Navegación SPA sin recargas</li>
+                <li>APIs simuladas con loading states</li>
+                <li>Arquitectura escalable</li>
+                <li>Mejor experiencia de usuario</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  )
+}
+
+=====================================================
+
+# Archivo: C:\Users\micae\Desktop\4to Cuatri\Front\TP2-Front-Grupo11\src\pages\Home.css
+
+/* ================================
+   Home.css - Página Home principal
+   ================================ */
+
+.home {
+  animation: fadeIn 0.8s ease;
+  overflow-x: hidden;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* Hero principal */
+.hero-content h1 span {
+  display: inline-block;
+  animation: bounce 2s infinite alternate;
+}
+
+.hero-content h1 span:nth-child(2) {
+  animation-delay: 0.5s;
+}
+
+.hero-subtitle {
+  font-size: 1.5rem;
+  color: #ccc;
+  margin-bottom: 1rem;
+}
+
+/* Sección de tecnologías */
+.technologies {
+  text-align: center;
+  margin: 3rem 0;
+  width: 100%;
+}
+
+.technologies h2 {
+  color: var(--primary-color);
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+}
+
+.tech-list {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.tech-list img {
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
+  filter: grayscale(100%);
+  transition: all 0.3s ease;
+}
+
+.tech-list img:hover {
+  filter: grayscale(0%);
+  transform: scale(1.2);
+}
+
+/* Caja de introducción */
+.intro {
+  margin: 3rem 0;
+  width: 100%;
+}
+
+.intro-box {
+  background: rgba(0, 212, 255, 0.05);
+  border: 2px solid var(--primary-color);
+  border-radius: 15px;
+  padding: 2rem;
+  text-align: center;
+  box-sizing: border-box;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.intro-box h3 {
+  color: var(--primary-color);
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.intro-box p {
+  font-size: 1.2rem;
+  line-height: 1.6;
+  color: #ccc;
+}
+
+/* Sección de portales */
+.portales {
+  margin: 3rem 0;
+}
+
+.portales h2 {
+  color: var(--secondary-color);
+  font-size: 2.5rem;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+/* Panel del proyecto */
+.proyecto {
+  margin: 3rem 0;
+}
+
+.proyecto h2 {
+  color: var(--accent-color);
+  font-size: 2.5rem;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.project-panel {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
+  padding: 2rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.project-panel p {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: #ddd;
+}
+
+/* Animaciones */
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+/* ================================
+   📱 Responsive Home
+   ================================ */
+@media (max-width: 768px) {
+  .hero-subtitle {
+    font-size: 1.2rem;
+  }
+
+  .technologies h2 {
+    font-size: 2rem;
+  }
+
+  .tech-list {
+    gap: 1rem;
+  }
+
+  .tech-list img {
+    width: 50px;
+    height: 50px;
+  }
+
+  .intro-box {
+    padding: 1.5rem;
+  }
+
+  .intro-box h3 {
+    font-size: 1.5rem;
+  }
+
+  .intro-box p {
+    font-size: 1rem;
+  }
+
+  .project-panel {
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-content h1 {
+    font-size: 2rem;
+  }
+
+  .portales h2,
+  .proyecto h2 {
+    font-size: 2rem;
+  }
+}
+
+/* ================================
+   🧩 Ajustes de estructura y centrado
+   ================================ */
+
+/* Contenedor centrado y fluido para secciones del Home */
+.home > section,
+.home .intro,
+.home .portales,
+.home .proyecto {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+/* Caja “Nuestra Propuesta” bien centrada y sin cortar */
+.intro-box {
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 2rem;
+  border-radius: 12px;
+  border: 1px solid #00d4ff;
+  background: rgba(0, 0, 0, 0.3);
+  text-align: center;
+}
+
+/* CardGrid centrado y flexible */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(240px, 1fr));
+  gap: 1.25rem;
+  justify-items: center;
+}
+
+@media (max-width: 1024px) {
+  .card-grid {
+    grid-template-columns: repeat(2, minmax(220px, 1fr));
+  }
+}
+
+@media (max-width: 600px) {
+  .card-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Imágenes responsivas dentro de las cards */
+.card-image {
+  width: 100%;
+  aspect-ratio: 4/5;
+  overflow: hidden;
+  border-radius: 12px;
+}
+
+.card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* ================================
+   🧩 Ajustes extra para móviles
+   ================================ */
+
+@media (max-width: 768px) {
+  .home > section,
+  .home .intro,
+  .home .portales,
+  .home .proyecto {
+    max-width: 100%;
+    padding: 0 1rem;
+  }
+
+  .intro-box {
+    max-width: 100%;
+    padding: 1.25rem;
+  }
+
+  .card-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+}
+
+=====================================================
+
+# Archivo: C:\Users\micae\Desktop\4to Cuatri\Front\TP2-Front-Grupo11\src\pages\Home.jsx
+
+// src/pages/Home.jsx - Página de inicio del sitio TechVerse React
+
+import HeroSection from "../components/ui/HeroSection";
+import CardGrid from "../components/ui/CardGrid";
+import "./Home.css";
+
+export default function Home() {
+  const integrantes = [
+    { name: "Micaela", image: "/img/card-Micaela.webp", link: "/micaela" },
+    { name: "Paula", image: "/img/card-Paula.webp", link: "/paula" },
+    { name: "María", image: "/img/card-Maria.webp", link: "/maria" },
+  ];
+
+  return (
+    <div className="home">
+      <HeroSection
+        title={
+          <>
+            <span>Tech</span>Verse React
+          </>
+        }
+        subtitle="Un multiverso digital donde cada integrante tiene su estilo."
+      />
+
+      <section className="intro">
+        <div className="intro-box">
+          <h3>Nuestra Propuesta</h3>
+          <p>
+            Cada portal individual refleja el estilo y las habilidades de sus integrantes,
+            mostrando cómo React permite crear identidades visuales coherentes dentro de un mismo ecosistema.
+          </p>
+        </div>
+      </section>
+
+      <section className="portales">
+        <h2>Portales de Integrantes</h2>
+        <CardGrid items={integrantes} />
+      </section>
+
+      <section className="proyecto">
+        <h2>Sobre el Proyecto</h2>
+        <div className="project-panel">
+          <p>
+            Cada integrante aportó de manera diferenciada a nivel de planificación, 
+            diseño y estructura, reflejando la diversidad creativa del grupo mientras se mantenía 
+            una experiencia unificada para el usuario.
+          </p>
+        </div>
+      </section>
+    </div>
+  );
+}
+
+=====================================================
+
+# Archivo: C:\Users\micae\Desktop\4to Cuatri\Front\TP2-Front-Grupo11\src\pages\Integrantes.css
+
+/* ================================
+   Integrantes.css - Página de Integrantes
+   ================================ */
+
+.integrantes {
+  animation: fadeIn 0.8s ease;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+/* ===== Hero Integrantes (cuando NO usás HeroSection) ===== */
+.hero-integrantes {
+  text-align: center;
+  padding: 3rem 1rem;
+  background: linear-gradient(135deg, rgba(255, 217, 61, 0.1), rgba(0, 212, 255, 0.1));
+  border-radius: 20px;
+  margin-bottom: 3rem;
+}
+
+.hero-integrantes .hero-content h1 {
+  font-size: clamp(2.2rem, 5vw, 3.5rem);
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--accent-color), var(--primary-color));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 0.75rem;
+}
+
+.hero-integrantes .hero-content p {
+  font-size: 1.2rem;
+  color: #ccc;
+}
+
+/* ===== Sección Equipo ===== */
+.equipo-actual {
+  margin: 4rem 0;
+  padding: 0 1rem;
+}
+
+.equipo-actual h2 {
+  text-align: center;
+  font-size: clamp(1.8rem, 2.5vw, 2.5rem);
+  color: var(--primary-color);
+  margin-bottom: 2rem;
+}
+
+/* ===== Grid de Integrantes ===== */
+.integrantes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* ===== Tarjeta de Integrante ===== */
+.integrante-card {
+  --color-principal: var(--primary-color);
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  padding: 1.5rem;
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.integrante-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+  background: var(--color-principal);
+  transform: translateX(-100%);
+  transition: transform 0.3s ease;
+}
+
+.integrante-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+  border-color: var(--color-principal);
+}
+
+.integrante-card:hover::before {
+  transform: translateX(0);
+}
+
+/* ===== Avatar circular con overlay ===== */
+.integrante-avatar {
+  position: relative;
+  width: 120px;
+  height: 120px;
+  margin: 0 auto 1rem;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 3px solid var(--color-principal);
+}
+
+.integrante-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+  display: block;
+}
+
+.avatar-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.avatar-overlay span {
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.9rem;
+  letter-spacing: .5px;
+}
+
+.integrante-card:hover .integrante-avatar img {
+  transform: scale(1.08);
+}
+
+.integrante-card:hover .avatar-overlay {
+  opacity: 1;
+}
+
+/* ===== Info ===== */
+.integrante-info {
+  text-align: center;
+}
+
+.integrante-info h3 {
+  font-size: 1.6rem;
+  color: var(--color-principal);
+  margin-bottom: 0.4rem;
+  font-weight: 800;
+}
+
+.rol {
+  font-size: 1.05rem;
+  color: var(--color-principal);
+  font-weight: 600;
+  margin-bottom: 0.35rem;
+}
+
+.ubicacion {
+  font-size: 0.95rem;
+  color: #aaa;
+  margin-bottom: 0.9rem;
+}
+
+.descripcion {
+  font-size: 0.98rem;
+  color: #ddd;
+  line-height: 1.6;
+  margin-bottom: 1.2rem;
+}
+
+/* ===== Especialidades (chips) ===== */
+.especialidades h4 {
+  font-size: 0.9rem;
+  color: #ccc;
+  margin-bottom: 0.6rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.especialidades-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
+}
+
+.especialidad-tag {
+  background: var(--color-principal);
+  color: white;
+  padding: 0.3rem 0.8rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+/* ===== Nota del equipo ===== */
+.nota-cambios {
+  margin: 4rem 0 2rem;
+  padding: 0 1rem;
+}
+
+.nota-box {
+  background: rgba(255, 217, 61, 0.1);
+  border: 2px solid var(--accent-color);
+  border-radius: 15px;
+  padding: 1.5rem;
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.nota-box h3 {
+  color: var(--accent-color);
+  font-size: 1.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.nota-box p {
+  color: #ddd;
+  line-height: 1.6;
+  margin-bottom: 0.75rem;
+}
+
+.nota-box p:last-child {
+  margin-bottom: 0;
+}
+
+/* ================================
+   📱 Responsive definitivo (grid)
+   ================================ */
+
+/* Desktop grande: 3 columnas */
+@media (min-width: 1025px) {
+  .integrantes-grid {
+    grid-template-columns: repeat(3, 1fr);
+    max-width: 1200px;
+  }
+}
+
+/* Tablets: 2 columnas */
+@media (min-width: 600px) and (max-width: 1024px) {
+  .integrantes-grid {
+    grid-template-columns: repeat(2, 1fr);
+    max-width: 900px;
+    gap: 1.5rem;
+  }
+
+  .integrante-card {
+    padding: 1.3rem;
+  }
+
+  .integrante-avatar {
+    width: 110px;
+    height: 110px;
+  }
+}
+
+/* Celulares: 1 columna */
+@media (max-width: 599px) {
+  .integrantes-grid {
+    grid-template-columns: 1fr;
+    max-width: 100%;
+    gap: 1rem;
+  }
+
+  .integrante-card {
+    padding: 1rem;
+    border-radius: 16px;
+  }
+
+  .integrante-avatar {
+    width: 95px;
+    height: 95px;
+  }
+
+  .descripcion {
+    font-size: 0.95rem;
+  }
+}
+
+=====================================================
+
+# Archivo: C:\Users\micae\Desktop\4to Cuatri\Front\TP2-Front-Grupo11\src\pages\Integrantes.jsx
+
+// src/pages/Integrantes.jsx - Página que muestra los integrantes del equipo
+import { Link } from "react-router-dom";
+import HeroSection from "../components/ui/HeroSection";
+import "./Integrantes.css";
+
+export default function Integrantes() {
+  const integrantes = [
+    {
+      nombre: "Paula",
+      edad: 32,
+      ubicacion: "Berazategui, Buenos Aires",
+      rol: "Full Stack Developer",
+      avatar: "/img/card-Paula.webp",
+      descripcion:
+        "Apasionada por la tecnología y el desarrollo web. Especializada en HTML, CSS, PHP y JavaScript.",
+      especialidades: ["HTML", "CSS", "PHP", "JavaScript"],
+      ruta: "/paula",
+      color: "rgb(58, 213, 252)",
+    },
+    {
+      nombre: "Micaela",
+      edad: 31,
+      ubicacion: "Buenos Aires, Argentina",
+      rol: "Frontend Developer & Design Enthusiast",
+      avatar: "/img/card-Micaela.webp",
+      descripcion:
+        "Creativa y detallista, combina diseño y programación. Aficionada a la impresión 3D y el café.",
+      especialidades: [
+        "Impresión 3D",
+        "Diseño Creativo",
+        "Programación",
+        "Café ☕",
+      ],
+      ruta: "/micaela",
+      color: "#F8B55F",
+    },
+    {
+      nombre: "María",
+      edad: 44,
+      ubicacion: "Córdoba, Argentina",
+      rol: "Creative Designer & Project Manager",
+      avatar: "/img/card-Maria.webp",
+      descripcion:
+        "Organizada y comunicativa, combina su experiencia en gestión de proyectos con una visión artística que da identidad y equilibrio al equipo.",
+      especialidades: [
+        "Organización",
+        "Trabajo en equipo",
+        "Resolución de problemas",
+        "Comunicación",
+      ],
+      ruta: "/maria",
+      color: "#F8B55F",
+    },
+  ];
+
+  return (
+    <div className="integrantes">
+      <HeroSection
+        title="Nuestro Equipo"
+        subtitle="Conocé a las integrantes del Grupo 11"
+        gradient="linear-gradient(135deg, rgba(255,217,61,0.1), rgba(0,212,255,0.1))"
+      />
+
+      <section className="equipo-actual">
+        <h2>Integrantes Activos</h2>
+        <div className="integrantes-grid">
+          {integrantes.map((i, index) => (
+            <Link
+              key={index}
+              to={i.ruta}
+              className="integrante-card"
+              style={{ "--color-principal": i.color }}
+            >
+              <div className="integrante-avatar">
+                <img src={i.avatar} alt={`${i.nombre} Avatar`} />
+                <div className="avatar-overlay">
+                  <span>Ver Portal</span>
+                </div>
+              </div>
+
+              <div className="integrante-info">
+                <h3>{i.nombre}</h3>
+                <p className="rol">{i.rol}</p>
+                <p className="ubicacion">📍 {i.ubicacion}</p>
+                <p className="descripcion">{i.descripcion}</p>
+
+                <div className="especialidades">
+                  <h4>Especialidades:</h4>
+                  <div className="especialidades-tags">
+                    {i.especialidades.map((esp, j) => (
+                      <span key={j} className="especialidad-tag">
+                        {esp}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      <section className="nota-cambios">
+        <div className="nota-box">
+          <h3>📝 Nota sobre el Equipo</h3>
+          <p>
+            Para este TP2, el equipo está conformado por <strong>Paula</strong>, <strong>Micaela</strong> y <strong>María</strong>.
+    Cada integrante mantiene su propio portal individual con un estilo y personalidad únicos,
+    reflejando la diversidad creativa del grupo y su compromiso con el desarrollo colaborativo.
+          </p>
+          <p>
+            Las secciones individuales incluyen información sobre habilidades, películas y música favoritas,
+    con un enfoque en el diseño personalizado y la integración dinámica de datos para fortalecer la práctica en React.
+          </p>
+        </div>
+      </section>
+    </div>
+  )
+}
+
+
+
+=====================================================
+
+# Archivo: C:\Users\micae\Desktop\4to Cuatri\Front\TP2-Front-Grupo11\src\pages\Musica.jsx
+
+// 🎧 Musica.jsx – Top Global Deezer con color de acento violeta 💜
+
+import { useState, useEffect } from "react";
+import "../styles/util.css";
+import "../styles/MediaPages.css";
+
+export default function Musica() {
+  const [canciones, setCanciones] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchDeezer = async () => {
+      try {
+        // ✅ FIX: Siempre usar /api/deezer sin parámetros para top global
+        const response = await fetch("/api/deezer");
+        
+        if (!response.ok) {
+          throw new Error(`Error ${response.status}: ${response.statusText}`);
+        }
+        
+        const data = await response.json();
+
+        if (data.data && Array.isArray(data.data)) {
+          setCanciones(data.data.slice(0, 10)); // 🔹 Solo top 10 canciones
+        } else {
+          setError("No se encontraron canciones 😞");
+        }
+      } catch (err) {
+        console.error("❌ Error al cargar datos de Deezer:", err);
+        setError("Error al cargar datos de Deezer. Intenta más tarde.");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchDeezer();
+  }, []);
+
+  if (loading)
+    return (
+      <div className="loading">
+        <p>🎵 Cargando canciones del Top Global Deezer...</p>
+      </div>
+    );
+
+  if (error)
+    return (
+      <div className="error">
+        <p>{error}</p>
+      </div>
+    );
+
+  return (
+    <div
+      className="media-page fade-in"
+      style={{ "--accent-color": "#A238FF" }} // 💜 Color Deezer
+    >
+      <section className="hero-media">
+        <h1>🎶 Top Global – Deezer</h1>
+        <p>Las 10 canciones más escuchadas del momento 🌍</p>
+      </section>
+
+      <section className="media-listado card">
+        <h2>Ranking mundial</h2>
+        <p className="api-indicator">
+          Mostrando {canciones.length} canciones
+        </p>
+
+        <div className="grid-media">
+          {canciones.map((song) => (
+            <div key={song.id} className="card-media fade-in">
+              <img
+                src={song.album?.cover_medium || "/img/placeholder-artist.webp"}
+                alt={song.title}
+                loading="lazy"
+                onError={(e) =>
+                  (e.currentTarget.src = "/img/placeholder-artist.webp")
+                }
+              />
+              <div className="media-info">
+                <h3>{song.title}</h3>
+                <p>
+                  <strong>Artista:</strong> {song.artist?.name || "Desconocido"}
+                </p>
+                <p>
+                  <strong>Álbum:</strong> {song.album?.title || "N/A"}
+                </p>
+                <a
+                  href={song.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-deezer"
+                >
+                  Escuchar en Deezer
+                </a>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* 💬 Créditos de fuente */}
+        <p
+          style={{
+            marginTop: "2rem",
+            textAlign: "center",
+            fontSize: "0.9rem",
+            color: "#bbb",
+          }}
+        >
+          🎧 Datos obtenidos en tiempo real desde la{" "}
+          <a
+            href="https://developers.deezer.com/api"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{ color: "#A238FF", textDecoration: "none" }}
+          >
+            API pública de Deezer
+          </a>
+          .
+        </p>
+      </section>
+    </div>
+  );
+}
+
+=====================================================
+
+# Archivo: C:\Users\micae\Desktop\4to Cuatri\Front\TP2-Front-Grupo11\src\pages\Peliculas.jsx
+
+// 🎬 Peliculas.jsx — listado desde JSON local con PeliculaCard unificada
+import "../styles/util.css";               // grid-media, card-media, botones, etc.
+import "../styles/MediaPages.css";         // nuevo archivo unificado
+import PeliculaCard from "../components/cards/PeliculaCard";
+import data from "../data/peliculas.json";
+
+export default function Peliculas() {
+  // Normaliza los datos del JSON
+  const peliculas = (data.peliculas || []).map((p) => ({
+    ...p,
+    year: p.year ?? p.año, // Usa 'año' si no existe 'year'
+  }));
+
+  return (
+    <div
+      className="media-page fade-in"
+      style={{ "--accent-color": "#00d4ff" }} // 🎨 color de acento (azul celeste)
+    >
+      <section className="hero-media">
+        <h1>🎬 Catálogo de Películas</h1>
+        <p>Datos obtenidos desde un archivo local JSON</p>
+      </section>
+
+      <section className="media-listado card">
+        <h2>Listado dinámico</h2>
+        <p className="api-indicator">
+          Mostrando {peliculas.length} películas
+        </p>
+
+        <div className="grid-media">
+          {peliculas.map((peli) => (
+            <PeliculaCard
+              key={peli.id || peli.titulo}
+              poster={peli.poster}
+              titulo={peli.titulo}
+              year={peli.year}
+              genero={peli.genero}
+              director={peli.director}
+              duracion={peli.duracion}
+              rating={peli.rating}
+              url={peli.url}
+            />
+          ))}
+        </div>
+      </section>
+    </div>
+  );
+}
+
+
+
+
+
+=====================================================
+
+# Archivo: C:\Users\micae\Desktop\4to Cuatri\Front\TP2-Front-Grupo11\src\pages\portales\Maria.jsx
+
+// Maria.jsx - Portal individual simplificado
+import PortalBase from "../../components/PortalBase";
+import "./Maria.css";
+
+export default function Maria() {
+  return (
+    <PortalBase
+      nombre="María"
+      rol="Creative Designer & Project Manager"
+      ubicacion="Córdoba, Argentina"
+      edad={44}
+      avatar="/img/maria-pixel-1.png"
+      habilidades={[
+        "Organización",
+        "Trabajo en equipo",
+        "Resolución de problemas",
+        "Comunicación",
+      ]}
+      peliculasTitulos={[
+        "El Viaje de Chihiro",
+        "Mi Vecino Totoro",
+        "El Castillo Ambulante",
+      ]}
+      artistasDeezer={["Hoobastank", "Audioslave", "Keane"]}
+      themeClass="maria-theme"
+      themeColors={{
+        primary: "#F8B55F",
+        secondary: "#955ea0",
+      }}
+    />
+  );
+}
+
+=====================================================
+
+# Archivo: C:\Users\micae\Desktop\4to Cuatri\Front\TP2-Front-Grupo11\src\pages\portales\Micaela.jsx
+
+// Micaela.jsx - Portal individual simplificado
+import PortalBase from "../../components/PortalBase";
+import "./Micaela.css";
+
+export default function Micaela() {
+  return (
+    <PortalBase
+      nombre="Micaela"
+      rol="Frontend Developer & Design Enthusiast"
+      ubicacion="Buenos Aires, Argentina"
+      edad={31}
+      avatar="/img/avatar-mica1.webp"
+      avatarHover="/img/avatar-mica2.webp" // ✨ Efecto hover único de Micaela
+      habilidades={[
+        "Impresión 3D",
+        "Diseño Creativo",
+        "Programación",
+        "Hacer café ☕",
+      ]}
+      peliculasTitulos={["Twister", "Volver al Futuro", "Mulan"]}
+      artistasDeezer={["BTS", "Miranda!", "5 Seconds of Summer"]}
+      themeClass="micaela-theme"
+      themeColors={{
+        primary: "#F8B55F",
+        secondary: "#C95792",
+      }}
+    />
+  );
+}
+
+=====================================================
+
+# Archivo: C:\Users\micae\Desktop\4to Cuatri\Front\TP2-Front-Grupo11\src\pages\portales\Paula.jsx
+
+// Paula.jsx - Portal individual simplificado
+import PortalBase from "../../components/PortalBase";
+import "./Paula.css";
+
+export default function Paula() {
+  return (
+    <PortalBase
+      nombre="Paula"
+      rol="Full Stack Developer"
+      ubicacion="Berazategui, Buenos Aires"
+      edad={32}
+      avatar="/img/card-Paula.webp"
+      habilidades={["HTML", "CSS", "PHP", "JavaScript"]}
+      peliculasTitulos={[
+        "Fragmentado",
+        "Harry Potter y la Piedra Filosofal",
+        "Interstellar",
+        "Inquebrantable",
+      ]}
+      artistasDeezer={[
+        "Soda Stereo",
+        "No Te Va Gustar",
+        "Carlos Rivera",
+        "Airbag",
+      ]}
+      themeClass="paula-theme"
+      themeColors={{
+        primary: "rgb(58, 213, 252)",
+        secondary: "#4118b1",
+      }}
+    />
+  );
+}
+
+=====================================================
+
+# Archivo: C:\Users\micae\Desktop\4to Cuatri\Front\TP2-Front-Grupo11\src\styles\IntegrantesBase.css
+
+/* ================================
+    IntegrantesBase.css - Estilos base para páginas de integrantes
+   Estructura común entre Micaela, Paula, María.
+   ================================ */
+
+.integrante-page {
+  animation: fadeIn 0.8s ease;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+/*  Tarjeta principal de cada integrante */
+.tarjeta-integrante {
+  max-width: 1100px;
+  margin: 2rem auto;
+  padding: 2rem;
+  display: flex;
+  gap: 2rem;
+  align-items: flex-start;
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: var(--shadow-soft);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.tarjeta-integrante:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+}
+
+/*  Avatar */
+.avatar-container {
+  flex-shrink: 0;
+  width: 260px;
+  height: 320px;
+  border-radius: 15px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease;
+}
+
+.avatar-container:hover {
+  transform: scale(1.05);
+}
+
+.avatar-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/*  Contenido textual */
+.contenido-integrante {
+  flex: 1;
+  color: var(--text-color);
+}
+
+.contenido-integrante h1 {
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: var(--accent-color);
+  margin-bottom: 0.5rem;
+}
+
+.contenido-integrante h2 {
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+  color: var(--primary-color);
+}
+
+/*  Rol y descripción */
+.rol {
+  font-size: 1.2rem;
+  color: var(--primary-color);
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.info-basica {
+  background: rgba(255, 255, 255, 0.08);
+  padding: 1.2rem;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  margin-bottom: 1.5rem;
+}
+
+.info-basica p {
+  margin: 0.4rem 0;
+  font-size: 1rem;
+  color: #ddd;
+}
+
+.info-basica strong {
+  color: var(--primary-color);
+  font-weight: 600;
+}
+
+/*  Estado de carga */
+.loading-section {
+  text-align: center;
+  padding: 1rem;
+  color: var(--primary-color);
+}
+
+/*  Secciones comunes */
+.seccion h2 {
+  font-size: 1.6rem;
+  margin-bottom: 1rem;
+  color: var(--accent-color);
+}
+
+.habilidades-lista li {
+  font-size: 1rem;
+}
+
+/*  Imágenes de las grillas de películas y música */
+.peliculas-grid img,
+.musica-grid img {
+  width: 100%;
+  border-radius: 8px;
+  object-fit: cover;
+  height: 320px;
+}
+
+/* =======================
+    Diseño Responsive
+   ======================= */
+
+/* --- Tablets (≤1024px) --- */
+@media (max-width: 1024px) {
+  .tarjeta-integrante {
+    gap: 1.5rem;
+    padding: 1.5rem;
+  }
+
+  .avatar-container {
+    width: 230px;
+    height: 280px;
+  }
+
+  .contenido-integrante h1 {
+    font-size: 2.1rem;
+  }
+}
+
+/* --- Móviles medianos (≤768px) --- */
+@media (max-width: 768px) {
+  .tarjeta-integrante {
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+  }
+
+  .avatar-container {
+    width: 220px;
+    height: 260px;
+  }
+
+  .contenido-integrante h1 {
+    font-size: 1.9rem;
+  }
+
+  .info-basica {
+    text-align: left;
+  }
+}
+
+/* --- Móviles pequeños (≤480px) --- */
+@media (max-width: 480px) {
+  .tarjeta-integrante {
+    padding: 1rem;
+  }
+
+  .avatar-container {
+    width: 180px;
+    height: 210px;
+  }
+
+  .contenido-integrante h1 {
+    font-size: 1.6rem;
+  }
+
+  .peliculas-grid img,
+  .musica-grid img {
+    height: 200px;
+  }
+}
+
+=====================================================
+
+# Archivo: C:\Users\micae\Desktop\4to Cuatri\Front\TP2-Front-Grupo11\src\styles\layout.css
+
+
+=====================================================
+
+# Archivo: C:\Users\micae\Desktop\4to Cuatri\Front\TP2-Front-Grupo11\src\styles\MediaPages.css
+
+/* =======================================
+   MediaPages.css - Páginas multimedia (Películas + Música)
+   Unificadas con color de acento dinámico
+   ======================================= */
+
+/* ===== Estructura general ===== */
+.media-page {
+  animation: fadeIn 0.8s ease;
+  padding: 2rem 0;
+}
+
+/* ===== Hero ===== */
+.hero-media {
+  text-align: center;
+  padding: 3rem 1rem;
+  border-radius: 20px;
+  margin-bottom: 3rem;
+  background: linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--accent-color, var(--primary-color)) 20%, transparent),
+    rgba(255, 107, 107, 0.15)
+  );
+  box-shadow: 0 8px 25px color-mix(in srgb, var(--accent-color, var(--primary-color)) 20%, transparent);
+}
+
+.hero-media h1 {
+  font-size: 3rem;
+  font-weight: 700;
+  color: var(--accent-color, var(--primary-color));
+  text-shadow: 0 0 15px color-mix(in srgb, var(--accent-color, var(--primary-color)) 60%, transparent);
+  margin-bottom: 1rem;
+}
+
+.hero-media p {
+  font-size: 1.2rem;
+  color: #ccc;
+}
+
+/* ===== Listado ===== */
+.media-listado {
+  margin: 0 auto;
+  max-width: 1300px;
+  padding: 2rem;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: var(--shadow-soft);
+}
+
+.media-listado h2 {
+  font-size: 2rem;
+  color: var(--accent-color, var(--primary-color));
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+/* ===== Indicador ===== */
+.api-indicator {
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--accent-color, var(--primary-color));
+  margin-bottom: 2rem;
+  padding: 0.5rem 1rem;
+  background: color-mix(in srgb, var(--accent-color, var(--primary-color)) 15%, transparent);
+  border: 1px solid var(--accent-color, var(--primary-color));
+  border-radius: 6px;
+  display: inline-block;
+}
+
+/* ===== Tarjeta multimedia ===== */
+.card-media {
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid var(--accent-color, var(--primary-color));
+  border-radius: 12px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.card-media:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px color-mix(in srgb, var(--accent-color, var(--primary-color)) 30%, transparent);
+  border-color: var(--accent-color, var(--primary-color));
+}
+
+.card-media img {
+  width: 100%;
+  height: 380px;
+  object-fit: cover;
+}
+
+.media-info {
+  padding: 1.5rem;
+  color: #ddd;
+}
+
+.media-info h3 {
+  font-size: 1.2rem;
+  color: #fff;
+  margin-bottom: 0.5rem;
+}
+
+.media-info p {
+  color: #ccc;
+  margin: 0.3rem 0;
+  font-size: 0.9rem;
+}
+
+/* ===== Botones externos ===== */
+.btn-imdb {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: 8px 16px;
+  background: #f5c518;
+  color: #000;
+  text-decoration: none;
+  border-radius: 6px;
+  font-weight: 700;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+}
+
+.btn-imdb:hover {
+  background: #ffd950;
+  transform: translateY(-2px);
+}
+
+.btn-deezer {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: 8px 16px;
+  background: var(--accent-color, #A238FF);
+  color: #fff;
+  text-decoration: none;
+  border-radius: 6px;
+  font-weight: 700;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+}
+
+.btn-deezer:hover {
+  background: color-mix(in srgb, var(--accent-color, #A238FF) 80%, white 20%);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(162, 56, 255, 0.35);
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+  .hero-media h1 { font-size: 2.3rem; }
+  .card-media img { height: 320px; }
+}
+
+@media (max-width: 480px) {
+  .hero-media h1 { font-size: 1.8rem; }
+  .media-info { padding: 1rem; }
+  .card-media img { height: 260px; }
+}
+
+=====================================================
+
+# Archivo: C:\Users\micae\Desktop\4to Cuatri\Front\TP2-Front-Grupo11\src\styles\themes.css
+
+/* ================================
+   themes.css - ESTILOS UNIFICADOS PARA PORTALES
+   Un solo archivo para los 3 temas
+   ================================ */
+
+/* === BASE COMÚN (heredada de IntegrantesBase.css) === */
+
+/* === TEMA MICAELA: Violeta y Dorado === */
+.micaela-theme .tarjeta-integrante {
+  background: linear-gradient(135deg, #7C4585, #3D365C);
+  border: 3px solid var(--theme-primary);
+  box-shadow: 0 8px 25px rgba(124, 69, 133, 0.4);
+}
+
+.micaela-theme .avatar-container {
+  border: 3px solid var(--theme-secondary);
+  box-shadow: 0 8px 25px rgba(201, 87, 146, 0.2);
+}
+
+.micaela-theme .avatar-container:hover {
+  border-color: var(--theme-primary);
+  box-shadow: 0 8px 25px rgba(201, 87, 146, 0.6);
+}
+
+.micaela-theme .contenido-integrante h1 {
+  color: var(--theme-primary);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.micaela-theme .rol {
+  color: var(--theme-secondary);
+}
+
+.micaela-theme .info-basica {
+  background: rgba(201, 87, 146, 0.15);
+  border: 2px solid var(--theme-secondary);
+}
+
+.micaela-theme .info-basica strong {
+  color: var(--theme-primary);
+}
+
+.micaela-theme .btn-outline {
+  border-color: var(--theme-primary);
+  color: var(--theme-primary);
+}
+
+.micaela-theme .btn-outline:hover,
+.micaela-theme .btn-outline.active {
+  background: linear-gradient(135deg, var(--theme-primary), var(--theme-secondary));
+  color: white;
+  box-shadow: 0 4px 15px rgba(248, 181, 95, 0.4);
+}
+
+.micaela-theme .seccion {
+  background: rgba(248, 181, 95, 0.08);
+  border: 1px solid rgba(248, 181, 95, 0.3);
+}
+
+.micaela-theme .seccion h2 {
+  color: var(--theme-primary);
+}
+
+/* === TEMA PAULA: Tech Futurista Azul === */
+.paula-theme .tarjeta-integrante {
+  background: linear-gradient(135deg, #4118b1, #2d0a7a);
+  border: 3px solid var(--theme-primary);
+  box-shadow: 0 8px 30px rgba(65, 24, 177, 0.4);
+}
+
+.paula-theme .avatar-container {
+  border: 3px solid var(--theme-primary);
+}
+
+.paula-theme .avatar-container:hover {
+  border-color: var(--theme-secondary);
+  transform: scale(1.05);
+}
+
+.paula-theme .contenido-integrante h1 {
+  color: var(--theme-primary);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.paula-theme .rol {
+  color: var(--theme-primary);
+}
+
+.paula-theme .info-basica {
+  background: rgba(58, 213, 252, 0.1);
+  border: 2px solid rgba(58, 213, 252, 0.3);
+}
+
+.paula-theme .info-basica strong {
+  color: var(--theme-primary);
+}
+
+.paula-theme .btn-outline {
+  border-color: var(--theme-primary);
+  color: var(--theme-primary);
+}
+
+.paula-theme .btn-outline:hover,
+.paula-theme .btn-outline.active {
+  background: linear-gradient(135deg, var(--theme-primary), var(--theme-secondary));
+  color: white;
+  box-shadow: 0 4px 15px rgba(58, 213, 252, 0.4);
+}
+
+.paula-theme .seccion {
+  background: rgba(58, 213, 252, 0.05);
+  border: 1px solid rgba(58, 213, 252, 0.2);
+}
+
+.paula-theme .seccion h2 {
+  color: var(--theme-primary);
+}
+
+/* === TEMA MARÍA: Retro 80s === */
+.maria-theme .tarjeta-integrante {
+  background: linear-gradient(135deg, #955ea0, #4a0b78);
+  border: 3px solid var(--theme-primary);
+  box-shadow: 0 8px 25px rgba(26, 24, 26, 0.5);
+  position: relative;
+}
+
+.maria-theme .avatar-container {
+  border: 3px solid var(--theme-primary);
+  box-shadow: 0 8px 25px rgba(248, 181, 95, 0.2);
+}
+
+.maria-theme .avatar-container:hover {
+  transform: scale(1.05);
+  border-color: var(--theme-secondary);
+  box-shadow: 0 8px 25px rgba(248, 181, 95, 0.4);
+}
+
+.maria-theme .contenido-integrante h1 {
+  color: var(--theme-primary);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+.maria-theme .rol {
+  color: var(--theme-primary);
+}
+
+.maria-theme .info-basica {
+  background: rgba(17, 24, 39, 0.3);
+  border: 2px solid var(--theme-secondary);
+  box-shadow: 0 0 10px rgba(223, 210, 225, 0.2);
+}
+
+.maria-theme .info-basica strong {
+  color: var(--theme-primary);
+}
+
+.maria-theme .btn-outline {
+  border-color: var(--theme-primary);
+  color: var(--theme-primary);
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.maria-theme .btn-outline:hover,
+.maria-theme .btn-outline.active {
+  background: linear-gradient(135deg, var(--theme-primary), var(--theme-secondary));
+  color: white;
+  box-shadow: 0 4px 15px rgba(248, 181, 95, 0.4);
+}
+
+.maria-theme .seccion {
+  background: rgba(17, 24, 39, 0.3);
+  border: 1px solid rgba(248, 181, 95, 0.3);
+}
+
+.maria-theme .seccion h2 {
+  color: var(--theme-primary);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Efecto retro escaneado para María */
+.maria-theme .tarjeta-integrante::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: repeating-linear-gradient(
+    90deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 255, 255, 0.03) 2px,
+    rgba(0, 255, 255, 0.03) 4px
+  );
+  pointer-events: none;
+  border-radius: var(--radius, 12px);
+}
+
+/* === Responsive unificado === */
+@media (max-width: 768px) {
+  .micaela-theme .tarjeta-integrante,
+  .paula-theme .tarjeta-integrante,
+  .maria-theme .tarjeta-integrante {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .micaela-theme .avatar-container,
+  .paula-theme .avatar-container,
+  .maria-theme .avatar-container {
+    width: 220px;
+    height: 280px;
+    margin: 0 auto;
+  }
+
+  .micaela-theme .contenido-integrante h1,
+  .paula-theme .contenido-integrante h1,
+  .maria-theme .contenido-integrante h1 {
+    font-size: 2.2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .micaela-theme .contenido-integrante h1,
+  .paula-theme .contenido-integrante h1,
+  .maria-theme .contenido-integrante h1 {
+    font-size: 1.8rem;
+  }
+}
+
+=====================================================
+
+# Archivo: C:\Users\micae\Desktop\4to Cuatri\Front\TP2-Front-Grupo11\src\styles\util.css
+
+/* ================================
+    util.css - UTILIDADES GLOBALES
+   Reutilizables en todo el proyecto
+   ================================ */
+
+/*  Variables generales */
+:root {
+  --radius: 12px;
+  --shadow-soft: 0 8px 20px rgba(0,0,0,.3);
+}
+
+/* Grillas auto-ajustables */
+.grid-auto {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  width: 100%;
+}
+.grid-auto-sm { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
+
+/* Tarjetas básicas */
+.card {
+  background: rgba(255,255,255,.05);
+  border: 1px solid rgba(255,255,255,.1);
+  border-radius: var(--radius);
+  padding: 1rem;
+  transition: transform .3s ease, box-shadow .3s ease;
+}
+.card-hover:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-soft);
+}
+
+/* Imágenes tipo cover */
+.img-cover {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  background: none;
+  border: none;
+}
+
+/* Botones outline reutilizables */
+.btn-outline {
+  background: transparent;
+  border: 2px solid var(--primary-color);
+  color: var(--primary-color);
+  padding: 10px 20px;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 500;
+}
+.btn-outline:hover, .btn-outline.active {
+  background: var(--primary-color);
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(0,212,255,.3);
+}
+
+/* Centrados y helpers */
+.center { display:flex; justify-content:center; align-items:center; }
+.fade-in { animation: fadeIn .3s ease; }
+
+/* Adaptabilidad */
+@media (max-width: 1024px) {
+  .grid-auto { gap: 1rem; }
+  .card { padding: 0.8rem; }
+}
+
+@media (max-width: 768px) {
+  .grid-auto { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+  .btn-outline { padding: 8px 16px; font-size: 0.9rem; }
+}
+
+@media (max-width: 480px) {
+  .grid-auto, .grid-1-md { grid-template-columns: 1fr !important; }
+  .card { padding: 0.7rem; }
+  .img-cover { height: 150px; }
+  .btn-outline { width: 100%; }
+}
+
+/* ================================
+   🔁 Tarjetas multimedia unificadas
+   ================================ */
+.card-media {
+  background: rgba(255,255,255,.05);
+  border: 1px solid rgba(255,255,255,.1);
+  border-radius: var(--radius);
+  overflow: hidden;
+  transition: transform .3s ease, box-shadow .3s ease, border-color .3s ease;
+}
+.card-media:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-soft);
+  border-color: var(--primary-color);
+}
+
+.card-media img {
+  width: 100%;
+  height: 360px;
+  object-fit: cover;
+}
+
+.media-info {
+  padding: 1.2rem;
+  color: var(--text-color);
+}
+.media-info h3 {
+  font-size: 1.15rem;
+  margin-bottom: .5rem;
+  color: var(--primary-color);
+}
+.media-info p {
+  font-size: .92rem;
+  color: #ccc;
+  margin: .25rem 0;
+}
+
+/* ================================
+   🔘 Botones de plataformas externas
+   ================================ */
+.btn-imdb {
+  display: inline-block;
+  margin-top: .8rem;
+  padding: 8px 14px;
+  background: #f5c518;
+  color: #000;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: .9rem;
+  transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
+}
+.btn-imdb:hover {
+  background: #ffd950;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(245, 197, 24, .35);
+}
+
+.btn-deezer {
+  display: inline-block;
+  margin-top: .8rem;
+  padding: 8px 14px;
+  background: #007FEB;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: .9rem;
+  transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
+}
+.btn-deezer:hover {
+  background: #1995ff;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 127, 235, .35);
+}
+
+/* ================================
+   🧩 Grilla unificada para listados
+   ================================ */
+.grid-media {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+  width: 100%;
+}
+
+@media (max-width: 1024px) {
+  .card-media img { height: 320px; }
+}
+@media (max-width: 768px) {
+  .grid-media { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+  .card-media img { height: 280px; }
+}
+@media (max-width: 480px) {
+  .grid-media { grid-template-columns: 1fr; }
+  .card-media img { height: 220px; }
+}
+
+/* ================================
+   🌈 Estructura general para páginas de medios
+   ================================ */
+.media-page {
+  animation: fadeIn 0.8s ease;
+  padding: 2rem 0;
+}
+
+.hero-section {
+  text-align: center;
+  padding: 3rem 1rem;
+  border-radius: 20px;
+  margin-bottom: 3rem;
+  background: linear-gradient(
+    135deg,
+    rgba(0, 212, 255, 0.15),
+    rgba(255, 107, 107, 0.15)
+  );
+  box-shadow: 0 8px 25px rgba(0, 212, 255, 0.1);
+}
+
+.hero-section h1 {
+  font-size: 3rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  margin-bottom: 1rem;
+  text-shadow: 0 0 10px rgba(0, 212, 255, 0.4);
+}
+
+.hero-section p {
+  font-size: 1.2rem;
+  color: #ccc;
+}
+
+=====================================================
+
+# Archivo: C:\Users\micae\Desktop\4to Cuatri\Front\TP2-Front-Grupo11\src\styles\variables.css
+
+/* ================================
+   variables.css VARIABLES GLOBALES
+   Definición de colores, tipografía y sombras
+   ================================ */
+
+:root {
+  /*  Colores principales */
+  --primary-color: #00d4ff;      /* celeste principal */
+  --accent-color: #9acbd0;       /* celeste grisáceo */
+  --bg-color: #0d1117;           /* fondo general oscuro */
+  --text-color: #e6edf3;         /* texto principal */
+  --text-secondary: #b0b0b0;     /* texto secundario */
+
+  /*  Gradientes */
+  --gradient-primary: linear-gradient(135deg, #00d4ff, #006a71);
+  --gradient-accent: linear-gradient(135deg, #48a6a7, #9acbd0);
+
+  /*  Estructura y sombras */
+  --radius: 12px;
+  --shadow-soft: 0 8px 20px rgba(0, 0, 0, 0.3);
+
+  /*  Tipografía */
+  --font-main: 'Poppins', sans-serif;
+  --font-size-base: 16px;
+  --line-height-base: 1.6;
+}
+
+/* Tipografía global (se aplica automáticamente) */
+body, button, input, textarea {
+  font-family: var(--font-main);
+  color: var(--text-color);
+  line-height: var(--line-height-base);
+}
+
+=====================================================
+
+# Archivo: C:\Users\micae\Desktop\4to Cuatri\Front\TP2-Front-Grupo11\src\utils\getDeezerArtists.js
+
+// getDeezerArtists.js - Obtiene artistas desde la API pública de Deezer (usa proxy si estás en local)
+
+export async function getDeezerArtists(nombres = []) {
+  const proxy =
+    window.location.hostname === "localhost"
+      ? "https://cors-anywhere.herokuapp.com/"
+      : "";
+
+  try {
+    const artistas = await Promise.all(
+      nombres.map(async (nombre) => {
+        const res = await fetch(`/api/deezer?artist=${encodeURIComponent(nombre)}`);
+        const data = await res.json();
+        const artista = data.data?.[0]; // primer resultado relevante
+
+        return artista
+          ? {
+              id: artista.id,
+              artista: artista.name,
+              url: artista.link,
+              imagen: artista.picture_medium,
+            }
+          : null;
+      })
+    );
+
+    return artistas.filter(Boolean);
+  } catch (error) {
+    console.error("❌ Error obteniendo artistas Deezer:", error);
+    return [];
+  }
+}

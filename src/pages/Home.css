@@ -1,5 +1,5 @@
 /* ================================
-   Home.css - Página Home principal
+   Home.css - Página Home Mejorada
    ================================ */
 
 .home {
@@ -26,37 +26,132 @@
   margin-bottom: 1rem;
 }
 
-/* Sección de tecnologías */
-.technologies {
-  text-align: center;
+/* ================================
+   NUEVA: Sección de Estadísticas
+   ================================ */
+.estadisticas {
   margin: 3rem 0;
-  width: 100%;
+  padding: 0 1rem;
 }
 
-.technologies h2 {
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.stat-card {
+  background: linear-gradient(135deg, rgba(0, 212, 255, 0.1), rgba(255, 107, 107, 0.1));
+  border: 2px solid rgba(0, 212, 255, 0.3);
+  border-radius: 15px;
+  padding: 2rem 1rem;
+  text-align: center;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.stat-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(0, 212, 255, 0.2), transparent);
+  transition: left 0.5s ease;
+}
+
+.stat-card:hover::before {
+  left: 100%;
+}
+
+.stat-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(0, 212, 255, 0.3);
+  border-color: var(--primary-color);
+}
+
+.stat-icon {
+  font-size: 3rem;
+  display: block;
+  margin-bottom: 1rem;
+  filter: drop-shadow(0 0 10px rgba(0, 212, 255, 0.5));
+}
+
+.stat-numero {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: var(--primary-color);
+  margin-bottom: 0.5rem;
+  text-shadow: 0 0 15px rgba(0, 212, 255, 0.5);
+}
+
+.stat-label {
+  font-size: 1rem;
+  color: #ccc;
+  font-weight: 600;
+}
+
+/* ================================
+   MEJORADA: Sección de Tecnologías
+   ================================ */
+.technologies-section {
+  text-align: center;
+  margin: 4rem 0;
+  padding: 0 1rem;
+}
+
+.technologies-section h2 {
   color: var(--primary-color);
   font-size: 2.5rem;
-  margin-bottom: 2rem;
+  margin-bottom: 2.5rem;
+  text-shadow: 0 0 15px rgba(0, 212, 255, 0.3);
 }
 
-.tech-list {
-  display: flex;
-  justify-content: center;
+.tech-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 2rem;
-  flex-wrap: wrap;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
-.tech-list img {
-  width: 60px;
-  height: 60px;
-  object-fit: contain;
-  filter: grayscale(100%);
+.tech-card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px solid rgba(0, 212, 255, 0.2);
+  border-radius: 15px;
+  padding: 2rem;
   transition: all 0.3s ease;
+  text-align: center;
 }
 
-.tech-list img:hover {
-  filter: grayscale(0%);
-  transform: scale(1.2);
+.tech-card:hover {
+  transform: translateY(-8px);
+  border-color: var(--primary-color);
+  box-shadow: 0 10px 30px rgba(0, 212, 255, 0.2);
+  background: rgba(0, 212, 255, 0.05);
+}
+
+.tech-icon {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+  display: block;
+}
+
+.tech-card h4 {
+  color: var(--primary-color);
+  font-size: 1.4rem;
+  margin-bottom: 0.75rem;
+  font-weight: 700;
+}
+
+.tech-card p {
+  color: #ccc;
+  font-size: 1rem;
+  line-height: 1.5;
 }
 
 /* Caja de introducción */
@@ -88,9 +183,69 @@
   color: #ccc;
 }
 
+/* ================================
+   NUEVA: Sección de Características
+   ================================ */
+.caracteristicas {
+  margin: 4rem 0;
+  padding: 0 1rem;
+}
+
+.caracteristicas h2 {
+  color: var(--secondary-color);
+  font-size: 2.5rem;
+  text-align: center;
+  margin-bottom: 3rem;
+  text-shadow: 0 0 15px rgba(255, 107, 107, 0.3);
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.feature-item {
+  background: rgba(255, 107, 107, 0.05);
+  border: 2px solid rgba(255, 107, 107, 0.2);
+  border-radius: 15px;
+  padding: 2rem;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.feature-item:hover {
+  transform: translateY(-5px);
+  border-color: var(--secondary-color);
+  box-shadow: 0 10px 30px rgba(255, 107, 107, 0.2);
+  background: rgba(255, 107, 107, 0.08);
+}
+
+.feature-icon {
+  font-size: 3.5rem;
+  display: block;
+  margin-bottom: 1rem;
+  filter: drop-shadow(0 0 10px rgba(255, 107, 107, 0.5));
+}
+
+.feature-item h3 {
+  color: var(--secondary-color);
+  font-size: 1.4rem;
+  margin-bottom: 0.75rem;
+  font-weight: 700;
+}
+
+.feature-item p {
+  color: #ccc;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
 /* Sección de portales */
 .portales {
-  margin: 3rem 0;
+  margin: 4rem 0;
 }
 
 .portales h2 {
@@ -102,7 +257,8 @@
 
 /* Panel del proyecto */
 .proyecto {
-  margin: 3rem 0;
+  margin: 4rem 0;
+  padding: 0 1rem;
 }
 
 .proyecto h2 {
@@ -114,7 +270,7 @@
 
 .project-panel {
   background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 2px solid rgba(255, 217, 61, 0.3);
   border-radius: 15px;
   padding: 2rem;
   max-width: 900px;
@@ -125,6 +281,53 @@
   font-size: 1.1rem;
   line-height: 1.8;
   color: #ddd;
+}
+
+/* ================================
+   NUEVA: Botones CTA
+   ================================ */
+.cta-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 2rem;
+  flex-wrap: wrap;
+}
+
+.btn-primary,
+.btn-secondary {
+  display: inline-block;
+  padding: 1rem 2rem;
+  border-radius: 25px;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--primary-color), #006a71);
+  color: white;
+  border-color: var(--primary-color);
+}
+
+.btn-primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(0, 212, 255, 0.4);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--accent-color);
+  border-color: var(--accent-color);
+}
+
+.btn-secondary:hover {
+  background: var(--accent-color);
+  color: #0d1117;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(255, 217, 61, 0.4);
 }
 
 /* Animaciones */
@@ -138,24 +341,54 @@
 }
 
 /* ================================
-   📱 Responsive Home
+   📱 Responsive Home Mejorado
    ================================ */
+@media (max-width: 1024px) {
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .tech-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .features-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
 @media (max-width: 768px) {
   .hero-subtitle {
     font-size: 1.2rem;
   }
 
-  .technologies h2 {
+  .technologies-section h2,
+  .caracteristicas h2,
+  .portales h2,
+  .proyecto h2 {
     font-size: 2rem;
   }
 
-  .tech-list {
+  .stats-grid {
+    grid-template-columns: 1fr;
     gap: 1rem;
   }
 
-  .tech-list img {
-    width: 50px;
-    height: 50px;
+  .stat-card {
+    padding: 1.5rem 1rem;
+  }
+
+  .stat-numero {
+    font-size: 2rem;
+  }
+
+  .tech-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .features-grid {
+    grid-template-columns: 1fr;
   }
 
   .intro-box {
@@ -173,6 +406,17 @@
   .project-panel {
     padding: 1.5rem;
   }
+
+  .cta-buttons {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .btn-primary,
+  .btn-secondary {
+    width: 100%;
+    text-align: center;
+  }
 }
 
 @media (max-width: 480px) {
@@ -180,92 +424,44 @@
     font-size: 2rem;
   }
 
-  .portales h2,
-  .proyecto h2 {
-    font-size: 2rem;
+  .stat-icon {
+    font-size: 2.5rem;
+  }
+
+  .stat-numero {
+    font-size: 1.8rem;
+  }
+
+  .tech-icon {
+    font-size: 3rem;
+  }
+
+  .feature-icon {
+    font-size: 3rem;
   }
 }
 
 /* ================================
-   🧩 Ajustes de estructura y centrado
+   🧩 Ajustes de estructura
    ================================ */
-
-/* Contenedor centrado y fluido para secciones del Home */
 .home > section,
 .home .intro,
 .home .portales,
-.home .proyecto {
+.home .proyecto,
+.home .estadisticas,
+.home .caracteristicas {
   max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 2rem;
+  margin-left: auto;
+  margin-right: auto;
 }
-
-/* Caja “Nuestra Propuesta” bien centrada y sin cortar */
-.intro-box {
-  max-width: 900px;
-  margin: 2rem auto;
-  padding: 2rem;
-  border-radius: 12px;
-  border: 1px solid #00d4ff;
-  background: rgba(0, 0, 0, 0.3);
-  text-align: center;
-}
-
-/* CardGrid centrado y flexible */
-.card-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(240px, 1fr));
-  gap: 1.25rem;
-  justify-items: center;
-}
-
-@media (max-width: 1024px) {
-  .card-grid {
-    grid-template-columns: repeat(2, minmax(220px, 1fr));
-  }
-}
-
-@media (max-width: 600px) {
-  .card-grid {
-    grid-template-columns: 1fr;
-  }
-}
-
-/* Imágenes responsivas dentro de las cards */
-.card-image {
-  width: 100%;
-  aspect-ratio: 4/5;
-  overflow: hidden;
-  border-radius: 12px;
-}
-
-.card-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-
-/* ================================
-   🧩 Ajustes extra para móviles
-   ================================ */
 
 @media (max-width: 768px) {
   .home > section,
   .home .intro,
   .home .portales,
-  .home .proyecto {
+  .home .proyecto,
+  .home .estadisticas,
+  .home .caracteristicas {
     max-width: 100%;
-    padding: 0 1rem;
-  }
-
-  .intro-box {
-    max-width: 100%;
-    padding: 1.25rem;
-  }
-
-  .card-grid {
-    grid-template-columns: 1fr;
-    gap: 1rem;
   }
 }

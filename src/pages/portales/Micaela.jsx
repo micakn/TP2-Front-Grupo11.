@@ -1,6 +1,5 @@
 // Micaela.jsx - Portal individual simplificado
 import PortalBase from "../../components/PortalBase";
-import "./Micaela.css";
 
 export default function Micaela() {
   return (
