@@ -1,4 +1,4 @@
-﻿// ðŸŽ§ Tarjeta simple para artistas Deezer (usada en portales individuales)
+﻿// MusicaCard.jsx - Tarjeta simple para artistas Deezer (usada en portales individuales)
 export default function MusicaCard({ artista, url, imagen }) {
   return (
     <article className="card-media fade-in">
@@ -69,6 +69,7 @@ export default function PeliculaCard({
   );
 }
 
+// CardGrid.jsx - Componente de cuadrÃ­cula de tarjetas para miembros o proyectos
 import { Link } from "react-router-dom";
 import "./ui.css";
 
@@ -87,7 +88,7 @@ export default function CardGrid({ items, type = "member" }) {
   );
 }
 
-import React from "react";
+// HeroSection.jsx - Componente de secciÃ³n hero con fondo degradado
 import "./ui.css";
 
 export default function HeroSection({ title, subtitle, gradient }) {
@@ -108,7 +109,7 @@ export default function HeroSection({ title, subtitle, gradient }) {
   );
 }
 /* ===============================
-   ðŸŽ¨ UI base compartida
+   ui.css - base compartida
    =============================== */
 
 /* Hero Section */
@@ -638,7 +639,7 @@ export default function TimelineItem({ fecha, titulo, descripcion }) {
 }
 
 /* ================================
-   ðŸ’œ Tema MarÃ­a - Retro 80s violeta y dorado
+   Maria.css - Tema MarÃ­a - Retro 80s violeta y dorado
    ================================ */
 
 .maria-theme .tarjeta-integrante {
@@ -737,6 +738,8 @@ export default function TimelineItem({ fecha, titulo, descripcion }) {
     font-size: 1.9rem;
   }
 }
+// Maria.jsx - Portal individual de Micaela
+
 import { useState, useEffect } from "react";
 import SeccionIntegrante from "../../components/SeccionIntegrante";
 import { getDeezerArtists } from "../../utils/getDeezerArtists";
@@ -823,7 +826,7 @@ export default function Maria() {
 
 
 /* ================================
-   ðŸŽ¨ Tema Micaela (violeta y dorado)
+   Micaela.css - Tema Micaela (violeta y dorado)
    ================================ */
 
 .micaela-theme .tarjeta-integrante {
@@ -902,6 +905,8 @@ export default function Maria() {
     font-size: 1.8rem;
   }
 }
+//Micaela.jsx - Portal individual de Micaela
+
 import { useState, useEffect } from "react";
 import SeccionIntegrante from "../../components/SeccionIntegrante";
 import { getDeezerArtists } from "../../utils/getDeezerArtists";
@@ -990,7 +995,7 @@ export default function Micaela() {
 }
 
 /* ================================
-   ðŸ’™ Tema Paula - Tech futurista azul
+   Paula.css - Tech futurista azul
    ================================ */
 
 .paula-theme .tarjeta-integrante {
@@ -1068,7 +1073,7 @@ export default function Micaela() {
   }
 }
 // ================================
-// ðŸ’™ Portal individual de Paula
+// Paula.jsx - Portal individual de Paula
 // Tema: Tech futurista azul
 // ================================
 
@@ -1148,6 +1153,8 @@ export default function Paula() {
     </div>
   );
 }
+/* bitacora.css - PÃ¡gina que muestra la bitÃ¡cora de desarrollo del proyecto */
+
 .bitacora {
   animation: fadeIn 0.8s ease;
 }
@@ -1399,6 +1406,8 @@ export default function Paula() {
 
 
 
+
+// src/pages/Bitacora.jsx - PÃ¡gina que muestra la bitÃ¡cora de desarrollo del proyecto
 import './Bitacora.css'
 
 export default function Bitacora() {
@@ -1579,7 +1588,8 @@ export default function Bitacora() {
   )
 }
 
-/* PÃ¡gina de diagramas con estilo tÃ©cnico */
+/* diagramas.css - PÃ¡gina que muestra diagramas y arquitectura de la aplicaciÃ³n */
+
 .diagramas {
   animation: fadeIn 0.8s ease;
   width: 100%;
@@ -2172,7 +2182,7 @@ export default function Bitacora() {
     align-items: center;
   }
 }
-// PÃ¡gina de diagramas de arquitectura y flujo de la aplicaciÃ³n
+// src/pages/Diagramas.jsx - PÃ¡gina que muestra diagramas y arquitectura de la aplicaciÃ³n
 import './Diagramas.css'
 
 export default function Diagramas() {
@@ -2431,7 +2441,7 @@ export default function Diagramas() {
   )
 }
 /* ================================
-   ðŸ  PÃ¡gina Home principal
+   Home.css - PÃ¡gina Home principal
    ================================ */
 
 .home {
@@ -2617,6 +2627,8 @@ export default function Diagramas() {
     font-size: 2rem;
   }
 }
+// src/pages/Home.jsx - PÃ¡gina de inicio del sitio TechVerse React
+
 import HeroSection from "../components/ui/HeroSection";
 import CardGrid from "../components/ui/CardGrid";
 import "./Home.css";
@@ -2668,7 +2680,7 @@ export default function Home() {
   );
 }
 /* ================================
-   ðŸ‘¥ PÃ¡gina de Integrantes
+   Integrantes.css - PÃ¡gina de Integrantes
    ================================ */
 
 .integrantes {
@@ -2945,6 +2957,7 @@ export default function Home() {
     font-size: 0.95rem;
   }
 }
+// src/pages/Integrantes.jsx - PÃ¡gina que muestra los integrantes del equipo
 import { Link } from "react-router-dom";
 import HeroSection from "../components/ui/HeroSection";
 import "./Integrantes.css";
@@ -3243,7 +3256,7 @@ export default function Peliculas() {
 
 
 /* ================================
-    Estilos base para pÃ¡ginas de integrantes
+    IntegrantesBase.css - Estilos base para pÃ¡ginas de integrantes
    Estructura comÃºn entre Micaela, Paula, MarÃ­a.
    ================================ */
 
@@ -3433,7 +3446,7 @@ export default function Peliculas() {
   }
 }
 /* ================================
-   ðŸ“ LAYOUT GENERAL MEJORADO
+   layout.css - LAYOUT GENERAL MEJORADO
    ================================ */
 
 /* Estructura base */
@@ -3511,7 +3524,7 @@ export default function Peliculas() {
 
 
 /* =======================================
-   ðŸŒˆ PÃ¡ginas multimedia (PelÃ­culas + MÃºsica)
+   MediaPages.css - PÃ¡ginas multimedia (PelÃ­culas + MÃºsica)
    Unificadas con color de acento dinÃ¡mico
    ======================================= */
 
@@ -3667,7 +3680,7 @@ export default function Peliculas() {
   .card-media img { height: 260px; }
 }
 /* ================================
-    UTILIDADES GLOBALES
+    util.css - UTILIDADES GLOBALES
    Reutilizables en todo el proyecto
    ================================ */
 
@@ -3880,7 +3893,7 @@ export default function Peliculas() {
   color: #ccc;
 }
 /* ================================
-    VARIABLES GLOBALES
+   variables.css VARIABLES GLOBALES
    DefiniciÃ³n de colores, tipografÃ­a y sombras
    ================================ */
 
@@ -3896,7 +3909,7 @@ export default function Peliculas() {
   --gradient-primary: linear-gradient(135deg, #00d4ff, #006a71);
   --gradient-accent: linear-gradient(135deg, #48a6a7, #9acbd0);
 
-  /* Estructura y sombras */
+  /*  Estructura y sombras */
   --radius: 12px;
   --shadow-soft: 0 8px 20px rgba(0, 0, 0, 0.3);
 
@@ -3912,7 +3925,7 @@ body, button, input, textarea {
   color: var(--text-color);
   line-height: var(--line-height-base);
 }
-// Obtiene artistas desde la API pÃºblica de Deezer (usa proxy si estÃ¡s en local)
+// getDeezerArtists.js - Obtiene artistas desde la API pÃºblica de Deezer (usa proxy si estÃ¡s en local)
 
 export async function getDeezerArtists(nombres = []) {
   const proxy =
@@ -3923,11 +3936,7 @@ export async function getDeezerArtists(nombres = []) {
   try {
     const artistas = await Promise.all(
       nombres.map(async (nombre) => {
-        const res = await fetch(
-          `${proxy}https://api.deezer.com/search/artist?q=${encodeURIComponent(
-            nombre
-          )}`
-        );
+        const res = await fetch(`/api/deezer?artist=${encodeURIComponent(nombre)}`);
         const data = await res.json();
         const artista = data.data?.[0]; // primer resultado relevante
 
@@ -3949,7 +3958,7 @@ export async function getDeezerArtists(nombres = []) {
   }
 }
 /* ================================
-    ESTILOS BASE DE App
+   app.css - ESTILOS BASE DE App
    ================================ */
 
 /* Contenedor principal */
@@ -3957,20 +3966,91 @@ export async function getDeezerArtists(nombres = []) {
   display: flex;
   min-height: 100vh;
   background: var(--bg-color);
-  overflow-x: hidden; /* Previene scroll horizontal */
+  overflow-x: hidden;
+  transition: all 0.3s ease;
 }
 
-/* Contenido principal del layout */
+/* Sidebar fija / colapsable */
+.sidebar {
+  width: 260px;
+  min-width: 240px;
+  background: linear-gradient(180deg, #1a1a1a 0%, #0d1421 100%);
+  border-right: 2px solid #333;
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  transition: all 0.3s ease;
+  z-index: 10;
+}
+
+/* Sidebar oculta en mobile */
+@media (max-width: 768px) {
+  .sidebar {
+    left: -240px; /* oculta fuera de pantalla */
+  }
+
+  .app.sidebar-open .sidebar {
+    left: 0; /* aparece cuando se abre */
+  }
+}
+
+/* Contenido principal */
 .main-content {
   flex: 1;
-  margin-left: 260px; /* Espacio para sidebar (desktop) */
   padding: 2rem;
   color: var(--text-color);
   box-sizing: border-box;
   transition: all 0.3s ease;
 }
 
-/* Spinner global (reutilizable) */
+/* Aplica margen solo cuando la sidebar estÃ¡ abierta */
+.app.sidebar-open .main-content {
+  margin-left: 260px;
+}
+
+/* =======================
+   RESPONSIVE
+   ======================= */
+
+/* ðŸ’» Laptops / Tablets grandes */
+@media (max-width: 1024px) {
+  .sidebar {
+    width: 220px;
+  }
+
+  .app.sidebar-open .main-content {
+    margin-left: 220px;
+  }
+}
+
+/* ðŸ“± Tablets y mÃ³viles */
+@media (max-width: 768px) {
+  .main-content {
+    margin-left: 0;
+    padding: 1rem;
+  }
+
+  .app.sidebar-open .main-content {
+    margin-left: 200px; /* sidebar abierta */
+  }
+}
+
+/* ðŸ“± MÃ³viles pequeÃ±os */
+@media (max-width: 480px) {
+  .main-content {
+    padding: 0.8rem;
+  }
+
+  .app.sidebar-open .main-content {
+    margin-left: 180px;
+  }
+}
+
+/* =======================
+   SPINNER GLOBAL
+   ======================= */
+
 .loading {
   display: flex;
   justify-content: center;
@@ -3990,38 +4070,11 @@ export async function getDeezerArtists(nombres = []) {
 }
 
 @keyframes spin {
-  to { transform: rotate(360deg); }
-}
-
-/* =======================
-    Responsive especÃ­fico
-   ======================= */
-
-/*  Breakpoint intermedio: laptops / tablets grandes */
-@media (max-width: 1024px) {
-  .main-content {
-    margin-left: 200px; /* reduce espacio del sidebar si se achica */
-    padding: 1.5rem;
+  to {
+    transform: rotate(360deg);
   }
 }
-
-/*  Tablet y mÃ³viles grandes */
-@media (max-width: 768px) {
-  .main-content {
-    margin-left: 0;
-    margin-top: 70px; /* espacio para navbar mÃ³vil si se usa */
-    padding: 1rem;
-  }
-}
-
-/*  MÃ³viles pequeÃ±os */
-@media (max-width: 480px) {
-  .main-content {
-    padding: 0.75rem;
-  }
-}
-
-// App.jsx - estructura principal con Sidebar controlada
+// App.jsx
 import { useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import Sidebar from "./components/Sidebar";
@@ -4041,10 +4094,15 @@ export default function App() {
   const toggleSidebar = () => setSidebarOpen((prev) => !prev);
 
   return (
-    <div className="app">
+    <div className={`app ${sidebarOpen ? "sidebar-open" : ""}`}>
+      {/* Sidebar fija */}
       <Sidebar sidebarOpen={sidebarOpen} toggleSidebar={toggleSidebar} />
 
-      <main className="main-content" onClick={() => sidebarOpen && toggleSidebar()}>
+      {/* Contenido principal */}
+      <main
+        className={`main-content ${sidebarOpen ? "shifted" : ""}`}
+        onClick={() => sidebarOpen && toggleSidebar()}
+      >
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/bitacora" element={<Bitacora />} />
@@ -4061,7 +4119,7 @@ export default function App() {
   );
 }
 /* ================================
-    RESET Y CONFIGURACIÃ“N GLOBAL
+    index.css - RESET Y CONFIGURACIÃ“N GLOBAL
    ================================ */
 
 * {
@@ -4141,7 +4199,7 @@ body {
 .fade-in {
   animation: fadeIn 0.6s ease;
 }
-// Punto de entrada principal de la aplicaciÃ³n React
+//main.jsx - Punto de entrada principal de la aplicaciÃ³n React
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { BrowserRouter } from 'react-router-dom'

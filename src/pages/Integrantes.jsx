@@ -1,3 +1,4 @@
+// src/pages/Integrantes.jsx - Página que muestra los integrantes del equipo
 import { Link } from "react-router-dom";
 import HeroSection from "../components/ui/HeroSection";
 import "./Integrantes.css";

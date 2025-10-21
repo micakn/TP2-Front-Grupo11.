@@ -1,4 +1,4 @@
-// 🎧 Tarjeta simple para artistas Deezer (usada en portales individuales)
+// MusicaCard.jsx - Tarjeta simple para artistas Deezer (usada en portales individuales)
 export default function MusicaCard({ artista, url, imagen }) {
   return (
     <article className="card-media fade-in">

@@ -1,5 +1,5 @@
 /* ================================
-    VARIABLES GLOBALES
+   variables.css VARIABLES GLOBALES
    Definición de colores, tipografía y sombras
    ================================ */
 
@@ -15,7 +15,7 @@
   --gradient-primary: linear-gradient(135deg, #00d4ff, #006a71);
   --gradient-accent: linear-gradient(135deg, #48a6a7, #9acbd0);
 
-  /* Estructura y sombras */
+  /*  Estructura y sombras */
   --radius: 12px;
   --shadow-soft: 0 8px 20px rgba(0, 0, 0, 0.3);
 

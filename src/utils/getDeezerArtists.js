@@ -1,4 +1,4 @@
-// Obtiene artistas desde la API pública de Deezer (usa proxy si estás en local)
+// getDeezerArtists.js - Obtiene artistas desde la API pública de Deezer (usa proxy si estás en local)
 
 export async function getDeezerArtists(nombres = []) {
   const proxy =

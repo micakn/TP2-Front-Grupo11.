@@ -1,3 +1,5 @@
+
+// src/pages/Bitacora.jsx - Página que muestra la bitácora de desarrollo del proyecto
 import './Bitacora.css'
 
 export default function Bitacora() {

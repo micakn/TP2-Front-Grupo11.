@@ -1,5 +1,5 @@
 /* ================================
-   📐 LAYOUT GENERAL MEJORADO
+   layout.css - LAYOUT GENERAL MEJORADO
    ================================ */
 
 /* Estructura base */
@@ -19,12 +19,6 @@
   transition: width 0.3s ease;
 }
 
-.main-content {
-  flex: 1;
-  padding: 2rem;
-  transition: all 0.3s ease;
-  box-sizing: border-box;
-}
 
 /* 💻 Escritorio grande */
 @media (min-width: 1200px) {

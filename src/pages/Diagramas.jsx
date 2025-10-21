@@ -1,4 +1,4 @@
-// Página de diagramas de arquitectura y flujo de la aplicación
+// src/pages/Diagramas.jsx - Página que muestra diagramas y arquitectura de la aplicación
 import './Diagramas.css'
 
 export default function Diagramas() {

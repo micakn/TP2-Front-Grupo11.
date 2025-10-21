@@ -1,3 +1,5 @@
+// src/pages/Home.jsx - Página de inicio del sitio TechVerse React
+
 import HeroSection from "../components/ui/HeroSection";
 import CardGrid from "../components/ui/CardGrid";
 import "./Home.css";

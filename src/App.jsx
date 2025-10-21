@@ -1,5 +1,5 @@
-// App.jsx - estructura principal con Sidebar controlada
-import { useState } from "react";
+// App.jsx
+import { useState, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import Sidebar from "./components/Sidebar";
 import Home from "./pages/Home";
@@ -14,14 +14,34 @@ import Peliculas from "./pages/Peliculas";
 import "./App.css";
 
 export default function App() {
-  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [sidebarOpen, setSidebarOpen] = useState(window.innerWidth > 768);
+
+  // ✅ Cierra automáticamente la sidebar si se agranda la pantalla
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth > 768) {
+        setSidebarOpen(true);
+      } else {
+        setSidebarOpen(false);
+      }
+    };
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   const toggleSidebar = () => setSidebarOpen((prev) => !prev);
 
   return (
-    <div className="app">
+    <div className={`app ${sidebarOpen ? "sidebar-open" : ""}`}>
       <Sidebar sidebarOpen={sidebarOpen} toggleSidebar={toggleSidebar} />
 
-      <main className="main-content" onClick={() => sidebarOpen && toggleSidebar()}>
+      <main
+        className="main-content"
+        onClick={() => {
+          // 🔹 Cierra el menú al hacer clic fuera en móvil
+          if (sidebarOpen && window.innerWidth <= 768) toggleSidebar();
+        }}
+      >
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/bitacora" element={<Bitacora />} />

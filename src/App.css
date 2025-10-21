@@ -1,40 +1,66 @@
 /* ================================
-   ESTILOS BASE DE App
+   app.css - ESTILOS BASE DE App
    ================================ */
 
-/* Contenedor principal */
+/* CONTENEDOR PRINCIPAL */
 .app {
   display: flex;
   min-height: 100vh;
   background: var(--bg-color);
-  overflow-x: hidden; /* Previene scroll horizontal */
-}
-
-/* Sidebar fija */
-.sidebar {
-  width: 260px;
-  min-width: 240px;
-  background: linear-gradient(180deg, #1a1a1a 0%, #0d1421 100%);
-  border-right: 2px solid #333;
-  position: fixed; /* ✅ sidebar fija */
-  left: 0;
-  top: 0;
-  bottom: 0;
-  transition: width 0.3s ease;
-  z-index: 10;
-}
-
-/* Contenido principal del layout */
-.main-content {
-  flex: 1;
-  margin-left: 260px; /* ✅ espacio reservado para la sidebar */
-  padding: 2rem;
-  color: var(--text-color);
-  box-sizing: border-box;
+  overflow-x: hidden;
   transition: all 0.3s ease;
 }
 
-/* Spinner global (reutilizable) */
+/* SIDEBAR FIJA */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 260px;
+  background: linear-gradient(180deg, #1a1a1a 0%, #0d1421 100%);
+  border-right: 2px solid #333;
+  z-index: 10;
+  transition: left 0.3s ease, width 0.3s ease;
+}
+
+/* CONTENIDO PRINCIPAL */
+.main-content {
+  flex: 1;
+  padding: 2rem;
+  color: var(--text-color);
+  box-sizing: border-box;
+  margin-left: 260px;
+  transition: margin-left 0.3s ease, padding 0.3s ease;
+}
+
+/* ===== Laptops ===== */
+@media (max-width: 1024px) {
+  .sidebar { width: 220px; }
+  .main-content { margin-left: 220px; padding: 1.5rem; }
+}
+
+/* ===== Tablets & móviles: overlay ===== */
+@media (max-width: 768px) {
+  /* La sidebar se oculta fuera de pantalla */
+  .sidebar { left: -260px; width: 260px; }
+
+  /* Al abrir (clase desde App.jsx/Sidebar.jsx), entra como overlay */
+  .sidebar.open { left: 0; }
+
+  /* El contenido NO se mueve nunca en móvil */
+  .main-content { margin-left: 0; padding: 1rem; }
+}
+
+/* ===== Móviles pequeños ===== */
+@media (max-width: 480px) {
+  .main-content { padding: 0.8rem; }
+}
+
+/* =======================
+   SPINNER GLOBAL
+   ======================= */
+
 .loading {
   display: flex;
   justify-content: center;
@@ -56,51 +82,5 @@
 @keyframes spin {
   to {
     transform: rotate(360deg);
-  }
-}
-
-/* =======================
-   RESPONSIVE
-   ======================= */
-
-/* 💻 Laptops / Tablets grandes */
-@media (max-width: 1024px) {
-  .sidebar {
-    width: 220px;
-  }
-
-  .main-content {
-    margin-left: 220px;
-    padding: 1.5rem;
-  }
-}
-
-/* 📱 Tablets y móviles */
-@media (max-width: 768px) {
-  .sidebar {
-    position: fixed;
-    width: 60px; /* se contrae */
-    overflow: hidden;
-  }
-
-  .sidebar:hover {
-    width: 200px; /* se expande al pasar el mouse */
-  }
-
-  .main-content {
-    margin-left: 60px; /* espacio reducido */
-    padding: 1rem;
-  }
-}
-
-/* 📱 Móviles pequeños */
-@media (max-width: 480px) {
-  .sidebar {
-    width: 50px;
-  }
-
-  .main-content {
-    margin-left: 0;
-    padding: 0.8rem;
   }
 }

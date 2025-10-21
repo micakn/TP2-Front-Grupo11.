@@ -1,4 +1,4 @@
-import React from "react";
+// HeroSection.jsx - Componente de sección hero con fondo degradado
 import "./ui.css";
 
 export default function HeroSection({ title, subtitle, gradient }) {

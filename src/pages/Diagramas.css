@@ -1,4 +1,5 @@
-/* Página de diagramas con estilo técnico */
+/* diagramas.css - Página que muestra diagramas y arquitectura de la aplicación */
+
 .diagramas {
   animation: fadeIn 0.8s ease;
   width: 100%;

@@ -1,3 +1,5 @@
+//Micaela.jsx - Portal individual de Micaela
+
 import { useState, useEffect } from "react";
 import SeccionIntegrante from "../../components/SeccionIntegrante";
 import { getDeezerArtists } from "../../utils/getDeezerArtists";

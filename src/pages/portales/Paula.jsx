@@ -1,5 +1,5 @@
 // ================================
-// 💙 Portal individual de Paula
+// Paula.jsx - Portal individual de Paula
 // Tema: Tech futurista azul
 // ================================
 

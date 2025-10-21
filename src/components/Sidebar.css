@@ -90,7 +90,7 @@
   display: none;
   position: fixed;
   top: 1rem;
-  left: 1rem;
+  left: 1.75rem; /* 🔥 corre un poquito el botón hacia adentro */
   width: 34px;
   height: 28px;
   flex-direction: column;
@@ -156,11 +156,6 @@
 
   .sidebar-footer {
     display: none;
-  }
-
-  .main-content {
-    margin-left: 0;
-    padding: 1rem;
   }
 }
 

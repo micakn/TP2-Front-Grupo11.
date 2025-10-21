@@ -1,3 +1,4 @@
+// CardGrid.jsx - Componente de cuadrícula de tarjetas para miembros o proyectos
 import { Link } from "react-router-dom";
 import "./ui.css";
 
