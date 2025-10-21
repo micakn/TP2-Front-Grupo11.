@@ -60,7 +60,7 @@ export default function Home() {
         <div className="intro-box">
           <h3>¡Bienvenido a TechVerse!</h3>
           <p>
-            Un multiverso digital donde cada integrante tiene su estilo. 
+            Un multiverso digital donde cada integrante tiene su propio portal. 
             Este proyecto representa la <strong>migración del TP1 a React</strong>, 
             transformándolo en una SPA moderna con componentes reutilizables.
           </p>
@@ -160,7 +160,7 @@ export default function Home() {
             se adapta a todos los dispositivos con menú hamburguesa en móviles.
           </p>
           <div className="cta-buttons">
-            <Link to="/bitacora" className="btn btn-primary">
+            <Link to="/bitacora" className="btn btn-secondary">
               📋 Ver Bitácora
             </Link>
             <Link to="/diagramas" className="btn btn-secondary">
