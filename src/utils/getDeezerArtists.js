@@ -9,11 +9,7 @@ export async function getDeezerArtists(nombres = []) {
   try {
     const artistas = await Promise.all(
       nombres.map(async (nombre) => {
-        const res = await fetch(
-          `${proxy}https://api.deezer.com/search/artist?q=${encodeURIComponent(
-            nombre
-          )}`
-        );
+        const res = await fetch(`/api/deezer?artist=${encodeURIComponent(nombre)}`);
         const data = await res.json();
         const artista = data.data?.[0]; // primer resultado relevante
 
