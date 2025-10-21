@@ -16,13 +16,14 @@ export default function Home() {
     return () => clearInterval(interval);
   }, []);
 
-  const tecnologias = [
-    { img: "/img/logo-html.webp", alt: "HTML" },
-    { img: "/img/logo-css.webp", alt: "CSS" },
-    { img: "/img/logo-javascript.webp", alt: "JavaScript" },
-    { img: "/img/logo-visual.webp", alt: "Visual Studio Code" },
-    { img: "/img/logo-github.webp", alt: "GitHub" }
-  ];
+ const tecnologias = [
+  { img: "/img/logo-react.webp", alt: "React" },
+  { img: "/img/logo-vite.webp", alt: "Vite" },
+  { img: "/img/logo-javascript.webp", alt: "JavaScript" },
+  { img: "/img/logo-css.webp", alt: "CSS" },
+  { img: "/img/logo-github.webp", alt: "GitHub" },
+  { img: "/img/logo-visual.webp", alt: "Visual Studio Code" },
+];
 
   const integrantes = [
     { nombre: "Micaela", img: "/img/card-Micaela.webp", ruta: "/micaela" },
