@@ -85,7 +85,7 @@ export default function Bitacora() {
    return (
     <div className="bitacora">
       <HeroSection
-  title="📋 Bitácora de Desarrollo TP2"
+  title="📋 Bitácora de Desarrollo"
   subtitle="Registro detallado del proceso de migración de TP1 a React SPA"
   accentColor="#a855f7"
 />
@@ -112,7 +112,7 @@ export default function Bitacora() {
           <div className="card card-hover">
             <h3 style={{color: '#a855f7', marginBottom: '1rem', fontWeight: '700'}}>⚛️ React + Vite</h3>
             <p style={{color: '#ccc', lineHeight: '1.6'}}>
-              Elegimos React con Vite por su velocidad de desarrollo, hot reload instantáneo y build optimizado. 
+              Se utiliza React con Vite por su velocidad de desarrollo, hot reload instantáneo y build optimizado. 
               Vite reduce los tiempos de compilación en un 60% comparado con Create React App.
             </p>
           </div>
