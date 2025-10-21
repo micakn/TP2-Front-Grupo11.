@@ -8,6 +8,7 @@ import './styles/variables.css';       //  colores y fuente
 import './styles/layout.css';          //  estructura general
 import './styles/IntegrantesBase.css'; //  base común entre integrantes
 import './styles/util.css';            // utilidades globales (cards, grids, etc.)
+import './styles/themes.css';
 
 
 // Renderizar la aplicación con React Router para SPA
