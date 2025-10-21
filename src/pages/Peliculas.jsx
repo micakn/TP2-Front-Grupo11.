@@ -1,8 +1,9 @@
-// 🎬 Peliculas.jsx — listado desde JSON local con PeliculaCard unificada
-import "../styles/util.css";               // grid-media, card-media, botones, etc.
-import "../styles/MediaPages.css";         // nuevo archivo unificado
+// Peliculas.jsx - Con HeroSection
+import HeroSection from "../components/ui/HeroSection";
 import PeliculaCard from "../components/cards/PeliculaCard";
 import data from "../data/peliculas.json";
+import "../styles/util.css";
+import "../styles/MediaPages.css";
 
 export default function Peliculas() {
   // Normaliza los datos del JSON
@@ -12,14 +13,12 @@ export default function Peliculas() {
   }));
 
   return (
-    <div
-      className="media-page fade-in"
-      style={{ "--accent-color": "#00d4ff" }} // 🎨 color de acento (azul celeste)
-    >
-      <section className="hero-media">
-        <h1>🎬 Catálogo de Películas</h1>
-        <p>Datos obtenidos desde un archivo local JSON</p>
-      </section>
+    <div className="media-page fade-in">
+      <HeroSection
+  title="🎬 Catálogo de Películas"
+  subtitle="Datos obtenidos desde un archivo local JSON"
+  accentColor="#00d4ff"
+/>
 
       <section className="media-listado card">
         <h2>Listado dinámico</h2>

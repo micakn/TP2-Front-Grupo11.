@@ -8,30 +8,6 @@
   overflow-x: hidden;
 }
 
-/* ===== Hero Integrantes (cuando NO usás HeroSection) ===== */
-.hero-integrantes {
-  text-align: center;
-  padding: 3rem 1rem;
-  background: linear-gradient(135deg, rgba(255, 217, 61, 0.1), rgba(0, 212, 255, 0.1));
-  border-radius: 20px;
-  margin-bottom: 3rem;
-}
-
-.hero-integrantes .hero-content h1 {
-  font-size: clamp(2.2rem, 5vw, 3.5rem);
-  font-weight: 700;
-  background: linear-gradient(135deg, var(--accent-color), var(--primary-color));
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  margin-bottom: 0.75rem;
-}
-
-.hero-integrantes .hero-content p {
-  font-size: 1.2rem;
-  color: #ccc;
-}
-
 /* ===== Sección Equipo ===== */
 .equipo-actual {
   margin: 4rem 0;
@@ -41,7 +17,7 @@
 .equipo-actual h2 {
   text-align: center;
   font-size: clamp(1.8rem, 2.5vw, 2.5rem);
-  color: var(--primary-color);
+  color: var(--section-color, #ff8c00);
   margin-bottom: 2rem;
 }
 
@@ -199,8 +175,8 @@
 }
 
 .nota-box {
-  background: rgba(255, 217, 61, 0.1);
-  border: 2px solid var(--accent-color);
+  background: rgba(255, 140, 0, 0.1);
+  border: 2px solid #ff8c00;
   border-radius: 15px;
   padding: 1.5rem;
   max-width: 900px;
@@ -209,7 +185,7 @@
 }
 
 .nota-box h3 {
-  color: var(--accent-color);
+  color: #ff8c00;
   font-size: 1.5rem;
   margin-bottom: 0.75rem;
 }

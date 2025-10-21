@@ -1,6 +1,7 @@
 // src/pages/Bitacora.jsx - Reutiliza util.css al máximo
-import './Bitacora.css'
-import TimelineItem from '../components/TimelineItem'
+import HeroSection from "../components/ui/HeroSection";
+import TimelineItem from '../components/TimelineItem';
+import './Bitacora.css';
 
 export default function Bitacora() {
   const eventos = [
@@ -81,12 +82,13 @@ export default function Bitacora() {
     }
   ];
 
-  return (
+   return (
     <div className="bitacora">
-      <section className="hero-bitacora">
-        <h1>📋 Bitácora de Desarrollo</h1>
-        <p>Registro completo del trabajo en equipo - TP1 y TP2</p>
-      </section>
+      <HeroSection
+  title="📋 Bitácora de Desarrollo TP2"
+  subtitle="Registro detallado del proceso de migración de TP1 a React SPA"
+  accentColor="#a855f7"
+/>
 
       {/* ✅ Timeline usando TimelineItem component */}
       <section className="timeline-section">

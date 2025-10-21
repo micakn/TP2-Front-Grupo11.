@@ -1,145 +1,168 @@
-// src/pages/Home.jsx - Página de inicio mejorada
-
-import HeroSection from "../components/ui/HeroSection";
-import CardGrid from "../components/ui/CardGrid";
+// Home.jsx - TP2 con efectos del TP1
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./Home.css";
 
 export default function Home() {
-  const integrantes = [
-    { name: "Micaela", image: "/img/card-Micaela.webp", link: "/micaela" },
-    { name: "Paula", image: "/img/card-Paula.webp", link: "/paula" },
-    { name: "María", image: "/img/card-Maria.webp", link: "/maria" },
-  ];
+  const [heroText, setHeroText] = useState("Hola");
+  const palabras = ["Hola", "Hello", "Bonjour", "Ciao", "Olá"];
+
+  useEffect(() => {
+    let index = 0;
+    const interval = setInterval(() => {
+      index = (index + 1) % palabras.length;
+      setHeroText(palabras[index]);
+    }, 3000);
+    return () => clearInterval(interval);
+  }, []);
 
   const tecnologias = [
-    {
-      nombre: "React",
-      icono: "⚛️",
-      descripcion: "Librería para interfaces de usuario"
-    },
-    {
-      nombre: "Vite",
-      icono: "⚡",
-      descripcion: "Build tool rápido y moderno"
-    },
-    {
-      nombre: "React Router",
-      icono: "🛣️",
-      descripcion: "Navegación SPA sin recargas"
-    },
-    {
-      nombre: "Deezer API",
-      icono: "🎵",
-      descripcion: "Integración de música en tiempo real"
-    }
+    { img: "/img/logo-html.webp", alt: "HTML" },
+    { img: "/img/logo-css.webp", alt: "CSS" },
+    { img: "/img/logo-javascript.webp", alt: "JavaScript" },
+    { img: "/img/logo-visual.webp", alt: "Visual Studio Code" },
+    { img: "/img/logo-github.webp", alt: "GitHub" }
   ];
 
-  const estadisticas = [
-    { numero: "3", label: "Integrantes Activas", icono: "👥" },
-    { numero: "20+", label: "Películas en JSON", icono: "🎬" },
-    { numero: "10+", label: "Componentes", icono: "🧩" },
-    { numero: "100%", label: "Responsive", icono: "📱" }
+  const integrantes = [
+    { nombre: "Micaela", img: "/img/card-Micaela.webp", ruta: "/micaela" },
+    { nombre: "Paula", img: "/img/card-Paula.webp", ruta: "/paula" },
+    { nombre: "María", img: "/img/card-Maria.webp", ruta: "/maria" }
   ];
 
   return (
     <div className="home">
-      <HeroSection
-        title={
-          <>
-            <span>Tech</span>Verse React
-          </>
-        }
-        subtitle="Un multiverso digital donde cada integrante tiene su estilo."
-      />
-
-      {/* Nueva sección de estadísticas */}
-      <section className="estadisticas">
-        <div className="stats-grid">
-          {estadisticas.map((stat, i) => (
-            <div key={i} className="stat-card">
-              <span className="stat-icon">{stat.icono}</span>
-              <h3 className="stat-numero">{stat.numero}</h3>
-              <p className="stat-label">{stat.label}</p>
-            </div>
-          ))}
+      {/* Hero con imagen de fondo (TP1) */}
+      <section className="hero">
+        <div className="hero__content">
+          <h1>
+            <span className="hero-saludo" key={heroText}>{heroText}</span>
+            <span>Mundo</span>
+          </h1>
         </div>
       </section>
 
-      <section className="intro">
+      {/* Tecnologías con efectos hover del TP1 */}
+      <section className="section-technologies">
+        <h2 className="titulo-principal">Tecnologías</h2>
+        <ul className="tech-list">
+          {tecnologias.map((tech, i) => (
+            <li key={i} className="tech-item">
+              <img src={tech.img} alt={tech.alt} title={tech.alt} />
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      {/* Intro con fondo */}
+      <section className="section-intro">
         <div className="intro-box">
-          <h3>Nuestra Propuesta</h3>
+          <h3>¡Bienvenido a TechVerse!</h3>
           <p>
-            Cada portal individual refleja el estilo y las habilidades de sus integrantes,
-            mostrando cómo React permite crear identidades visuales coherentes dentro de un mismo ecosistema.
+            Un multiverso digital donde cada integrante tiene su estilo. 
+            Este proyecto representa la <strong>migración del TP1 a React</strong>, 
+            transformándolo en una SPA moderna con componentes reutilizables.
           </p>
         </div>
       </section>
 
-      {/* Nueva sección de tecnologías mejorada */}
-      <section className="technologies-section">
-        <h2>🛠️ Stack Tecnológico</h2>
-        <div className="tech-grid">
-          {tecnologias.map((tech, i) => (
-            <div key={i} className="tech-card">
-              <div className="tech-icon">{tech.icono}</div>
-              <h4>{tech.nombre}</h4>
-              <p>{tech.descripcion}</p>
-            </div>
+      {/* Estadísticas del TP2 */}
+      <section className="stats-section">
+        <h2 className="titulo-principal">Proyecto en números</h2>
+        <div className="stats-grid">
+          <div className="stat-card">
+            <span className="stat-icon">👥</span>
+            <h3>3</h3>
+            <p>Integrantes Activas</p>
+          </div>
+          <div className="stat-card">
+            <span className="stat-icon">🎬</span>
+            <h3>20+</h3>
+            <p>Películas en JSON</p>
+          </div>
+          <div className="stat-card">
+            <span className="stat-icon">🎵</span>
+            <h3>API</h3>
+            <p>Deezer en tiempo real</p>
+          </div>
+          <div className="stat-card">
+            <span className="stat-icon">🧩</span>
+            <h3>10+</h3>
+            <p>Componentes React</p>
+          </div>
+        </div>
+      </section>
+
+      {/* Cards de miembros con efecto glow */}
+      <section className="section-cards">
+        <h2 className="titulo-principal">Portales de integrantes</h2>
+        <div className="cards-grid">
+          {integrantes.map((i, idx) => (
+            <Link key={idx} to={i.ruta} className="card card-member">
+              <img src={i.img} alt={`Portal ${i.nombre}`} />
+              <span>{i.nombre}</span>
+            </Link>
           ))}
         </div>
       </section>
 
-      <section className="portales">
-        <h2>Portales de Integrantes</h2>
-        <CardGrid items={integrantes} />
-      </section>
-
-      {/* Nueva sección de características */}
-      <section className="caracteristicas">
-        <h2>✨ Características del Proyecto</h2>
+      {/* Características TP2 */}
+      <section className="features-section">
+        <h2 className="titulo-principal">✨ Características del TP2</h2>
         <div className="features-grid">
-          <div className="feature-item">
+          <div className="feature-card">
+            <span className="feature-icon">⚛️</span>
+            <h4>Single Page Application</h4>
+            <p>React Router para navegación sin recargas</p>
+          </div>
+          <div className="feature-card">
+            <span className="feature-icon">🧭</span>
+            <h4>Sidebar Responsive</h4>
+            <p>Menú fijo en desktop, hamburguesa en móvil</p>
+          </div>
+          <div className="feature-card">
+            <span className="feature-icon">📄</span>
+            <h4>Datos desde JSON</h4>
+            <p>20+ películas renderizadas dinámicamente</p>
+          </div>
+          <div className="feature-card">
+            <span className="feature-icon">🌐</span>
+            <h4>API Pública</h4>
+            <p>Integración con Deezer API (música)</p>
+          </div>
+          <div className="feature-card">
+            <span className="feature-icon">📊</span>
+            <h4>Diagramas Técnicos</h4>
+            <p>Árbol de componentes + estructura carpetas</p>
+          </div>
+          <div className="feature-card">
             <span className="feature-icon">🎨</span>
-            <h3>Diseño Personalizado</h3>
-            <p>Cada integrante mantiene su estilo único con temas personalizados usando CSS variables.</p>
-          </div>
-          <div className="feature-item">
-            <span className="feature-icon">📱</span>
-            <h3>Totalmente Responsive</h3>
-            <p>Diseño adaptable a todos los dispositivos con breakpoints optimizados.</p>
-          </div>
-          <div className="feature-item">
-            <span className="feature-icon">🚀</span>
-            <h3>SPA Performance</h3>
-            <p>Navegación instantánea sin recargas gracias a React Router.</p>
-          </div>
-          <div className="feature-item">
-            <span className="feature-icon">🔄</span>
-            <h3>APIs Dinámicas</h3>
-            <p>Consumo de datos desde JSON local y API pública de Deezer.</p>
+            <h4>Temas Personalizados</h4>
+            <p>CSS Variables para cada integrante</p>
           </div>
         </div>
       </section>
 
-      <section className="proyecto">
-        <h2>Sobre el Proyecto</h2>
+      {/* Proyecto */}
+      <section className="section-project">
+        <h2 className="titulo-principal">Sobre el Proyecto</h2>
         <div className="project-panel">
           <p>
-            <strong>TechVerse</strong> es la evolución del TP1, transformado en una Single Page Application moderna. 
-            Este proyecto demuestra el dominio de React, la componentización efectiva, y la integración 
-            de datos dinámicos tanto locales como desde APIs externas.
+            <strong>TechVerse</strong> es la evolución del TP1 a una arquitectura React moderna. 
+            Implementamos una <strong>Single Page Application</strong> con componentes reutilizables, 
+            React Router para navegación fluida, y consumo de datos dinámicos desde JSON local y 
+            APIs públicas.
           </p>
-          <p style={{ marginTop: '1rem' }}>
-            Cada integrante aportó de manera diferenciada a nivel de planificación, 
-            diseño y estructura, reflejando la diversidad creativa del grupo mientras se mantenía 
-            una experiencia unificada para el usuario.
+          <p>
+            Cada integrante mantiene su portal individual con diseño único, demostrando la flexibilidad 
+            de React para gestionar múltiples estilos dentro de un mismo proyecto. El sidebar responsive 
+            se adapta a todos los dispositivos con menú hamburguesa en móviles.
           </p>
           <div className="cta-buttons">
-            <Link to="/bitacora" className="btn-primary">
+            <Link to="/bitacora" className="btn btn-primary">
               📋 Ver Bitácora
             </Link>
-            <Link to="/diagramas" className="btn-secondary">
+            <Link to="/diagramas" className="btn btn-secondary">
               📊 Ver Diagramas
             </Link>
           </div>

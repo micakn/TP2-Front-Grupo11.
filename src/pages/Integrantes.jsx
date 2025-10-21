@@ -15,7 +15,7 @@ export default function Integrantes() {
         "Apasionada por la tecnología y el desarrollo web. Especializada en HTML, CSS, PHP y JavaScript.",
       especialidades: ["HTML", "CSS", "PHP", "JavaScript"],
       ruta: "/paula",
-      color: "rgb(58, 213, 252)",
+      color: "#F8B55F",
     },
     {
       nombre: "Micaela",
@@ -54,11 +54,11 @@ export default function Integrantes() {
   ];
 
   return (
-    <div className="integrantes">
+    <div className="integrantes" style={{ '--section-color': '#ff8c00' }}>
       <HeroSection
         title="Nuestro Equipo"
         subtitle="Conocé a las integrantes del Grupo 11"
-        gradient="linear-gradient(135deg, rgba(255,217,61,0.1), rgba(0,212,255,0.1))"
+        accentColor="#ff8c00"
       />
 
       <section className="equipo-actual">
@@ -105,17 +105,15 @@ export default function Integrantes() {
           <h3>📝 Nota sobre el Equipo</h3>
           <p>
             Para este TP2, el equipo está conformado por <strong>Paula</strong>, <strong>Micaela</strong> y <strong>María</strong>.
-    Cada integrante mantiene su propio portal individual con un estilo y personalidad únicos,
-    reflejando la diversidad creativa del grupo y su compromiso con el desarrollo colaborativo.
+            Cada integrante mantiene su propio portal individual con un estilo y personalidad únicos,
+            reflejando la diversidad creativa del grupo y su compromiso con el desarrollo colaborativo.
           </p>
           <p>
             Las secciones individuales incluyen información sobre habilidades, películas y música favoritas,
-    con un enfoque en el diseño personalizado y la integración dinámica de datos para fortalecer la práctica en React.
+            con un enfoque en el diseño personalizado y la integración dinámica de datos para fortalecer la práctica en React.
           </p>
         </div>
       </section>
     </div>
-  )
+  );
 }
-
-

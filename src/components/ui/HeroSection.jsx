@@ -1,18 +1,16 @@
-// HeroSection.jsx - Componente de sección hero con fondo degradado
+// HeroSection.jsx - Componente de sección hero con colores personalizables
 import "./ui.css";
 
-export default function HeroSection({ title, subtitle, gradient }) {
+export default function HeroSection({ title, subtitle, accentColor = "#00d4ff" }) {
   return (
     <section
       className="hero-section"
       style={{
-        background:
-          gradient ||
-          "linear-gradient(135deg, rgba(0, 212, 255, 0.1), rgba(255, 107, 107, 0.1))",
+        "--hero-accent": accentColor,
       }}
     >
       <div className="hero-content">
-        <h1>{title}</h1>
+        <h1 style={{ color: accentColor }}>{title}</h1>
         {subtitle && <p>{subtitle}</p>}
       </div>
     </section>

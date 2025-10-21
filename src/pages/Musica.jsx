@@ -1,6 +1,7 @@
-// 🎧 Musica.jsx – Top Global Deezer con color de acento violeta 💜
-
+// ===== MÚSICA =====
+// Musica.jsx - Con HeroSection
 import { useState, useEffect } from "react";
+import HeroSection from "../components/ui/HeroSection";
 import "../styles/util.css";
 import "../styles/MediaPages.css";
 
@@ -51,15 +52,13 @@ export default function Musica() {
       </div>
     );
 
-  return (
-    <div
-      className="media-page fade-in"
-      style={{ "--accent-color": "#A238FF" }} // 💜 Color Deezer
-    >
-      <section className="hero-media">
-        <h1>🎶 Top Global – Deezer</h1>
-        <p>Las 10 canciones más escuchadas del momento 🌍</p>
-      </section>
+   return (
+    <div className="media-page fade-in">
+      <HeroSection
+  title="🎶 Top Global — Deezer"
+  subtitle="Las 10 canciones más escuchadas del momento 🌍"
+  accentColor="#ff69b4"
+/>
 
       <section className="media-listado card">
         <h2>Ranking mundial</h2>

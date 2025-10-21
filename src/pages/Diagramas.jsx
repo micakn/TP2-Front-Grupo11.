@@ -1,12 +1,16 @@
-import './Diagramas.css'
+// ===== DIAGRAMAS =====
+// Diagramas.jsx - Con HeroSection
+import HeroSection from "../components/ui/HeroSection";
+import './Diagramas.css';
 
 export default function Diagramas() {
   return (
     <div className="diagramas">
-      <section className="hero-diagramas">
-        <h1>Diagramas del Proyecto</h1>
-        <p>Visualización del árbol de renderizado y estructura del proyecto React</p>
-      </section>
+      <HeroSection
+  title="📊 Diagramas Técnicos del Proyecto"
+  subtitle="Visualización de la arquitectura y organización del TP2 React SPA"
+  accentColor="#4ade80"
+/>
 
       <section className="diagramas-visuales">
         <h2>📊 Diagramas Visuales</h2>

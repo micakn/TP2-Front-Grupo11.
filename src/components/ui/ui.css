@@ -5,23 +5,35 @@
 /* Hero Section */
 .hero-section {
   text-align: center;
-  padding: 4rem 2rem;
+  padding: 3rem 2rem;
   border-radius: 20px;
   margin-bottom: 3rem;
+  background: linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--hero-accent) 15%, transparent),
+    color-mix(in srgb, var(--hero-accent) 5%, transparent)
+  );
+  border: 2px solid color-mix(in srgb, var(--hero-accent) 30%, transparent);
+  box-shadow: 0 8px 25px color-mix(in srgb, var(--hero-accent) 20%, transparent);
+  transition: all 0.3s ease;
 }
 
-.hero-section h1 {
-  font-size: clamp(2.2rem, 6vw, 4rem);
+.hero-content h1 {
+  font-size: clamp(2.2rem, 5vw, 3.5rem);
   font-weight: 700;
-  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: salmon;
+  color: var(--hero-accent) !important;
+  text-shadow: 0 0 20px color-mix(in srgb, var(--hero-accent) 60%, transparent);
   margin-bottom: 1rem;
+  font-family: 'Orbitron', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 2px;
 }
 
-.hero-section p {
+.hero-content p {
   font-size: 1.2rem;
   color: #ccc;
+  max-width: 700px;
+  margin: 0 auto;
 }
 
 /* ===============================
