@@ -1,3 +1,4 @@
+// api/deezer.js
 export default async function handler(request, response) {
   try {
     const { artist } = request.query;

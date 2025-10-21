@@ -1,4 +1,4 @@
-// 🎧 Musica.jsx — Top Global Deezer con color de acento violeta 💜
+// 🎧 Musica.jsx – Top Global Deezer con color de acento violeta 💜
 
 import { useState, useEffect } from "react";
 import "../styles/util.css";
@@ -12,23 +12,23 @@ export default function Musica() {
   useEffect(() => {
     const fetchDeezer = async () => {
       try {
-        // 🌐 Detección automática: local usa proxy, deploy usa /api/deezer
-        const isLocal = window.location.hostname === "localhost";
-        const baseURL = isLocal
-          ? "https://cors-anywhere.herokuapp.com/https://api.deezer.com/chart/0/tracks"
-          : "/api/deezer";
-
-        const response = await fetch(baseURL);
+        // ✅ FIX: Siempre usar /api/deezer sin parámetros para top global
+        const response = await fetch("/api/deezer");
+        
+        if (!response.ok) {
+          throw new Error(`Error ${response.status}: ${response.statusText}`);
+        }
+        
         const data = await response.json();
 
-        if (data.data) {
+        if (data.data && Array.isArray(data.data)) {
           setCanciones(data.data.slice(0, 10)); // 🔹 Solo top 10 canciones
         } else {
           setError("No se encontraron canciones 😞");
         }
       } catch (err) {
         console.error("❌ Error al cargar datos de Deezer:", err);
-        setError("Error al cargar datos de Deezer");
+        setError("Error al cargar datos de Deezer. Intenta más tarde.");
       } finally {
         setLoading(false);
       }
@@ -57,7 +57,7 @@ export default function Musica() {
       style={{ "--accent-color": "#A238FF" }} // 💜 Color Deezer
     >
       <section className="hero-media">
-        <h1>🎶 Top Global — Deezer</h1>
+        <h1>🎶 Top Global – Deezer</h1>
         <p>Las 10 canciones más escuchadas del momento 🌍</p>
       </section>
 
@@ -71,7 +71,7 @@ export default function Musica() {
           {canciones.map((song) => (
             <div key={song.id} className="card-media fade-in">
               <img
-                src={song.album.cover_medium || "/img/placeholder-artist.webp"}
+                src={song.album?.cover_medium || "/img/placeholder-artist.webp"}
                 alt={song.title}
                 loading="lazy"
                 onError={(e) =>
@@ -81,10 +81,10 @@ export default function Musica() {
               <div className="media-info">
                 <h3>{song.title}</h3>
                 <p>
-                  <strong>Artista:</strong> {song.artist.name}
+                  <strong>Artista:</strong> {song.artist?.name || "Desconocido"}
                 </p>
                 <p>
-                  <strong>Álbum:</strong> {song.album.title}
+                  <strong>Álbum:</strong> {song.album?.title || "N/A"}
                 </p>
                 <a
                   href={song.link}

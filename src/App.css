@@ -8,7 +8,6 @@
   min-height: 100vh;
   background: var(--bg-color);
   overflow-x: hidden;
-  transition: all 0.3s ease;
 }
 
 /* SIDEBAR FIJA */
@@ -20,47 +19,64 @@
   width: 260px;
   background: linear-gradient(180deg, #1a1a1a 0%, #0d1421 100%);
   border-right: 2px solid #333;
-  z-index: 10;
-  transition: left 0.3s ease, width 0.3s ease;
+  z-index: 1000;
+  transition: left 0.3s ease;
 }
 
 /* CONTENIDO PRINCIPAL */
 .main-content {
   flex: 1;
   padding: 2rem;
+  margin-left: 260px;
   color: var(--text-color);
   box-sizing: border-box;
-  margin-left: 260px;
-  transition: margin-left 0.3s ease, padding 0.3s ease;
+  transition: margin-left 0.3s ease;
+  width: 100%;
 }
 
-/* ===== Laptops ===== */
+/* ===== DESKTOP MEDIO ===== */
 @media (max-width: 1024px) {
-  .sidebar { width: 220px; }
-  .main-content { margin-left: 220px; padding: 1.5rem; }
+  .sidebar { 
+    width: 220px; 
+  }
+  .main-content { 
+    margin-left: 220px; 
+    padding: 1.5rem; 
+  }
 }
 
-/* ===== Tablets & móviles: overlay ===== */
+/* ===== TABLETS & MÓVILES: OVERLAY MODE ===== */
 @media (max-width: 768px) {
-  /* La sidebar se oculta fuera de pantalla */
-  .sidebar { left: -260px; width: 260px; }
+  /* Sidebar oculta por defecto */
+  .sidebar { 
+    left: -260px; 
+    width: 260px; 
+  }
 
-  /* Al abrir (clase desde App.jsx/Sidebar.jsx), entra como overlay */
-  .sidebar.open { left: 0; }
+  /* Sidebar visible cuando tiene clase 'open' */
+  .sidebar.open { 
+    left: 0; 
+  }
 
-  /* El contenido NO se mueve nunca en móvil */
-  .main-content { margin-left: 0; padding: 1rem; }
+  /* Main content NUNCA se mueve en móvil */
+  .main-content { 
+    margin-left: 0; 
+    padding: 1rem; 
+    padding-top: 4rem; /* Espacio para hamburguesa */
+  }
 }
 
-/* ===== Móviles pequeños ===== */
+/* ===== MÓVILES PEQUEÑOS ===== */
 @media (max-width: 480px) {
-  .main-content { padding: 0.8rem; }
+  .main-content { 
+    padding: 0.8rem; 
+    padding-top: 3.5rem;
+  }
 }
 
 /* =======================
    SPINNER GLOBAL
    ======================= */
-
 .loading {
   display: flex;
   justify-content: center;
@@ -80,7 +96,5 @@
 }
 
 @keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
+  to { transform: rotate(360deg); }
 }
