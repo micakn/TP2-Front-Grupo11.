@@ -1,5 +1,5 @@
-// TimelineItem.jsx
-// Elemento individual de la bitácora (con fecha, título y descripción)
+import './TimelineItem.css';
+
 
 export default function TimelineItem({ fecha, titulo, descripcion }) {
   return (
@@ -13,4 +13,5 @@ export default function TimelineItem({ fecha, titulo, descripcion }) {
     </div>
   );
 }
+
 
