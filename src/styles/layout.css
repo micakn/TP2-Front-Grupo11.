@@ -20,15 +20,6 @@
 }
 
 
-/* 💻 Escritorio grande */
-@media (min-width: 1200px) {
-  .main-content {
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 3rem;
-  }
-}
-
 /* 💻 Pantallas medianas (laptops) */
 @media (max-width: 1024px) {
   .sidebar {
