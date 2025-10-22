@@ -4,13 +4,14 @@ import "./Sidebar.css";
 
 export default function Sidebar({ sidebarOpen, toggleSidebar }) {
   const linksPrincipales = [
-    { to: "/", label: "🏠 Inicio" },
-    { to: "/bitacora", label: "📋 Bitácora" },
-    { to: "/integrantes", label: "👥 Integrantes" },
-    { to: "/diagramas", label: "📊 Diagramas" },
-    { to: "/peliculas", label: "🎬 Películas" },
-    { to: "/musica", label: "🎶 Música" },
-  ];
+  { to: "/", label: "🏠 Inicio" },
+  { to: "/bitacora", label: "📋 Bitácora" },
+  { to: "/integrantes", label: "👥 Integrantes" },
+  { to: "/diagramas", label: "📊 Diagramas" },
+  { to: "/peliculas", label: "🎬 Películas" },
+  { to: "/musica", label: "🎶 Música (Deezer)" },
+  { to: "/musica-player", label: "🎵 Reproductor (iTunes)" }, // 👈 NUEVA
+];
 
   const linksPortales = [
     { to: "/micaela", label: "🎮 Micaela" },
