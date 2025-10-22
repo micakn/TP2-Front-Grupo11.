@@ -83,12 +83,17 @@ export default function Home() {
           </div>
           <div className="stat-card">
             <span className="stat-icon">🎵</span>
-            <h3>API</h3>
-            <p>Deezer en tiempo real</p>
+            <h3>2 APIs</h3>
+            <p>Deezer + iTunes</p>
+          </div>
+          <div className="stat-card">
+            <span className="stat-icon">🎧</span>
+            <h3>Player</h3>
+            <p>Reproductor global</p>
           </div>
           <div className="stat-card">
             <span className="stat-icon">🧩</span>
-            <h3>10+</h3>
+            <h3>12+</h3>
             <p>Componentes React</p>
           </div>
         </div>
@@ -140,6 +145,11 @@ export default function Home() {
             <span className="feature-icon">🎨</span>
             <h4>Temas Personalizados</h4>
             <p>CSS Variables para cada integrante</p>
+          </div>
+          <div className="feature-card">
+            <span className="feature-icon">🎧</span>
+            <h4>Reproductor Integrado</h4>
+            <p>Player global con previews de 30s desde iTunes API</p>
           </div>
         </div>
       </section>

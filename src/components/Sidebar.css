@@ -74,15 +74,9 @@
   font-weight: 600;
 }
 
-/* === Footer === */
+/* Ocultar footer en todas las resoluciones */
 .sidebar-footer {
-  position: absolute;
-  bottom: 1rem;
-  left: 1rem;
-  right: 1rem;
-  text-align: center;
-  color: #666;
-  font-size: 0.8rem;
+  display: none;
 }
 
 /* ============================
@@ -160,10 +154,6 @@
     display: block;
   }
 
-  /* Simplificar sidebar en móvil */
-  .sidebar-footer {
-    display: none;
-  }
 }
 
 @media (max-width: 480px) {

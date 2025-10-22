@@ -19,7 +19,7 @@ export default function MusicaPlayer() {
       const data = await response.json();
       setCanciones(data.results || []);
     } catch (error) {
-      console.error('Error al buscar en iTunes:', error);
+      console.error('Error:', error);
     } finally {
       setLoading(false);
     }
@@ -29,68 +29,40 @@ export default function MusicaPlayer() {
     fetchiTunes(searchTerm);
   }, []);
 
-  if (loading) return <div className="loading">🎵 Cargando canciones...</div>;
+  if (loading) return <div className="loading">🎵 Cargando...</div>;
 
   return (
     <div className="media-page fade-in">
       <HeroSection
         title="🎵 Reproductor de Música"
-        subtitle="Busca y reproduce previews de 30 segundos con iTunes API"
+        subtitle="Busca y reproduce previews de 30 segundos"
         accentColor="#EC4899"
       />
 
       <section className="media-listado card">
-        {/* Buscador */}
-        <div style={{ 
-          maxWidth: '500px', 
-          margin: '0 auto 2rem',
-          display: 'flex',
-          gap: '0.5rem'
-        }}>
+        {/* Buscador reutiliza estilos de MediaPages.css */}
+        <div className="search-container">
           <input
             type="text"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             onKeyDown={(e) => e.key === 'Enter' && fetchiTunes(searchTerm)}
             placeholder="Buscar artista o canción..."
-            style={{
-              flex: 1,
-              padding: '12px 20px',
-              borderRadius: '10px',
-              border: '2px solid rgba(236, 72, 153, 0.3)',
-              background: 'rgba(0,0,0,0.3)',
-              color: 'white',
-              fontSize: '1rem',
-              outline: 'none'
-            }}
+            className="search-input"
           />
-          <button
-            onClick={() => fetchiTunes(searchTerm)}
-            className="btn-outline"
-            style={{
-              padding: '12px 24px',
-              borderRadius: '10px',
-              whiteSpace: 'nowrap'
-            }}
-          >
+          <button onClick={() => fetchiTunes(searchTerm)} className="btn-outline">
             🔍 Buscar
           </button>
         </div>
 
-        <h2>Resultados de búsqueda</h2>
-        <p className="api-indicator">
-          {canciones.length} canciones • iTunes API
-        </p>
+        <h2>Resultados</h2>
+        <p className="api-indicator">{canciones.length} canciones • iTunes API</p>
 
         <div className="grid-media">
-          {canciones.map((song) => (
+          {canciones.map(song => (
             <MusicaCardWithPlayer key={song.trackId} song={song} />
           ))}
         </div>
-
-        <p style={{ marginTop: '2rem', textAlign: 'center', color: '#bbb', fontSize: '0.9rem' }}>
-          🎧 Previews de 30 segundos • Powered by iTunes Search API
-        </p>
       </section>
     </div>
   );

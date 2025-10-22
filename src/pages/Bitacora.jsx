@@ -76,9 +76,14 @@ export default function Bitacora() {
       descripcion: "Creación de diagramas visuales: árbol de renderizado de componentes React y estructura de carpetas del proyecto. Actualización completa del README.md con badges, instrucciones de instalación y documentación técnica detallada."
     },
     { 
-      fecha: "21/10/25", 
+      fecha: "20/10/25", 
+      titulo: "Reproductor de Música", 
+      descripcion: "Implementación de sistema de reproducción de música con iTunes API. Player global flotante con controles de reproducción, barra de progreso interactiva y búsqueda en tiempo real. Componentes modularizados siguiendo la arquitectura del proyecto."
+    },
+        { 
+      fecha: "22/10/25", 
       titulo: "Entrega Final TP2", 
-      descripcion: "Deploy exitoso en Vercel con todas las funcionalidades operativas. Repositorio GitHub actualizado con commits organizados. Proyecto completo cumpliendo 100% de las consignas: SPA funcional, APIs integradas, responsive, diagramas incluidos."
+      descripcion: "Deploy exitoso en Vercel con todas las funcionalidades operativas incluyendo reproductor de música funcional. Repositorio GitHub actualizado con commits organizados. Proyecto completo cumpliendo 100% de las consignas: SPA funcional, 2 APIs integradas (Deezer + iTunes), responsive, diagramas incluidos, reproductor global."
     }
   ];
 
@@ -138,6 +143,14 @@ export default function Bitacora() {
             <p style={{color: '#ccc', lineHeight: '1.6'}}>
               Integración de datos locales (JSON con 20 películas) y API externa (Deezer para música). 
               Implementación de proxy serverless en Vercel para evitar problemas de CORS en producción.
+            </p>
+          </div>
+          <div className="card card-hover">
+            <h3 style={{color: '#a855f7', marginBottom: '1rem', fontWeight: '700'}}>🎧 Reproductor Global</h3>
+            <p style={{color: '#ccc', lineHeight: '1.6'}}>
+              Implementación de un sistema de audio unificado con React Context que permite 
+              reproducir previews de 30 segundos desde iTunes API. Player flotante persistente 
+              en toda la aplicación con controles completos y barra de progreso interactiva.
             </p>
           </div>
         </div>

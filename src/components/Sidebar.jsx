@@ -82,8 +82,6 @@ export default function Sidebar({ sidebarOpen, toggleSidebar }) {
             </li>
           ))}
         </ul>
-
-        <div className="sidebar-footer">TP2 React · 2025</div>
       </nav>
 
       {/* 🌙 Overlay accesible (cierra al click o Enter) */}

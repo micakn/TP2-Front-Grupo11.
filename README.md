@@ -8,7 +8,7 @@
 ## 🌐 Links del Proyecto
 
 - **🚀 Deploy en Vercel:** [https://tp-2-front-grupo11-rho.vercel.app/](https://tp-2-front-grupo11-rho.vercel.app/)
-- **📂 Repositorio GitHub:** [[URL de GitHub](https://github.com/micakn/TP2-Front-Grupo11.)]
+- **📂 Repositorio GitHub:** [[https://github.com/micakn/TP2-Front-Grupo11.](https://github.com/micakn/TP2-Front-Grupo11.)]
 
 ---
 
@@ -64,10 +64,12 @@ Transformar el sitio web estático del TP1 en una SPA moderna utilizando React, 
 - **🎨 CSS3 Puro** - Estilos modernos sin frameworks (CSS Variables, Flexbox, Grid)
 
 ### Gestión de Datos
-- **📦 Fetch API** - Consumo asíncrono de datos
-- **🔄 React Hooks** - `useState`, `useEffect` para manejo de estado
-- **📁 JSON Local** - 20+ películas almacenadas localmente
-- **🎵 Deezer API** - Integración con API pública de música
+- 📦 Fetch API - Consumo asíncrono de datos
+- 🔄 React Hooks - `useState`, `useEffect` para manejo de estado
+- 🎵 React Context API - Estado global para reproductor de música
+- 📁 JSON Local - 20+ películas almacenadas localmente
+- 🎶 Deezer API - Top chart global en tiempo real
+- 🎧 iTunes Search API - Búsqueda y previews de música sin autenticación
 
 ### Deploy & DevOps
 - **☁️ Vercel** - Hosting y CI/CD automático
@@ -169,24 +171,15 @@ npm run dev
 http://localhost:5173
 ```
 
-### Comandos Disponibles
-
-| Comando | Descripción |
-|---------|-------------|
-| `npm run dev` | Inicia servidor de desarrollo con hot reload |
-| `npm run build` | Genera build de producción optimizado |
-| `npm run preview` | Preview del build de producción |
-| `npm run lint` | Ejecuta ESLint para verificar código |
-
 ---
 
 ## 📊 Secciones de la Aplicación
 
 ### 🏠 **Home**
 - Página principal con introducción al proyecto
-- Estadísticas del proyecto (3 integrantes, 20+ películas, 10+ componentes)
+- Estadísticas actualizadas (3 integrantes, 20+ películas, 2 APIs, reproductor global)
 - Stack tecnológico con íconos animados
-- Características destacadas del proyecto
+- Características destacadas incluyendo reproductor de música
 - CTAs hacia Bitácora y Diagramas
 
 ### 📋 **Bitácora**
@@ -214,11 +207,19 @@ http://localhost:5173
 - Enlaces a IMDb
 - Tarjetas responsive con hover effects
 
-### 🎵 **Música**
+### 🎵 **Música (Deezer API)**
 - Top 10 canciones globales desde Deezer API
-- Datos en tiempo real
-- Imágenes de álbumes
+- Datos en tiempo real del chart mundial
+- Imágenes de álbumes en alta calidad
 - Enlaces directos a Deezer
+
+### 🎧 **Reproductor (iTunes API)** ⭐ NUEVO
+- Búsqueda libre de canciones y artistas
+- Previews reproducibles de 30 segundos reales
+- Player flotante global persistente en toda la app
+- Controles completos (play/pause/stop)
+- Barra de progreso interactiva
+- Carátulas de álbumes giratorias durante reproducción
 
 ### 🌟 **Portales Individuales**
 
@@ -258,10 +259,18 @@ http://localhost:5173
 
 ### 🔌 Integración de APIs
 - **Fetch Asíncrono**: Con `useEffect` y `useState`
-- **Loading States**: Indicadores de carga
-- **Error Handling**: Manejo de errores de red
-- **Timeout Simulado**: Experiencia realista de carga
-- **Proxy Serverless**: `/api/deezer.js` para evitar CORS
+- **Loading States**: Indicadores de carga en todas las páginas
+- **Error Handling**: Manejo de errores de red con fallbacks
+- **Proxy Serverless**: `/api/deezer.js` para evitar CORS en Deezer
+- **iTunes Direct Fetch**: API pública sin autenticación ni proxy necesario
+- **Búsqueda en Tiempo Real**: Debounce y optimización de requests
+
+### 🎧 Sistema de Audio Global
+- **React Context API**: Estado compartido para reproducción en toda la app
+- **Audio Web API**: Reproducción nativa sin dependencias externas
+- **Player Flotante**: Componente persistente con z-index optimizado para móviles
+- **Controles Completos**: Play, pause, stop, seek en la barra de progreso
+- **Animaciones**: Carátula giratoria durante reproducción
 
 ### ♿ Accesibilidad
 - **Semantic HTML**: Uso correcto de etiquetas
@@ -284,29 +293,6 @@ http://localhost:5173
 | ❌ CSS repetitivo por página | ✅ CSS modular + variables globales |
 | ❌ Responsive básico | ✅ Mobile-first con 3 breakpoints |
 | ❌ Sin arquitectura definida | ✅ Arquitectura escalable por capas |
-
----
-
-## 📝 Consignas del TP2 Cumplidas
-
-### ✅ Requerimientos Obligatorios
-
-- [x] **Sidebar fijo** con navegación en todos los dispositivos
-- [x] **Sección Portada** (Home) migrada y mejorada
-- [x] **Sección Bitácora** con timeline interactivo
-- [x] **Secciones Individuales** por integrante con estilos únicos
-- [x] **Datos desde JSON** (20+ películas con información completa)
-- [x] **Datos desde API Pública** (Deezer - música en tiempo real)
-- [x] **Árbol de Renderizado** con diagrama visual
-- [x] **Diagrama de Carpetas** con estructura clara
-- [x] **React Router** implementado para SPA
-- [x] **Responsive Design** con 3 breakpoints (480px, 768px, 1024px)
-- [x] **Componentización** efectiva y reutilizable
-- [x] **Deploy en Vercel** funcional y público
-- [x] **Repositorio GitHub** con commits organizados
-- [x] **README actualizado** con documentación completa
-
----
 
 ## 🌐 Deploy en Vercel
 
