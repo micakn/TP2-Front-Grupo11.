@@ -252,7 +252,7 @@ export function MusicaCardWithPlayer({ song }) {
 }
 
 // ===================================
-// 🎮 PLAYER GLOBAL FLOTANTE
+// 🎮 PLAYER GLOBAL FLOTANTE COMPLETO
 // ===================================
 export function GlobalMusicPlayer() {
   const { currentTrack, isPlaying, currentTime, duration, playTrack, stopTrack, seekTo } = useAudio();
@@ -300,7 +300,163 @@ export function GlobalMusicPlayer() {
         border: '2px solid rgba(0, 212, 255, 0.4)',
         animation: 'slideUp 0.3s ease'
       }}>
-        {/* ... resto del código del player (igual que el tuyo) ... */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+          <img
+            src={currentTrack.cover || '/img/placeholder-artist.webp'}
+            alt={currentTrack.title}
+            style={{
+              width: '70px',
+              height: '70px',
+              borderRadius: '12px',
+              objectFit: 'cover',
+              border: '3px solid rgba(255,255,255,0.4)',
+              animation: isPlaying ? 'spin 6s linear infinite' : 'none'
+            }}
+          />
+
+          <div style={{ flex: 1, minWidth: 0 }}>
+            <h4 style={{ 
+              margin: 0, 
+              fontSize: '1rem', 
+              color: 'white',
+              fontWeight: '700',
+              whiteSpace: 'nowrap',
+              overflow: 'hidden',
+              textOverflow: 'ellipsis'
+            }}>
+              {currentTrack.title}
+            </h4>
+            <p style={{ 
+              margin: '0.3rem 0', 
+              fontSize: '0.85rem', 
+              color: 'rgba(255,255,255,0.8)',
+              whiteSpace: 'nowrap',
+              overflow: 'hidden',
+              textOverflow: 'ellipsis'
+            }}>
+              {currentTrack.artist}
+            </p>
+            
+            {/* Barra de progreso */}
+            <div style={{ 
+              marginTop: '0.5rem',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '0.5rem'
+            }}>
+              <span style={{ 
+                fontSize: '0.7rem', 
+                color: 'rgba(255,255,255,0.7)',
+                minWidth: '35px'
+              }}>
+                {formatTime(currentTime)}
+              </span>
+              <div 
+                style={{
+                  flex: 1,
+                  height: '6px',
+                  background: 'rgba(255,255,255,0.2)',
+                  borderRadius: '3px',
+                  overflow: 'hidden',
+                  cursor: 'pointer'
+                }}
+                onClick={(e) => {
+                  const rect = e.currentTarget.getBoundingClientRect();
+                  const x = e.clientX - rect.left;
+                  const percent = x / rect.width;
+                  seekTo(percent * duration);
+                }}
+              >
+                <div style={{
+                  width: `${progress}%`,
+                  height: '100%',
+                  background: 'linear-gradient(90deg, #fff, rgba(255,255,255,0.8))',
+                  transition: 'width 0.1s linear'
+                }} />
+              </div>
+              <span style={{ 
+                fontSize: '0.7rem', 
+                color: 'rgba(255,255,255,0.7)',
+                minWidth: '35px',
+                textAlign: 'right'
+              }}>
+                {formatTime(duration)}
+              </span>
+            </div>
+          </div>
+
+          {/* Botones */}
+          <div style={{ display: 'flex', gap: '0.5rem' }}>
+            <button
+              onClick={() => playTrack(currentTrack)}
+              style={{
+                width: '45px',
+                height: '45px',
+                borderRadius: '50%',
+                border: '2px solid white',
+                background: 'rgba(255,255,255,0.2)',
+                color: 'white',
+                cursor: 'pointer',
+                fontSize: '1.3rem',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                transition: 'all 0.3s ease'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background = 'rgba(255,255,255,0.3)';
+                e.currentTarget.style.transform = 'scale(1.1)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = 'rgba(255,255,255,0.2)';
+                e.currentTarget.style.transform = 'scale(1)';
+              }}
+            >
+              {isPlaying ? '⏸️' : '▶️'}
+            </button>
+
+            <button
+              onClick={stopTrack}
+              style={{
+                width: '45px',
+                height: '45px',
+                borderRadius: '50%',
+                border: '2px solid white',
+                background: 'rgba(255,255,255,0.2)',
+                color: 'white',
+                cursor: 'pointer',
+                fontSize: '1.3rem',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                transition: 'all 0.3s ease'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background = 'rgba(255,255,255,0.3)';
+                e.currentTarget.style.transform = 'scale(1.1)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = 'rgba(255,255,255,0.2)';
+                e.currentTarget.style.transform = 'scale(1)';
+              }}
+            >
+              ⏹️
+            </button>
+          </div>
+        </div>
+
+        {/* Footer */}
+        <div style={{
+          marginTop: '0.75rem',
+          padding: '0.5rem',
+          background: 'rgba(0,0,0,0.3)',
+          borderRadius: '8px',
+          fontSize: '0.75rem',
+          color: 'rgba(255,255,255,0.8)',
+          textAlign: 'center'
+        }}>
+          🎵 Preview de 30s • Powered by iTunes API
+        </div>
       </div>
     </>
   );
