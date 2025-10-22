@@ -25,8 +25,8 @@ export default function Diagramas() {
           <p>
             Representa la jerarquía de componentes desde <code>App.jsx</code> 
             hacia los subcomponentes, incluyendo <code>Sidebar</code>, 
-            <code>Pages</code> y <code>Cards</code>. Refleja el flujo de renderizado
-            dentro de la SPA.
+            los componentes de página principales y las <code>Cards</code>. 
+            Refleja el flujo de renderizado dentro de la SPA.
           </p>
         </div>
 
