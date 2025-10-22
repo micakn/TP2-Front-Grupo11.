@@ -1,4 +1,3 @@
-
 {
   "peliculas": [
     {
@@ -53,6 +52,7 @@
       "director": "Hayao Miyazaki",
       "rating": 8.6,
       "duracion": "125 min",
+      "poster": "/img/peli-elviajedechihiro.webp",
       "url": "https://www.imdb.com/title/tt0245429"
     },
     {
@@ -63,6 +63,7 @@
       "director": "Hayao Miyazaki",
       "rating": 8.1,
       "duracion": "86 min",
+      "poster": "/img/peli-mivecinototoro.webp",
       "url": "https://www.imdb.com/title/tt0096283"
     },
     {
@@ -73,6 +74,7 @@
       "director": "Hayao Miyazaki",
       "rating": 8.2,
       "duracion": "119 min",
+      "poster": "/img/peli-elcastilloambulante.webp",
       "url": "https://www.imdb.com/title/tt0347149"
     },
     {
@@ -83,6 +85,7 @@
       "director": "Jan de Bont",
       "rating": 6.4,
       "duracion": "113 min",
+      "poster": "/img/peli-twister.webp",
       "url": "https://www.imdb.com/title/tt0117998"
     },
     {
@@ -93,6 +96,7 @@
       "director": "Robert Zemeckis",
       "rating": 8.5,
       "duracion": "116 min",
+      "poster": "/img/peli-volveral-futuro.webp",
       "url": "https://www.imdb.com/title/tt0088763"
     },
     {
@@ -103,6 +107,7 @@
       "director": "Tony Bancroft",
       "rating": 7.6,
       "duracion": "88 min",
+      "poster": "/img/peli-mulan.webp",
       "url": "https://www.imdb.com/title/tt0120762"
     },
     {
@@ -113,6 +118,7 @@
       "director": "Lana y Lilly Wachowski",
       "rating": 8.7,
       "duracion": "136 min",
+      "poster": "/img/peli-matrix.webp",
       "url": "https://www.imdb.com/title/tt0133093"
     },
     {
@@ -123,6 +129,7 @@
       "director": "Peter Jackson",
       "rating": 8.8,
       "duracion": "178 min",
+      "poster": "/img/peli-elsenordelosanillos.webp",
       "url": "https://www.imdb.com/title/tt0120737"
     },
     {
@@ -133,6 +140,7 @@
       "director": "Christopher Nolan",
       "rating": 8.8,
       "duracion": "148 min",
+      "poster": "/img/peli-inception.webp",
       "url": "https://www.imdb.com/title/tt1375666"
     },
     {
@@ -143,6 +151,7 @@
       "director": "Guillermo del Toro",
       "rating": 8.2,
       "duracion": "118 min",
+      "poster": "/img/peli-ellaberintodelfauno.webp",
       "url": "https://www.imdb.com/title/tt0457430"
     },
     {
@@ -153,6 +162,7 @@
       "director": "Lee Unkrich",
       "rating": 8.4,
       "duracion": "105 min",
+      "poster": "/img/peli-coco.webp",
       "url": "https://www.imdb.com/title/tt2380307"
     },
     {
@@ -163,6 +173,7 @@
       "director": "Christopher Nolan",
       "rating": 9.0,
       "duracion": "152 min",
+      "poster": "/img/peli-elcaballerodelanoche.webp",
       "url": "https://www.imdb.com/title/tt0468569"
     },
     {
@@ -173,6 +184,7 @@
       "director": "Damien Chazelle",
       "rating": 8.0,
       "duracion": "128 min",
+      "poster": "/img/peli-lalaland.webp",
       "url": "https://www.imdb.com/title/tt3783958"
     },
     {
@@ -183,6 +195,7 @@
       "director": "Wes Anderson",
       "rating": 8.1,
       "duracion": "99 min",
+      "poster": "/img/peli-elgranhotelbudapest.webp",
       "url": "https://www.imdb.com/title/tt2278388"
     },
     {
@@ -193,6 +206,7 @@
       "director": "George Miller",
       "rating": 8.1,
       "duracion": "120 min",
+      "poster": "/img/peli-madmaxfuryroad.webp",
       "url": "https://www.imdb.com/title/tt1392190"
     },
     {
@@ -203,6 +217,7 @@
       "director": "Makoto Shinkai",
       "rating": 8.4,
       "duracion": "106 min",
+      "poster": "/img/peli-yourname.webp",
       "url": "https://www.imdb.com/title/tt5311514"
     }
   ]
