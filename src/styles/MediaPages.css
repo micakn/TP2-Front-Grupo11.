@@ -184,15 +184,6 @@
   box-shadow: 0 0 20px rgba(0,212,255,0.4);
 }
 
-.playing-indicator {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 4rem;
-  animation: pulse 1.5s infinite;
-}
-
 /* Botones de preview */
 .btn-preview, .btn-itunes {
   display: block;

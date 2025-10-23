@@ -97,7 +97,6 @@ export function MusicaCardWithPlayer({ song }) {
           alt={song.trackName}
           loading="lazy"
         />
-        {isThisPlaying && <div className="playing-indicator">🎵</div>}
       </div>
 
       <div className="media-info">
